@@ -1,0 +1,49 @@
+{
+  "pageTitleText": "Certs",
+  "cert": "Cert",
+  "createText": "Create",
+  "createBy": "CreateBy",
+  "keypairname": "KeypairName",
+  "groupName": "Group",
+  "certpemUpload": "Certpem Upload",
+  "certkeyUpload": "Certkey Upload",
+  "commonName": "CommonName",
+  "issuerCommonName": "Issuer CommonName",
+  "sanDns": "SAN",
+  "validityStart": "Validity Start",
+  "validityEnd": "Validity End",
+  "expiredDays": "Expired Days",
+  "emailAddress": "Email Address",
+  "certpemFileName": "Certpem FileName",
+  "certkeyFileName": "Certkey FileName",
+  "certpemRaw": "PEM",
+  "certkeyRaw": "KEY",
+  "status": "Status",
+  "createDate":"Create Date",
+  "modifiedDate":"Modified Date",
+  "sections": {
+    "essential": "Essential",
+    "conditionIdentity": "Condition - Identity",
+    "conditionBehavior": "Condition - Behavior",
+    "conditionOwasp": "Condition - Owasp",
+    "conditionExclusion": "Condition - Exclusion"
+  }, 
+  "warning": {
+    "keypairname_missing": "keypairname cannot be empty.",
+    "pem_missing": "PEM cannot be empty.",
+    "key_missing": "KEY cannot be empty.",
+    "keypairname_error": "cannot be used."
+  },
+  "notif": {
+    "form_error": "Error: Please check the form error.",
+    "create_success": "Verification Successful",
+    "create_fail": "Failed to create. Please try again",
+    "errorText": "Error:",
+    "format_error": "Unsupport format",
+    "upload_success": "Upload Success",
+    "upload_fail": "Cert is being deployed. Please try again.",
+    "commonname_error": "Error: common name undefined",
+    "delete_fail": "Failed to delete. Please try again",
+    "delete_success": "Delete Successful"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "cache_rules": "Cache Rules",
+  "no_cache_rules": "No Cache Rules",
+  "cache_path": "Cache Path",
+  "cache_file": "Cache File",
+  "force_cuscache_path": "Force Cache Path",
+  "force_cuscache_file": "Force Cache File",
+  "no_cached_path": "No Cached Path",
+  "no_cached_file": "No Cached File",
+  "proxyCacheIgnoreArgs": "Ignore Args",
+  "warning": {
+    "space_not_allow": "Space is not allowed."
+  },
+  "notif": {
+    "form_error": "Error: Please check the form error.",
+    "create_success": "Verification Successful",
+    "create_fail": "Failed to create. Please try again",
+    "create_fail_quota": "Failed to create. There are not available rules to create.",
+    "errorText": "Error:",
+    "format_error": "Unsupport format",
+    "upload_success": "Upload Success",
+    "upload_fail": "WAF Rules is being deployed. Please try again."
+  },
+  "tooltip": {
+    "cache": "Default file extension will be cached."
+  }
+}

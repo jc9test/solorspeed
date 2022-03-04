@@ -1,0 +1,38 @@
+{
+  "groupName": "group",
+  "htmlPageName": "HTML Page Name",
+  "htmlPageUpload": "HTML Page Upload",
+  "status": "Status",
+  "log": "Log",
+  "pageName": "Page Name",
+  "action": "Actions",
+  "username": "Username",
+  "submitTime": "Submit Time",
+  "content": "Content",
+  "diffData": "Diff Data",
+  "titleContent": "Custom html pages for error page or wafrules.",
+  "ridPosition": "Rid Position",
+  "ridColor": "Rid Color",
+  "htmlPageContent": "HTML Page Content",
+  "htmlPagePreview": "HTML Page Preview",
+  "createBy": "Create By",
+  "createdDate": "Created Date",
+  "modifiedDate": "Modified Date",
+  "fileError": "HTML file only",
+  "subtitleContent": {
+    "first": "You have created",
+    "of": "of",
+    "htmlrules": "HTML Pages"
+  },
+  "sections": {
+    "essential": "Essential"
+  },
+  "notif": {
+    "create_fail_quota": "Exceed Quota",
+    "create_success": "Created Successfully",
+    "create_fail": "Create Failed",
+    "update_success": "Updated Successfully",
+    "update_fail": "Update Failed",
+    "form_error": "Form Error"
+  }
+}

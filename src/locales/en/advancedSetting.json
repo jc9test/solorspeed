@@ -1,0 +1,36 @@
+{
+  "view_more_setting": "View More Settings",
+  "error_html_page_name": "Error HTML Page Name",
+  "upstream_timeout": "Upstream Timeout",
+  "upstream_compression": "Upstream Compression",
+  "insert_rid": "Insert RID",
+  "upstream_http": "Upstream HTTP/1.1",
+  "custom_host": "Custom Host",
+  "host": "Host",
+  "accept_http": "Accept HTTP/1.0",
+  "upgrade_insecure_request": "Upgrade Insecure Request",
+  "web_socket_path": "Web Socket Path",
+  "proxy_buffer_size": "Proxy Buffer Size",
+  "max_upload_size": "Max Upload Size (MB)",
+  "path_follow_origin": "Path Follow Origin",
+  "file_follow_origin": "File Follow Origin",
+  "browser_cached_path_expired": "Browser Cached Path Expired",
+  "server_cached_path_expired": "Server Cached Path Expired",
+  "cached_path_minused": "Cached Path Minused",
+  "browser_cached_file_expired": "Browser Cached File Expired",
+  "server_cached_file_expired": "Server Cached File Expired",
+  "cached_file_minused": "Cached File Minused",
+  "browser_default_cached_file_expired": "Browser Default Cached File Expired",
+  "server_default_cached_file_expired": "Server Default Cached File Expired",
+  "default_cached_file_minused": "Default Cached File Minused",
+  "warning": {
+    "enter_host": "Please enter a host",
+    "space_not_allow": "Space is not allowed."
+  },
+  "tooltip": {
+    "insertRid": " Insert CDN request id within header, the key of header is rid",
+    "customHost": " If the domain you are trying to access is different from current profile servername, this should be turned on.",
+    "acceptHttp": "Enable this to accept HTTP/1.0 requests, the default behavior is to reject HTTP/1.0 requests.",
+    "upgradeInsecureReq": "Toggle Upgrade Insecure Request."
+  }
+}

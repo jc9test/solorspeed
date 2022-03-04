@@ -1,0 +1,23 @@
+{
+  "domain": "Domain",
+  "group": "Group",
+  "list": "Domain List",
+  "service_name": "Service Name",
+  "description": "Description",
+  "tags": "tags",
+  "cname": "CNAME",
+  "clear_cache": "Clear Cache",
+  "delete": "Delete",
+  "edit": "Edit",
+  "status": "Status",
+  "save": "Save",
+  "use_system_cert": "Use System Cert",
+  "keypairName": "KeypairName",
+  "on": "On",
+  "off": "Off",
+  "sections": {
+    "essential": "Essential",
+    "http_https": "HTTP/HTTPS"
+  },
+  "addDomain": "Add Domain"
+}

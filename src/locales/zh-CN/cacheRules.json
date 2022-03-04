@@ -1,0 +1,27 @@
+{
+  "cache_rules": "Cache Rules",
+  "no_cache_rules": "No Cache Rules",
+  "cache_path": "缓存路径",
+  "cache_file": "缓存文件",
+  "force_cuscache_path": "强制缓存路径",
+  "force_cuscache_file": "强制缓存文件",
+  "no_cached_path": "不缓存路径",
+  "no_cached_file": "不缓存文件",
+  "proxyCacheIgnoreArgs": "忽略 Args",
+  "warning": {
+    "space_not_allow": "不可有空格"
+  },
+  "notif": {
+    "form_error": "错误: 请再检查表单错误.",
+    "create_success": "验证成功",
+    "create_fail": "创造失败，请稍后再试.",
+    "create_fail_quota": "创造失败，无可创造之 WAF 规则。",
+    "errorText": "错误",
+    "format_error": "格式不支援",
+    "upload_success": "上传成功",
+    "upload_fail": "Rule 规则正在部署中，请稍后再试。"
+  },
+  "tooltip": {
+    "cache": "默认文件缓存"
+  }
+}

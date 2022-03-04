@@ -1,0 +1,18 @@
+{
+  "http_or_https": "HTTP or HTTPS",
+  "https_port": "HTTPS 端口",
+  "http_port": "HTTP 端口",
+  "hsts": "HSTS",
+  "redirect_https": "跳转 HTTPS",
+  "redirect_http_code": "跳转 HTTP 代码",
+  "warning": {
+    "port_out_of_range": "端口超出范围 ",
+    "select_scheme": "请至少选择一个 scheme.",
+    "select_http_port": "请至少选择一个 http 端口.",
+    "select_https_port": "请至少选择一个 https 端口."
+  },
+  "tooltip": {
+    "httpPort": "HTTP 可用端口 : 80, 8080, 8880, 2052, 2082, 2086, 2095",
+    "httpsPort": "除了 HTTP PORT可用端口，所有端口都可以作为HTTPS端口使用，除了5000-6000"
+  }
+}

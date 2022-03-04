@@ -1,0 +1,20 @@
+{
+  "title": "Welcome Back!",
+  "subtitle": "Please sign in to your account",
+  "create_new_acc_text": "I do not have an account yet",
+  "forget_password_text": "Forgot Password?",
+  "forget_password_context": "Enter your email and click on the confirm button to reset your password. We'll send you an email detailing the steps to complete the procedure.",
+  "email": "Email Address",
+  "username": "Username",
+  "password": "Password",
+  "token": "Token",
+  "cancelText": "Cancel",
+  "confirmText": "Confirm",
+  "signInText": "Sign in",
+  "warning": {
+     "enter_username": "Please enter your username.",
+     "enter_password": "Please enter your password.",
+     "enter_token": "Please enter your token.",
+     "required": "This is a required field"
+  }
+}

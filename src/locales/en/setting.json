@@ -1,0 +1,34 @@
+{
+  "profile_dropdown": "Profile",
+  "setting_dropdown": "Settings",
+  "profile_setting": "Profile Setting",
+  "user_profile": "User Profile",
+  "change_password": "Change Password",
+  "subscription": "Subscription",
+  "profile_info": "Profile Info",
+  "profile_picture": "Profile Picture",
+  "email": "Email",
+  "username": "Username",
+  "old_password": "Old Password",
+  "new_password": "New Password",
+  "password_repeat": "Repeat New Password",
+  "security": "Security",
+  "2factor_auth": "2 Factor Auth",
+  "phone_number": "Phone Number",
+  "profile_dropdowntext": "View your profile",
+  "account_dropdowntext": "Account Setting",
+  "profile_content": "Edit your account's setting",
+  "password_content": "Edit your account password",
+  "security_content": "For an improved account security",
+  "2factor_content": "Enable or disable 2 factor auth",
+  "notif": {
+    "unauthorized_login": "Incorrect username or password, please try again later",
+    "change_success": "Your changes have been successfully saved!"
+  },
+  "warning": {
+    "passord_duplicate": "New password cannot be the same as your old password",
+    "password_enter": "Please enter your new password.",
+    "password_notmatch": "The password confirmation does not match.",
+    "password_repeat": "Please repeat your new password."
+  }
+}

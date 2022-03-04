@@ -1,0 +1,32 @@
+{
+  "filter": "filter",
+  "filterText": "Filter",
+  "excludeText": "Exclude",
+  "removeText": "Remove",
+  "last_5min": "Last 5 minutes",
+  "last_hour": "Last 1 hour",
+  "last_three_hour": "Last 3 hours",
+  "last_six_hour": "Last 6 hours",
+  "last_day": "Last 1 day",
+  "last_seven_day": "Last seven days",
+  "custom": "custom",
+  "searchText": "Search",
+  "deepSearch": "Deep Search",
+  "fuzzySearch": "Fuzzy Search",
+  "essential": "Essential",
+  "start_date": "Start Date",
+  "end_date": "End Date",
+  "select_date": "Select Date",
+  "select_tags": "Select a tag",
+  "select_type": "Select a type",
+  "select_group": "Select a group",
+  "select_action": "Select a action",
+  "select_service": "Select a service",
+  "select_country": "Select a country",
+  "select_deny_page": "Select a deny page",
+  "input_keypairName": "Enter a Keypair Name",
+  "validation": {
+    "required": "This filed is required.",
+    "cannot_use": "cannot be used."
+  }
+}

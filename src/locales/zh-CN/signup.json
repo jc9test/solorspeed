@@ -1,0 +1,23 @@
+{
+  "title": "现在就加入我们.",
+  "subtitle": "从注册您的账号开始",
+  "loginText": "我已经有拥有账号",
+  "email": "电子邮件",
+  "username": "用户名",
+  "password": "密码",
+  "confirm_password": "确认密码",
+  "signupText": "注册",
+  "signup_success_text": "谢谢您的申请！",
+  "signup_success_content": "确认邮件已发送至您的信箱，请查看以完成注册步骤。",
+  "success_login_text": "登入至 Soloar Speed",
+  "warning": {
+    "enter_username": "请输入用户名",
+    "valid_email": "请输入合法的电邮地址",
+    "enter_password": "请输入密码",
+    "match_password": "密码不相符"
+  },
+  "notif": {
+    "invalid_email": "此电邮已经被使用，请使用其他电邮。",
+    "signup_fail": "注册失败。请稍后再试。"
+  }
+}

@@ -1,0 +1,1727 @@
+a {
+  color: rgb(72, 95, 199);
+}
+
+.button.is-ghost {
+  color: rgb(72, 95, 199);
+}
+
+.button.is-ghost:hover,
+.button.is-ghost.is-hovered {
+  color: rgb(72, 95, 199);
+}
+
+.button.is-link {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.button.is-link:hover,
+.button.is-link.is-hovered {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.button.is-link:focus,
+.button.is-link.is-focused {
+  color: rgb(255, 255, 255);
+}
+
+.button.is-link:active,
+.button.is-link.is-active {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.button.is-link[disabled],
+fieldset[disabled] .button.is-link {
+  background-color: rgb(72, 95, 199);
+}
+
+.button.is-link.is-inverted {
+  background-color: rgb(255, 255, 255);
+  color: rgb(72, 95, 199);
+}
+
+.button.is-link.is-inverted:hover,
+.button.is-link.is-inverted.is-hovered {
+  background-color: rgb(255, 255, 255);
+}
+
+.button.is-link.is-inverted[disabled],
+fieldset[disabled] .button.is-link.is-inverted {
+  background-color: rgb(255, 255, 255);
+  color: rgb(72, 95, 199);
+}
+
+.button.is-link.is-outlined {
+  border-color: rgb(72, 95, 199);
+  color: rgb(72, 95, 199);
+}
+
+.button.is-link.is-outlined:hover,
+.button.is-link.is-outlined.is-hovered,
+.button.is-link.is-outlined:focus,
+.button.is-link.is-outlined.is-focused {
+  background-color: rgb(72, 95, 199);
+  border-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.button.is-link.is-outlined[disabled],
+fieldset[disabled] .button.is-link.is-outlined {
+  border-color: rgb(72, 95, 199);
+  color: rgb(72, 95, 199);
+}
+
+.button.is-link.is-inverted.is-outlined {
+  border-color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+}
+
+.button.is-link.is-inverted.is-outlined:hover,
+.button.is-link.is-inverted.is-outlined.is-hovered,
+.button.is-link.is-inverted.is-outlined:focus,
+.button.is-link.is-inverted.is-outlined.is-focused {
+  background-color: rgb(255, 255, 255);
+  color: rgb(72, 95, 199);
+}
+
+.button.is-link.is-inverted.is-outlined[disabled],
+fieldset[disabled] .button.is-link.is-inverted.is-outlined {
+  border-color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+}
+
+.button.is-link.is-light {
+  background-color: rgb(239, 241, 250);
+  color: rgb(56, 79, 184);
+}
+
+.button.is-link.is-light:hover,
+.button.is-link.is-light.is-hovered {
+  background-color: rgb(239, 241, 250);
+  color: rgb(56, 79, 184);
+}
+
+.button.is-link.is-light:active,
+.button.is-link.is-light.is-active {
+  background-color: rgb(239, 241, 250);
+  color: rgb(56, 79, 184);
+}
+
+.notification.is-link {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.notification.is-link.is-light {
+  background-color: rgb(239, 241, 250);
+  color: rgb(56, 79, 184);
+}
+
+.progress.is-link::-webkit-progress-value {
+  background-color: rgb(72, 95, 199);
+}
+
+.progress.is-link::-moz-progress-bar {
+  background-color: rgb(72, 95, 199);
+}
+
+.progress.is-link::-ms-fill {
+  background-color: rgb(72, 95, 199);
+}
+
+.table td.is-link,
+.table th.is-link {
+  background-color: rgb(72, 95, 199);
+  border-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.tag:not(body).is-link {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.tag:not(body).is-link.is-light {
+  background-color: rgb(239, 241, 250);
+  color: rgb(56, 79, 184);
+}
+
+.select select:focus,
+.textarea:focus,
+.input:focus,
+.select select.is-focused,
+.is-focused.textarea,
+.is-focused.input,
+.select select:active,
+.textarea:active,
+.input:active,
+.select select.is-active,
+.is-active.textarea,
+.is-active.input {
+  border-color: rgb(72, 95, 199);
+}
+
+.is-link.textarea,
+.is-link.input {
+  border-color: rgb(72, 95, 199);
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+  border-color: rgb(72, 95, 199);
+}
+
+.select.is-link:not(:hover)::after {
+  border-color: rgb(72, 95, 199);
+}
+
+.select.is-link select {
+  border-color: rgb(72, 95, 199);
+}
+
+.select.is-link select:hover,
+.select.is-link select.is-hovered {
+  border-color: rgb(72, 95, 199);
+}
+
+.file.is-link .file-cta {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.file.is-link:hover .file-cta,
+.file.is-link.is-hovered .file-cta {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.file.is-link:focus .file-cta,
+.file.is-link.is-focused .file-cta {
+  color: rgb(255, 255, 255);
+}
+
+.file.is-link:active .file-cta,
+.file.is-link.is-active .file-cta {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.help.is-link {
+  color: rgb(72, 95, 199);
+}
+
+.breadcrumb a {
+  color: rgb(72, 95, 199);
+}
+
+a.dropdown-item.is-active,
+button.dropdown-item.is-active {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.menu-list a.is-active {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.message.is-link {
+  background-color: rgb(239, 241, 250);
+}
+
+.message.is-link .message-header {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.message.is-link .message-body {
+  border-color: rgb(72, 95, 199);
+  color: rgb(56, 79, 184);
+}
+
+.navbar.is-link {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.navbar.is-link .navbar-brand > .navbar-item,
+.navbar.is-link .navbar-brand .navbar-link {
+  color: rgb(255, 255, 255);
+}
+
+.navbar.is-link .navbar-brand > a.navbar-item:focus,
+.navbar.is-link .navbar-brand > a.navbar-item:hover,
+.navbar.is-link .navbar-brand > a.navbar-item.is-active,
+.navbar.is-link .navbar-brand .navbar-link:focus,
+.navbar.is-link .navbar-brand .navbar-link:hover,
+.navbar.is-link .navbar-brand .navbar-link.is-active {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.navbar.is-link .navbar-brand .navbar-link::after {
+  border-color: rgb(255, 255, 255);
+}
+
+.navbar.is-link .navbar-burger {
+  color: rgb(255, 255, 255);
+}
+
+@media screen and (min-width: 1024px) {
+  .navbar.is-link .navbar-start > .navbar-item,
+  .navbar.is-link .navbar-start .navbar-link,
+  .navbar.is-link .navbar-end > .navbar-item,
+  .navbar.is-link .navbar-end .navbar-link {
+    color: rgb(255, 255, 255);
+  }
+
+  .navbar.is-link .navbar-start > a.navbar-item:focus,
+  .navbar.is-link .navbar-start > a.navbar-item:hover,
+  .navbar.is-link .navbar-start > a.navbar-item.is-active,
+  .navbar.is-link .navbar-start .navbar-link:focus,
+  .navbar.is-link .navbar-start .navbar-link:hover,
+  .navbar.is-link .navbar-start .navbar-link.is-active,
+  .navbar.is-link .navbar-end > a.navbar-item:focus,
+  .navbar.is-link .navbar-end > a.navbar-item:hover,
+  .navbar.is-link .navbar-end > a.navbar-item.is-active,
+  .navbar.is-link .navbar-end .navbar-link:focus,
+  .navbar.is-link .navbar-end .navbar-link:hover,
+  .navbar.is-link .navbar-end .navbar-link.is-active {
+    background-color: rgb(72, 95, 199);
+    color: rgb(255, 255, 255);
+  }
+
+  .navbar.is-link .navbar-start .navbar-link::after,
+  .navbar.is-link .navbar-end .navbar-link::after {
+    border-color: rgb(255, 255, 255);
+  }
+
+  .navbar.is-link .navbar-item.has-dropdown:focus .navbar-link,
+  .navbar.is-link .navbar-item.has-dropdown:hover .navbar-link,
+  .navbar.is-link .navbar-item.has-dropdown.is-active .navbar-link {
+    background-color: rgb(72, 95, 199);
+    color: rgb(255, 255, 255);
+  }
+
+  .navbar.is-link .navbar-dropdown a.navbar-item.is-active {
+    background-color: rgb(72, 95, 199);
+    color: rgb(255, 255, 255);
+  }
+}
+
+a.navbar-item:focus,
+a.navbar-item:focus-within,
+a.navbar-item:hover,
+a.navbar-item.is-active,
+.navbar-link:focus,
+.navbar-link:focus-within,
+.navbar-link:hover,
+.navbar-link.is-active {
+  color: rgb(72, 95, 199);
+}
+
+.navbar-item.is-tab:focus,
+.navbar-item.is-tab:hover {
+  border-bottom-color: rgb(72, 95, 199);
+}
+
+.navbar-item.is-tab.is-active {
+  border-bottom-color: rgb(72, 95, 199);
+  color: rgb(72, 95, 199);
+}
+
+.navbar-link:not(.is-arrowless)::after {
+  border-color: rgb(72, 95, 199);
+}
+
+@media screen and (min-width: 1024px) {
+  .navbar.is-transparent .navbar-dropdown a.navbar-item.is-active {
+    color: rgb(72, 95, 199);
+  }
+
+  .navbar-dropdown a.navbar-item.is-active {
+    color: rgb(72, 95, 199);
+  }
+}
+
+.pagination-link.is-current {
+  background-color: rgb(72, 95, 199);
+  border-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.panel.is-link .panel-heading {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.panel.is-link .panel-tabs a.is-active {
+  border-bottom-color: rgb(72, 95, 199);
+}
+
+.panel.is-link .panel-block.is-active .panel-icon {
+  color: rgb(72, 95, 199);
+}
+
+.panel-list a:hover {
+  color: rgb(72, 95, 199);
+}
+
+.panel-block.is-active {
+  border-left-color: rgb(72, 95, 199);
+}
+
+.panel-block.is-active .panel-icon {
+  color: rgb(72, 95, 199);
+}
+
+.tabs li.is-active a {
+  border-bottom-color: rgb(72, 95, 199);
+  color: rgb(72, 95, 199);
+}
+
+.tabs.is-toggle li.is-active a {
+  background-color: rgb(72, 95, 199);
+  border-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link .title {
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link .subtitle {
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link .subtitle a:not(.button),
+.hero.is-link .subtitle strong {
+  color: rgb(255, 255, 255);
+}
+
+@media screen and (max-width: 1023px) {
+  .hero.is-link .navbar-menu {
+    background-color: rgb(72, 95, 199);
+  }
+}
+
+.hero.is-link .navbar-item,
+.hero.is-link .navbar-link {
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link a.navbar-item:hover,
+.hero.is-link a.navbar-item.is-active,
+.hero.is-link .navbar-link:hover,
+.hero.is-link .navbar-link.is-active {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link .tabs a {
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link .tabs.is-boxed a,
+.hero.is-link .tabs.is-toggle a {
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link .tabs.is-boxed li.is-active a,
+.hero.is-link .tabs.is-boxed li.is-active a:hover,
+.hero.is-link .tabs.is-toggle li.is-active a,
+.hero.is-link .tabs.is-toggle li.is-active a:hover {
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(255, 255, 255);
+  color: rgb(72, 95, 199);
+}
+
+a {
+  color: rgb(72, 95, 199);
+}
+
+.button.is-ghost {
+  color: rgb(72, 95, 199);
+}
+
+.button.is-ghost:hover,
+.button.is-ghost.is-hovered {
+  color: rgb(72, 95, 199);
+}
+
+.button.is-link {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.button.is-link:hover,
+.button.is-link.is-hovered {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.button.is-link:focus,
+.button.is-link.is-focused {
+  color: rgb(255, 255, 255);
+}
+
+.button.is-link:active,
+.button.is-link.is-active {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.button.is-link[disabled],
+fieldset[disabled] .button.is-link {
+  background-color: rgb(72, 95, 199);
+}
+
+.button.is-link.is-inverted {
+  background-color: rgb(255, 255, 255);
+  color: rgb(72, 95, 199);
+}
+
+.button.is-link.is-inverted:hover,
+.button.is-link.is-inverted.is-hovered {
+  background-color: rgb(255, 255, 255);
+}
+
+.button.is-link.is-inverted[disabled],
+fieldset[disabled] .button.is-link.is-inverted {
+  background-color: rgb(255, 255, 255);
+  color: rgb(72, 95, 199);
+}
+
+.button.is-link.is-outlined {
+  border-color: rgb(72, 95, 199);
+  color: rgb(72, 95, 199);
+}
+
+.button.is-link.is-outlined:hover,
+.button.is-link.is-outlined.is-hovered,
+.button.is-link.is-outlined:focus,
+.button.is-link.is-outlined.is-focused {
+  background-color: rgb(72, 95, 199);
+  border-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.button.is-link.is-outlined[disabled],
+fieldset[disabled] .button.is-link.is-outlined {
+  border-color: rgb(72, 95, 199);
+  color: rgb(72, 95, 199);
+}
+
+.button.is-link.is-inverted.is-outlined {
+  border-color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+}
+
+.button.is-link.is-inverted.is-outlined:hover,
+.button.is-link.is-inverted.is-outlined.is-hovered,
+.button.is-link.is-inverted.is-outlined:focus,
+.button.is-link.is-inverted.is-outlined.is-focused {
+  background-color: rgb(255, 255, 255);
+  color: rgb(72, 95, 199);
+}
+
+.button.is-link.is-inverted.is-outlined[disabled],
+fieldset[disabled] .button.is-link.is-inverted.is-outlined {
+  border-color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+}
+
+.button.is-link.is-light {
+  background-color: rgb(239, 241, 250);
+  color: rgb(56, 79, 184);
+}
+
+.button.is-link.is-light:hover,
+.button.is-link.is-light.is-hovered {
+  background-color: rgb(239, 241, 250);
+  color: rgb(56, 79, 184);
+}
+
+.button.is-link.is-light:active,
+.button.is-link.is-light.is-active {
+  background-color: rgb(239, 241, 250);
+  color: rgb(56, 79, 184);
+}
+
+.notification.is-link {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.notification.is-link.is-light {
+  background-color: rgb(239, 241, 250);
+  color: rgb(56, 79, 184);
+}
+
+.progress.is-link::-webkit-progress-value {
+  background-color: rgb(72, 95, 199);
+}
+
+.progress.is-link::-moz-progress-bar {
+  background-color: rgb(72, 95, 199);
+}
+
+.progress.is-link::-ms-fill {
+  background-color: rgb(72, 95, 199);
+}
+
+.table td.is-link,
+.table th.is-link {
+  background-color: rgb(72, 95, 199);
+  border-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.tag:not(body).is-link {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.tag:not(body).is-link.is-light {
+  background-color: rgb(239, 241, 250);
+  color: rgb(56, 79, 184);
+}
+
+.input:focus,
+.textarea:focus,
+.select select:focus,
+.is-focused.input,
+.is-focused.textarea,
+.select select.is-focused,
+.input:active,
+.textarea:active,
+.select select:active,
+.is-active.input,
+.is-active.textarea,
+.select select.is-active {
+  border-color: rgb(72, 95, 199);
+}
+
+.is-link.input,
+.is-link.textarea {
+  border-color: rgb(72, 95, 199);
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+  border-color: rgb(72, 95, 199);
+}
+
+.select.is-link:not(:hover)::after {
+  border-color: rgb(72, 95, 199);
+}
+
+.select.is-link select {
+  border-color: rgb(72, 95, 199);
+}
+
+.select.is-link select:hover,
+.select.is-link select.is-hovered {
+  border-color: rgb(72, 95, 199);
+}
+
+.file.is-link .file-cta {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.file.is-link:hover .file-cta,
+.file.is-link.is-hovered .file-cta {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.file.is-link:focus .file-cta,
+.file.is-link.is-focused .file-cta {
+  color: rgb(255, 255, 255);
+}
+
+.file.is-link:active .file-cta,
+.file.is-link.is-active .file-cta {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.help.is-link {
+  color: rgb(72, 95, 199);
+}
+
+.breadcrumb a {
+  color: rgb(72, 95, 199);
+}
+
+a.dropdown-item.is-active,
+button.dropdown-item.is-active {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.menu-list a.is-active {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.message.is-link {
+  background-color: rgb(239, 241, 250);
+}
+
+.message.is-link .message-header {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.message.is-link .message-body {
+  border-color: rgb(72, 95, 199);
+  color: rgb(56, 79, 184);
+}
+
+.navbar.is-link {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.navbar.is-link .navbar-brand > .navbar-item,
+.navbar.is-link .navbar-brand .navbar-link {
+  color: rgb(255, 255, 255);
+}
+
+.navbar.is-link .navbar-brand > a.navbar-item:focus,
+.navbar.is-link .navbar-brand > a.navbar-item:hover,
+.navbar.is-link .navbar-brand > a.navbar-item.is-active,
+.navbar.is-link .navbar-brand .navbar-link:focus,
+.navbar.is-link .navbar-brand .navbar-link:hover,
+.navbar.is-link .navbar-brand .navbar-link.is-active {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.navbar.is-link .navbar-brand .navbar-link::after {
+  border-color: rgb(255, 255, 255);
+}
+
+.navbar.is-link .navbar-burger {
+  color: rgb(255, 255, 255);
+}
+
+@media screen and (min-width: 1024px) {
+  .navbar.is-link .navbar-start > .navbar-item,
+  .navbar.is-link .navbar-start .navbar-link,
+  .navbar.is-link .navbar-end > .navbar-item,
+  .navbar.is-link .navbar-end .navbar-link {
+    color: rgb(255, 255, 255);
+  }
+
+  .navbar.is-link .navbar-start > a.navbar-item:focus,
+  .navbar.is-link .navbar-start > a.navbar-item:hover,
+  .navbar.is-link .navbar-start > a.navbar-item.is-active,
+  .navbar.is-link .navbar-start .navbar-link:focus,
+  .navbar.is-link .navbar-start .navbar-link:hover,
+  .navbar.is-link .navbar-start .navbar-link.is-active,
+  .navbar.is-link .navbar-end > a.navbar-item:focus,
+  .navbar.is-link .navbar-end > a.navbar-item:hover,
+  .navbar.is-link .navbar-end > a.navbar-item.is-active,
+  .navbar.is-link .navbar-end .navbar-link:focus,
+  .navbar.is-link .navbar-end .navbar-link:hover,
+  .navbar.is-link .navbar-end .navbar-link.is-active {
+    background-color: rgb(72, 95, 199);
+    color: rgb(255, 255, 255);
+  }
+
+  .navbar.is-link .navbar-start .navbar-link::after,
+  .navbar.is-link .navbar-end .navbar-link::after {
+    border-color: rgb(255, 255, 255);
+  }
+
+  .navbar.is-link .navbar-item.has-dropdown:focus .navbar-link,
+  .navbar.is-link .navbar-item.has-dropdown:hover .navbar-link,
+  .navbar.is-link .navbar-item.has-dropdown.is-active .navbar-link {
+    background-color: rgb(72, 95, 199);
+    color: rgb(255, 255, 255);
+  }
+
+  .navbar.is-link .navbar-dropdown a.navbar-item.is-active {
+    background-color: rgb(72, 95, 199);
+    color: rgb(255, 255, 255);
+  }
+}
+
+a.navbar-item:focus,
+a.navbar-item:focus-within,
+a.navbar-item:hover,
+a.navbar-item.is-active,
+.navbar-link:focus,
+.navbar-link:focus-within,
+.navbar-link:hover,
+.navbar-link.is-active {
+  color: rgb(72, 95, 199);
+}
+
+.navbar-item.is-tab:focus,
+.navbar-item.is-tab:hover {
+  border-bottom-color: rgb(72, 95, 199);
+}
+
+.navbar-item.is-tab.is-active {
+  border-bottom-color: rgb(72, 95, 199);
+  color: rgb(72, 95, 199);
+}
+
+.navbar-link:not(.is-arrowless)::after {
+  border-color: rgb(72, 95, 199);
+}
+
+@media screen and (min-width: 1024px) {
+  .navbar.is-transparent .navbar-dropdown a.navbar-item.is-active {
+    color: rgb(72, 95, 199);
+  }
+
+  .navbar-dropdown a.navbar-item.is-active {
+    color: rgb(72, 95, 199);
+  }
+}
+
+.pagination-link.is-current {
+  background-color: rgb(72, 95, 199);
+  border-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.panel.is-link .panel-heading {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.panel.is-link .panel-tabs a.is-active {
+  border-bottom-color: rgb(72, 95, 199);
+}
+
+.panel.is-link .panel-block.is-active .panel-icon {
+  color: rgb(72, 95, 199);
+}
+
+.panel-list a:hover {
+  color: rgb(72, 95, 199);
+}
+
+.panel-block.is-active {
+  border-left-color: rgb(72, 95, 199);
+}
+
+.panel-block.is-active .panel-icon {
+  color: rgb(72, 95, 199);
+}
+
+.tabs li.is-active a {
+  border-bottom-color: rgb(72, 95, 199);
+  color: rgb(72, 95, 199);
+}
+
+.tabs.is-toggle li.is-active a {
+  background-color: rgb(72, 95, 199);
+  border-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link .title {
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link .subtitle {
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link .subtitle a:not(.button),
+.hero.is-link .subtitle strong {
+  color: rgb(255, 255, 255);
+}
+
+@media screen and (max-width: 1023px) {
+  .hero.is-link .navbar-menu {
+    background-color: rgb(72, 95, 199);
+  }
+}
+
+.hero.is-link .navbar-item,
+.hero.is-link .navbar-link {
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link a.navbar-item:hover,
+.hero.is-link a.navbar-item.is-active,
+.hero.is-link .navbar-link:hover,
+.hero.is-link .navbar-link.is-active {
+  background-color: rgb(72, 95, 199);
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link .tabs a {
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link .tabs.is-boxed a,
+.hero.is-link .tabs.is-toggle a {
+  color: rgb(255, 255, 255);
+}
+
+.hero.is-link .tabs.is-boxed li.is-active a,
+.hero.is-link .tabs.is-boxed li.is-active a:hover,
+.hero.is-link .tabs.is-toggle li.is-active a,
+.hero.is-link .tabs.is-toggle li.is-active a:hover {
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(255, 255, 255);
+  color: rgb(72, 95, 199);
+}
+
+p.white-text {
+  color: rgb(255, 255, 255);
+}
+
+code {
+  color: rgb(65, 185, 131);
+}
+
+.is-dark code {
+  color: rgb(65, 185, 131);
+}
+
+.is-dark strong {
+  color: rgb(255, 255, 255);
+}
+
+body.opened {
+  background: rgb(255, 255, 255);
+}
+
+.toolbar .toolbar-notifications .dropdown:hover .is-trigger {
+  background: rgb(255, 255, 255);
+}
+
+.toolbar .toolbar-notifications .dropdown .is-trigger .new-indicator {
+  background: rgb(230, 41, 100);
+}
+
+.toolbar .toolbar-notifications .dropdown .dropdown-menu .dropdown-content {
+  background: rgb(255, 255, 255);
+}
+
+.toolbar .toolbar-notifications .dropdown .dropdown-menu .dropdown-content .heading .heading-right .notification-link {
+  color: rgb(65, 185, 131);
+}
+
+.toolbar .toolbar-link:hover {
+  background: rgb(255, 255, 255);
+}
+
+.minimal-wrapper.light {
+  background: rgb(255, 255, 255);
+}
+
+.right-panel-wrapper .right-panel {
+  background: rgb(255, 255, 255);
+}
+
+.right-panel-wrapper .right-panel .right-panel-head .close-panel:hover svg {
+  color: rgb(65, 185, 131);
+}
+
+.is-dark .right-panel-wrapper .right-panel .right-panel-head .close-panel:hover svg {
+  color: rgb(65, 185, 131);
+}
+
+.title.is-purple,
+.subtitle.is-purple {
+  color: rgb(65, 185, 131);
+}
+
+.title.is-light,
+.subtitle.is-light {
+  color: rgb(255, 255, 255);
+}
+
+.is-green {
+  color: rgb(6, 214, 158);
+}
+
+.is-purple {
+  color: rgb(65, 185, 131);
+}
+
+.success-text {
+  color: rgb(6, 214, 158);
+}
+
+.info-text {
+  color: rgb(3, 152, 226);
+}
+
+.warning-text {
+  color: rgb(250, 173, 66);
+}
+
+.danger-text {
+  color: rgb(230, 41, 100);
+}
+
+.menu-toggle .icon-line-center {
+  background: rgb(65, 185, 131);
+}
+
+.menu-toggle .icon-line-top {
+  background: rgb(65, 185, 131);
+}
+
+.menu-toggle .icon-line-bottom {
+  background: rgb(65, 185, 131);
+}
+
+.text-tooltip .tooltip-content {
+  background: rgb(255, 255, 255);
+}
+
+.hopscotch-bubble .hopscotch-bubble-container .hopscotch-bubble-number {
+  background: rgb(65, 185, 131);
+}
+
+.hopscotch-bubble .hopscotch-bubble-container .hopscotcv-actions .hopscotch-nav-button {
+  background: rgb(255, 255, 255);
+  color: rgb(65, 185, 131);
+  border-color: rgb(65, 185, 131);
+}
+
+.hopscotch-bubble .hopscotch-bubble-container .hopscotcv-actions .hopscotch-nav-button:hover {
+  background: rgb(65, 185, 131);
+}
+
+.demo-wrapper:hover {
+  background: rgb(255, 255, 255);
+}
+
+#backtotop.visible a:hover {
+  background: rgb(65, 185, 131);
+  color: rgb(255, 255, 255);
+}
+
+.r-card {
+  background-color: rgb(255, 255, 255);
+}
+
+.r-card.is-primary {
+  background: rgb(65, 185, 131);
+  border-color: rgb(65, 185, 131);
+  color: rgb(255, 255, 255);
+}
+
+.s-card {
+  background-color: rgb(255, 255, 255);
+}
+
+.s-card.is-primary {
+  background: rgb(65, 185, 131);
+  border-color: rgb(65, 185, 131);
+  color: rgb(255, 255, 255);
+}
+
+.l-card {
+  background-color: rgb(255, 255, 255);
+}
+
+.l-card.is-primary {
+  background: rgb(65, 185, 131);
+  border-color: rgb(65, 185, 131);
+  color: rgb(255, 255, 255);
+}
+
+.r-card-advanced,
+.s-card-advanced,
+.l-card-advanced {
+  background-color: rgb(255, 255, 255);
+}
+
+.content blockquote.is-primary {
+  border-color: rgb(65, 185, 131);
+}
+
+.content blockquote.is-success {
+  border-color: rgb(6, 214, 158);
+}
+
+.content blockquote.is-info {
+  border-color: rgb(3, 152, 226);
+}
+
+.content blockquote.is-warning {
+  border-color: rgb(250, 173, 66);
+}
+
+.content blockquote.is-danger {
+  border-color: rgb(230, 41, 100);
+}
+
+.is-dark .content blockquote.is-primary {
+  border-color: rgb(65, 185, 131);
+}
+
+.h-toggle .toggler .active,
+.h-toggle .toggler .inactive {
+  background: rgb(255, 255, 255);
+}
+
+.h-toggle .toggler .active i,
+.h-toggle .toggler .inactive i {
+  color: rgb(255, 255, 255);
+}
+
+.h-toggle .toggler .inactive {
+  background: rgb(255, 255, 255);
+  border-color: rgb(6, 214, 158);
+  color: rgb(6, 214, 158);
+}
+
+.h-toggle .toggler .active {
+  background: rgb(255, 255, 255);
+}
+
+.slider-target .slider-base .slider-connects .slider-connect {
+  background: rgb(65, 185, 131);
+}
+
+.slider-target .slider-base .slider-tooltip {
+  background: rgb(65, 185, 131);
+}
+
+.is-slider-info .slider-target .slider-base .slider-connects .slider-connect {
+  background: rgb(3, 152, 226);
+}
+
+.is-slider-info .slider-target .slider-base .slider-tooltip {
+  background: rgb(3, 152, 226);
+}
+
+.is-slider-success .slider-target .slider-base .slider-connects .slider-connect {
+  background: rgb(6, 214, 158);
+}
+
+.is-slider-success .slider-target .slider-base .slider-tooltip {
+  background: rgb(6, 214, 158);
+}
+
+.is-slider-warning .slider-target .slider-base .slider-connects .slider-connect {
+  background: rgb(250, 173, 66);
+}
+
+.is-slider-warning .slider-target .slider-base .slider-tooltip {
+  background: rgb(250, 173, 66);
+}
+
+.is-slider-danger .slider-target .slider-base .slider-connects .slider-connect {
+  background: rgb(230, 41, 100);
+}
+
+.is-slider-danger .slider-target .slider-base .slider-tooltip {
+  background: rgb(230, 41, 100);
+}
+
+.steps-segment::after {
+  background-color: rgb(65, 185, 131);
+}
+
+.steps:not(.is-hollow) .steps-marker:not(.is-hollow) {
+  background-color: rgb(65, 185, 131);
+}
+
+.steps:not(.is-hollow) .steps-segment.is-active .steps-marker:not(.is-hollow) {
+  background-color: rgb(65, 185, 131);
+}
+
+.steps.is-hollow .is-active .steps-marker,
+.steps .is-active .steps-marker.is-hollow {
+  border-color: rgb(65, 185, 131);
+}
+
+.action-link {
+  color: rgb(65, 185, 131);
+}
+
+.action-link:hover {
+  color: rgb(65, 185, 131);
+}
+
+.is-dark .action-link {
+  color: rgb(65, 185, 131);
+}
+
+.is-dark .action-link::after {
+  border-bottom-color: rgb(65, 185, 131);
+}
+
+.user-list .user-list-status.is-online {
+  background: rgb(6, 214, 158);
+}
+
+.user-list .user-list-status.is-busy {
+  background: rgb(250, 173, 66);
+}
+
+#nprogress .bar {
+  background: rgb(65, 185, 131);
+}
+
+.vc-popover-content-wrapper .vc-nav-popover-container .vc-nav-container .vc-nav-header .vc-nav-arrow {
+  color: rgb(255, 255, 255);
+}
+
+.vc-popover-content-wrapper .vc-nav-popover-container .vc-nav-container .vc-nav-header .vc-nav-arrow svg {
+  stroke: rgb(255, 255, 255);
+}
+
+.vc-popover-content-wrapper .vc-nav-popover-container .vc-nav-container .vc-nav-items .vc-nav-item {
+  color: rgb(255, 255, 255);
+}
+
+.is-dark .vc-popover-content-wrapper .vc-nav-popover-container .vc-nav-container .vc-nav-items .vc-nav-item {
+  color: rgb(255, 255, 255);
+}
+
+.is-divider[data-content]::after,
+.is-divider-vertical[data-content]::after {
+  background: rgb(255, 255, 255);
+}
+
+.note-modal .note-modal-content .note-modal-footer .btn-primary {
+  background: rgb(65, 185, 131);
+}
+
+.note-modal .note-modal-content .note-modal-footer .btn-primary {
+  background: rgb(65, 185, 131);
+  border-color: rgb(65, 185, 131);
+}
+
+.is-dark .apexcharts-subtitle-text {
+  fill: rgb(65, 185, 131);
+}
+
+.sliding-toggle input:checked ~ .toggler {
+  border-color: rgb(65, 185, 131);
+}
+
+.sliding-toggle .toggler .light {
+  background: rgb(65, 185, 131);
+  border-color: rgb(65, 185, 131);
+}
+
+.sliding-toggle .toggler .dark {
+  background: rgb(65, 185, 131);
+  border-color: rgb(65, 185, 131);
+}
+
+.special-checkbox label {
+  background-color: rgb(255, 255, 255);
+}
+
+.special-checkbox input[type=checkbox]:checked + label {
+  background-color: rgb(65, 185, 131);
+  border-color: rgb(65, 185, 131);
+}
+
+.v-popover-content .popover-head h4 {
+  color: rgb(40, 50, 82);
+}
+
+.v-popover-profile .profile-popover-block .profile-popover-wrapper .popover-fake-avatar.is-primary span,
+.v-popover-profile .profile-popover-block .skill-popover-wrapper .popover-fake-avatar.is-primary span,
+.v-popover-profile .skill-popover-block .profile-popover-wrapper .popover-fake-avatar.is-primary span,
+.v-popover-profile .skill-popover-block .skill-popover-wrapper .popover-fake-avatar.is-primary span {
+  color: rgb(65, 185, 131);
+}
+
+.v-popover-profile .profile-popover-block .profile-popover-wrapper .popover-fake-avatar.is-accent span,
+.v-popover-profile .profile-popover-block .skill-popover-wrapper .popover-fake-avatar.is-accent span,
+.v-popover-profile .skill-popover-block .profile-popover-wrapper .popover-fake-avatar.is-accent span,
+.v-popover-profile .skill-popover-block .skill-popover-wrapper .popover-fake-avatar.is-accent span {
+  color: rgb(65, 185, 131);
+}
+
+.v-popover-profile .profile-popover-block .profile-popover-wrapper .popover-fake-avatar.is-success span,
+.v-popover-profile .profile-popover-block .skill-popover-wrapper .popover-fake-avatar.is-success span,
+.v-popover-profile .skill-popover-block .profile-popover-wrapper .popover-fake-avatar.is-success span,
+.v-popover-profile .skill-popover-block .skill-popover-wrapper .popover-fake-avatar.is-success span {
+  color: rgb(6, 214, 158);
+}
+
+.v-popover-profile .profile-popover-block .profile-popover-wrapper .popover-fake-avatar.is-info span,
+.v-popover-profile .profile-popover-block .skill-popover-wrapper .popover-fake-avatar.is-info span,
+.v-popover-profile .skill-popover-block .profile-popover-wrapper .popover-fake-avatar.is-info span,
+.v-popover-profile .skill-popover-block .skill-popover-wrapper .popover-fake-avatar.is-info span {
+  color: rgb(3, 152, 226);
+}
+
+.v-popover-profile .profile-popover-block .profile-popover-wrapper .popover-fake-avatar.is-warning span,
+.v-popover-profile .profile-popover-block .skill-popover-wrapper .popover-fake-avatar.is-warning span,
+.v-popover-profile .skill-popover-block .profile-popover-wrapper .popover-fake-avatar.is-warning span,
+.v-popover-profile .skill-popover-block .skill-popover-wrapper .popover-fake-avatar.is-warning span {
+  color: rgb(250, 173, 66);
+}
+
+.v-popover-profile .profile-popover-block .profile-popover-wrapper .popover-fake-avatar.is-danger span,
+.v-popover-profile .profile-popover-block .skill-popover-wrapper .popover-fake-avatar.is-danger span,
+.v-popover-profile .skill-popover-block .profile-popover-wrapper .popover-fake-avatar.is-danger span,
+.v-popover-profile .skill-popover-block .skill-popover-wrapper .popover-fake-avatar.is-danger span {
+  color: rgb(230, 41, 100);
+}
+
+.v-popover-profile .profile-popover-block .profile-popover-wrapper .popover-meta span.job-title,
+.v-popover-profile .profile-popover-block .profile-popover-wrapper .popover-meta span.skill-type,
+.v-popover-profile .profile-popover-block .skill-popover-wrapper .popover-meta span.job-title,
+.v-popover-profile .profile-popover-block .skill-popover-wrapper .popover-meta span.skill-type,
+.v-popover-profile .skill-popover-block .profile-popover-wrapper .popover-meta span.job-title,
+.v-popover-profile .skill-popover-block .profile-popover-wrapper .popover-meta span.skill-type,
+.v-popover-profile .skill-popover-block .skill-popover-wrapper .popover-meta span.job-title,
+.v-popover-profile .skill-popover-block .skill-popover-wrapper .popover-meta span.skill-type {
+  color: rgb(65, 185, 131);
+}
+
+.is-dark .v-popover-profile .profile-popover-block .popover-actions .popover-icon:hover svg {
+  color: rgb(65, 185, 131);
+}
+
+.tabs.is-toggle li.is-active a {
+  background: rgb(65, 185, 131);
+  border-color: rgb(65, 185, 131);
+}
+
+.tabs.is-toggle li.is-active a:hover,
+.tabs.is-toggle li.is-active a:focus {
+  color: rgb(255, 255, 255);
+}
+
+.tabs li.is-active a {
+  border-bottom-color: rgb(65, 185, 131);
+  color: rgb(65, 185, 131);
+}
+
+.tabs li.is-active a:hover,
+.tabs li.is-active a:focus {
+  border-bottom-color: rgb(65, 185, 131);
+  color: rgb(65, 185, 131);
+}
+
+.is-dark .tabs.is-toggle li.is-active a,
+.is-dark .tabs.is-toggle li.is-active a:hover {
+  border-color: rgb(65, 185, 131);
+  color: rgb(255, 255, 255);
+}
+
+.is-dark .tabs li.is-active a {
+  border-bottom-color: rgb(65, 185, 131);
+  color: rgb(65, 185, 131);
+}
+
+.tabs-wrapper.is-slider.is-inverted .tabs,
+.tabs-wrapper-alt.is-slider.is-inverted .tabs {
+  background: rgb(255, 255, 255);
+}
+
+.tabs-wrapper.is-slider .tabs li.is-active a,
+.tabs-wrapper-alt.is-slider .tabs li.is-active a {
+  color: rgb(255, 255, 255);
+}
+
+.tabs-wrapper.is-slider .tab-naver,
+.tabs-wrapper-alt.is-slider .tab-naver {
+  background: rgb(65, 185, 131);
+}
+
+.tabs-wrapper.is-triple-slider.is-inverted .tabs,
+.tabs-wrapper-alt.is-triple-slider.is-inverted .tabs {
+  background: rgb(255, 255, 255);
+}
+
+.tabs-wrapper.is-triple-slider .tabs li.is-active a,
+.tabs-wrapper-alt.is-triple-slider .tabs li.is-active a {
+  color: rgb(255, 255, 255);
+}
+
+.tabs-wrapper.is-triple-slider .tab-naver,
+.tabs-wrapper-alt.is-triple-slider .tab-naver {
+  background: rgb(65, 185, 131);
+}
+
+.is-dark .tabs-wrapper.is-slider .tabs li.is-active a,
+.is-dark .tabs-wrapper.is-triple-slider .tabs li.is-active a {
+  color: rgb(255, 255, 255);
+}
+
+@media only screen and (max-width: 767px) {
+  .vertical-tabs-wrapper .tabs ul li.is-active a {
+    color: rgb(65, 185, 131);
+    border-bottom-color: rgb(65, 185, 131);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .vertical-tabs-wrapper .tabs ul li.is-active a {
+    color: rgb(65, 185, 131);
+    border-right-color: rgb(65, 185, 131);
+  }
+}
+
+.flex-pagination .pagination-next,
+.flex-pagination .pagination-previous {
+  background: rgb(255, 255, 255);
+}
+
+.flex-pagination .pagination-next.has-chevron svg,
+.flex-pagination .pagination-previous.has-chevron svg {
+  color: rgb(65, 185, 131);
+}
+
+.flex-pagination .pagination-list li .pagination-link {
+  background: rgb(255, 255, 255);
+}
+
+.flex-pagination .pagination-list li .pagination-link.is-current {
+  background: rgb(65, 185, 131);
+  border-color: rgb(65, 185, 131);
+}
+
+.is-dark .flex-pagination .pagination-next svg,
+.is-dark .flex-pagination .pagination-previous svg {
+  color: rgb(65, 185, 131);
+}
+
+.is-dark .flex-pagination .pagination-list li .pagination-link.is-current {
+  background: rgb(65, 185, 131);
+  border-color: rgb(65, 185, 131);
+}
+
+.hint--primary::after {
+  background-color: rgb(65, 185, 131);
+}
+
+.hint--primary.hint--top-left::before {
+  border-top-color: rgb(65, 185, 131);
+}
+
+.hint--primary.hint--top-right::before {
+  border-top-color: rgb(65, 185, 131);
+}
+
+.hint--primary.hint--top::before {
+  border-top-color: rgb(65, 185, 131);
+}
+
+.hint--primary.hint--bottom-left::before {
+  border-bottom-color: rgb(65, 185, 131);
+}
+
+.hint--primary.hint--bottom-right::before {
+  border-bottom-color: rgb(65, 185, 131);
+}
+
+.hint--primary.hint--bottom::before {
+  border-bottom-color: rgb(65, 185, 131);
+}
+
+.hint--primary.hint--left::before {
+  border-left-color: rgb(65, 185, 131);
+}
+
+.hint--primary.hint--right::before {
+  border-right-color: rgb(65, 185, 131);
+}
+
+.hint--error::after {
+  background-color: rgb(230, 41, 100);
+}
+
+.hint--error.hint--top-left::before {
+  border-top-color: rgb(230, 41, 100);
+}
+
+.hint--error.hint--top-right::before {
+  border-top-color: rgb(230, 41, 100);
+}
+
+.hint--error.hint--top::before {
+  border-top-color: rgb(230, 41, 100);
+}
+
+.hint--error.hint--bottom-left::before {
+  border-bottom-color: rgb(230, 41, 100);
+}
+
+.hint--error.hint--bottom-right::before {
+  border-bottom-color: rgb(230, 41, 100);
+}
+
+.hint--error.hint--bottom::before {
+  border-bottom-color: rgb(230, 41, 100);
+}
+
+.hint--error.hint--left::before {
+  border-left-color: rgb(230, 41, 100);
+}
+
+.hint--error.hint--right::before {
+  border-right-color: rgb(230, 41, 100);
+}
+
+.hint--warning::after {
+  background-color: rgb(250, 173, 66);
+}
+
+.hint--warning.hint--top-left::before {
+  border-top-color: rgb(250, 173, 66);
+}
+
+.hint--warning.hint--top-right::before {
+  border-top-color: rgb(250, 173, 66);
+}
+
+.hint--warning.hint--top::before {
+  border-top-color: rgb(250, 173, 66);
+}
+
+.hint--warning.hint--bottom-left::before {
+  border-bottom-color: rgb(250, 173, 66);
+}
+
+.hint--warning.hint--bottom-right::before {
+  border-bottom-color: rgb(250, 173, 66);
+}
+
+.hint--warning.hint--bottom::before {
+  border-bottom-color: rgb(250, 173, 66);
+}
+
+.hint--warning.hint--left::before {
+  border-left-color: rgb(250, 173, 66);
+}
+
+.hint--warning.hint--right::before {
+  border-right-color: rgb(250, 173, 66);
+}
+
+.hint--info::after {
+  background-color: rgb(3, 152, 226);
+}
+
+.hint--info.hint--top-left::before {
+  border-top-color: rgb(3, 152, 226);
+}
+
+.hint--info.hint--top-right::before {
+  border-top-color: rgb(3, 152, 226);
+}
+
+.hint--info.hint--top::before {
+  border-top-color: rgb(3, 152, 226);
+}
+
+.hint--info.hint--bottom-left::before {
+  border-bottom-color: rgb(3, 152, 226);
+}
+
+.hint--info.hint--bottom-right::before {
+  border-bottom-color: rgb(3, 152, 226);
+}
+
+.hint--info.hint--bottom::before {
+  border-bottom-color: rgb(3, 152, 226);
+}
+
+.hint--info.hint--left::before {
+  border-left-color: rgb(3, 152, 226);
+}
+
+.hint--info.hint--right::before {
+  border-right-color: rgb(3, 152, 226);
+}
+
+.hint--success::after {
+  background-color: rgb(6, 214, 158);
+}
+
+.hint--success.hint--top-left::before {
+  border-top-color: rgb(6, 214, 158);
+}
+
+.hint--success.hint--top-right::before {
+  border-top-color: rgb(6, 214, 158);
+}
+
+.hint--success.hint--top::before {
+  border-top-color: rgb(6, 214, 158);
+}
+
+.hint--success.hint--bottom-left::before {
+  border-bottom-color: rgb(6, 214, 158);
+}
+
+.hint--success.hint--bottom-right::before {
+  border-bottom-color: rgb(6, 214, 158);
+}
+
+.hint--success.hint--bottom::before {
+  border-bottom-color: rgb(6, 214, 158);
+}
+
+.hint--success.hint--left::before {
+  border-left-color: rgb(6, 214, 158);
+}
+
+.hint--success.hint--right::before {
+  border-right-color: rgb(6, 214, 158);
+}
+
+.hint--light::after {
+  background-color: rgb(255, 255, 255);
+}
+
+.hint--light.hint--top-left::before {
+  border-top-color: rgb(255, 255, 255);
+}
+
+.hint--light.hint--top-right::before {
+  border-top-color: rgb(255, 255, 255);
+}
+
+.hint--light.hint--top::before {
+  border-top-color: rgb(255, 255, 255);
+}
+
+.hint--light.hint--bottom-left::before {
+  border-bottom-color: rgb(255, 255, 255);
+}
+
+.hint--light.hint--bottom-right::before {
+  border-bottom-color: rgb(255, 255, 255);
+}
+
+.hint--light.hint--bottom::before {
+  border-bottom-color: rgb(255, 255, 255);
+}
+
+.hint--light.hint--left::before {
+  border-left-color: rgb(255, 255, 255);
+}
+
+.hint--light.hint--right::before {
+  border-right-color: rgb(255, 255, 255);
+}
+
+.is-dark .hint--primary::after {
+  background-color: rgb(65, 185, 131);
+}
+
+.is-dark .hint--primary.hint--top-left::before {
+  border-top-color: rgb(65, 185, 131);
+}
+
+.is-dark .hint--primary.hint--top-right::before {
+  border-top-color: rgb(65, 185, 131);
+}
+
+.is-dark .hint--primary.hint--top::before {
+  border-top-color: rgb(65, 185, 131);
+}
+
+.is-dark .hint--primary.hint--bottom-left::before {
+  border-bottom-color: rgb(65, 185, 131);
+}
+
+.is-dark .hint--primary.hint--bottom-right::before {
+  border-bottom-color: rgb(65, 185, 131);
+}
+
+.is-dark .hint--primary.hint--bottom::before {
+  border-bottom-color: rgb(65, 185, 131);
+}
+
+.is-dark .hint--primary.hint--left::before {
+  border-left-color: rgb(65, 185, 131);
+}
+
+.is-dark .hint--primary.hint--right::before {
+  border-right-color: rgb(65, 185, 131);
+}
+
+.ck-editor {
+  --ck-color-base-active: rgb(65, 185, 131);
+  --ck-color-focus-border: rgb(65, 185, 131);
+}
+
+.card-container .creditcard #cardfront .st2 {
+  fill: rgb(255, 255, 255);
+}
+
+.card-container .creditcard #cardfront .st7 {
+  fill: rgb(255, 255, 255);
+}
+
+.card-container .creditcard #cardback .st9 {
+  fill: rgb(255, 255, 255);
+}
+
+.stat-widget {
+  background-color: rgb(255, 255, 255);
+}
+
+.stat-widget.is-primary {
+  background: rgb(65, 185, 131);
+  border-color: rgb(65, 185, 131);
+  color: rgb(255, 255, 255);
+}
+
+.stat-widget.is-straight {
+  background-color: rgb(255, 255, 255);
+}
+
+.stat-widget.is-straight.is-primary {
+  background: rgb(65, 185, 131);
+  border-color: rgb(65, 185, 131);
+  color: rgb(255, 255, 255);
+}
+
+.layout-selector .layout-item .indicator {
+  background: rgb(65, 185, 131);
+  color: rgb(255, 255, 255);
+}
+
+.layout-selector .layout-item .indicator svg,
+.layout-selector .layout-item .indicator .iconify {
+  color: rgb(255, 255, 255);
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .navbar-brand .is-notification .navbar-dropdown {
+    background: rgb(255, 255, 255);
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-brand .is-notification .navbar-dropdown {
+    background: rgb(255, 255, 255);
+  }
+}
+
+.is-dark .menu-toggle i {
+  background: rgb(65, 185, 131);
+  color: rgb(255, 255, 255);
+}

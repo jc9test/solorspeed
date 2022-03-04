@@ -1,0 +1,49 @@
+{
+  "pageTitleText": "凭证管理",
+  "cert": "凭证",
+  "createText": "添加凭证",
+  "createBy": "创建者",
+  "keypairname": "凭证组名称",
+  "groupName": "群组",
+  "certpemUpload": "上传凭证",
+  "certkeyUpload": "上传私钥",
+  "commonName": "网域",
+  "issuerCommonName": "颁发组织",
+  "sanDns": "SAN",
+  "validityStart": "有效起始日期",
+  "validityEnd": "有效截止日期",
+  "expiredDays": "距到期日",
+  "emailAddress": "注册信箱",
+  "certpemFileName": "凭证文件名称",
+  "certkeyFileName": "私钥文件名称",
+  "certpemRaw": "凭证",
+  "certkeyRaw": "私钥",
+  "status": "状态",
+  "createDate":"创造日期",
+  "modifiedDate":"修改日期",
+  "sections": {
+    "essential": "基础",
+    "conditionIdentity": "条件 - 特征",
+    "conditionBehavior": "条件 - 行为",
+    "conditionOwasp": "条件 - Owasp",
+    "conditionExclusion": "条件 - Exclusion"
+  },
+  "warning": {
+    "keypairname_missing": "凭证组名称不可为空.",
+    "pem_missing":"PEM 不可为空.",
+    "key_missing":"KEY 不可为空.",
+    "keypairname_error": "不可使用."
+  },
+  "notif": {
+    "form_error": "错误: 请再检查表单错误.",
+    "create_success": "验证成功",
+    "create_fail": "创造失败，请稍后再试.",
+    "errorText": "错误",
+    "format_error": "格式不支援",
+    "upload_success": "上传成功",
+    "upload_fail": "凭证正在部署中，请稍后再试。",
+    "commonname_error": "错误：网域不可为空",
+    "delete_fail": "删除失败，请稍后再试。",
+    "delete_success": "删除成功"
+  }
+}

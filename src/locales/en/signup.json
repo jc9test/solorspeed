@@ -1,0 +1,23 @@
+{
+  "title": "Join Us Now.",
+  "subtitle": "Start by creating your account",
+  "loginText": "I already have an account",
+  "email": "Email Address",
+  "username": "Username",
+  "password": "Password",
+  "confirm_password": "Confirm Password",
+  "signupText": "Sign Up",
+  "signup_success_text": "Thank you for your application!",
+  "signup_success_content": "A confirmation mail has sent to you, please check your mailbox to complete.",
+  "success_login_text": "Login to Solar Speed",
+  "warning": {
+    "enter_username": "Please enter your username.",
+    "valid_email": "This field must be a valid email.",
+    "enter_password": "Please enter your password.",
+    "match_password": "Passwords do not match."
+  },
+  "notif": {
+    "invalid_email": "This email address is already used.",
+    "signup_fail": "Registeration failed. Please try again."
+  }
+}

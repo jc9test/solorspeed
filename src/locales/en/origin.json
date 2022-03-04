@@ -1,0 +1,39 @@
+{
+  "origin": "Origin",
+  "address": "Address",
+  "origin_policies": "Origin Policies",
+  "origin_policy": "Origin Policy",
+  "origin_scheme": "Origin Scheme",
+  "origin_port": "Origin Port",
+  "used_origin_policy": "Used Origin Policy",
+  "applied_origin_policy": "Applied Origin Policies",
+  "policy": "Policy",
+  "region": "Region",
+  "status": "Status",
+  "group": "Group",
+  "policy_name": "Policy Name",
+  "port_mapping_type": "Port Mapping Type",
+  "port_number": "Port Number",
+  "load_balancing_method": "Load Balancing Method",
+  "load_balancing_sticky": "Load Balancing Sticky",
+  "health_check_mode": "Health Check Mode",
+  "health_check_interval": "Health Check Interval",
+  "health_check_timeout": "Health Check Timeout",
+  "health_check_success": "Health Check Success",
+  "health_check_fail": "Health Check Fail",
+  "add_region_policy": "Add Region and Policy",
+  "edit_region_policy": "Edit Policy Name",
+  "warning": {
+    "origin_policy_Name_empty": "Origin policy name can't be empty",
+    "at_least_one_origin": "Please add at least one origin",
+    "enter_orgin_address": "Please enter at least one origin address.",
+    "enter_origin_address_text": "Please enter origin address.",
+    "at_least_one_region": "Please add at least one region",
+    "at_least_one_policy": "Policy is empty",
+    "region_exist": "Region exist",
+    "origin_port_out_of_range": "Origin Port is out of range."
+  },
+  "tooltip": {
+    "origin": "The origin server behind the CDN, weight will only effect when choosing LoadBalancer Methods to weight. Backup origins will only be used when all origins unavailable"
+  }
+}

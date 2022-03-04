@@ -1,0 +1,19 @@
+{
+  "http_or_https": "HTTP or HTTPS",
+  "https_port": "HTTPS Port",
+  "http_port": "HTTP Port",
+  "hsts": "HSTS",
+  "redirect_https": "Redirect HTTPS",
+  "redirect_http_code": "Redirect HTTP Code",
+  "warning": {
+    "select_scheme": "Please select at least one scheme.",
+    "port_out_of_range": "Port Out Of Range ",
+    "select_http_port": "Please select at least one http port.",
+    "select_https_port": "Please select at least one https port.",
+    "enter_https_port": "Please enter at least one https port."
+  },
+  "tooltip": {
+    "httpPort": "HTTP PORT : 80, 8080, 8880, 2052, 2082, 2086, 2095",
+    "httpsPort": "Other than HTTP PORT, ALL PORT except 5000-6000"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "view_more_setting": "查看更多设定",
+  "error_html_page_name": "错误页面",
+  "upstream_timeout": "Upstream Timeout",
+  "upstream_compression": "Upstream Compression",
+  "insert_rid": "Insert RID",
+  "upstream_http": "Upstream HTTP/1.1",
+  "custom_host": "自訂源 Host",
+  "host": "Host",
+  "accept_http": "允許接收 HTTP/1.0",
+  "upgrade_insecure_request": "Upgrade Insecure Request",
+  "web_socket_path": "Websocket路径",
+  "proxy_buffer_size": "Proxy Buffer Size",
+  "max_upload_size": "Max Upload Size (MB)",
+  "path_follow_origin": "缓存遵循源站路径",
+  "file_follow_origin": "缓存遵循源站文件",
+  "browser_cached_path_expired": "缓存路径的浏览器过期时间",
+  "server_cached_path_expired": "缓存路径的服务器过期时间",
+  "cached_path_minused": "缓存路径的热点次数",
+  "browser_cached_file_expired": "缓存文件的浏览器过期时间",
+  "server_cached_file_expired": "缓存文件的服务器过期时间",
+  "cached_file_minused": "缓存文件的热点次数",
+  "browser_default_cached_file_expired": "默认缓存文件的浏览器过期时间",
+  "server_default_cached_file_expired": "默认缓存文件的服务器过期时间",
+  "default_cached_file_minused": "默认缓存文件的热点次数",
+  "warning": {
+    "enter_host": "請輸入 Host",
+    "space_not_allow": "不可有空格"
+  },
+  "tooltip": {
+    "insertRid": "在header中插入CDN請求id，header的key為rid",
+    "customHost": "如果您嘗試訪問的域與當前配置文件服務器名不同，則應打開此選項",
+    "acceptHttp": "啟用它以接受 HTTP/1.0 請求，默認行為是拒絕 HTTP/1.0 請求",
+    "upgradeInsecureReq": "切換升級不安全請求"
+  }
+}

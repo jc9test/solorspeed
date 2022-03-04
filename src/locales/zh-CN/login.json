@@ -1,0 +1,20 @@
+{
+  "title": "欢迎回来!",
+  "subtitle": "请登入您的账户",
+  "create_new_acc_text": "注册新账号",
+  "forget_password_text": "忘记密码?",
+  "forget_password_context": "输入您的电邮并按下确认以重设您的密码。您将会收到一封邮件，请根据所提供的资讯完成步骤。",
+  "email": "电子邮件",
+  "username": "用户名",
+  "password": "密码",
+  "token": "Token",
+  "cancelText": "取消",
+  "confirmText": "确认",
+  "signInText": "登入",
+  "warning": {
+     "enter_username": "请输入用户名",
+     "enter_password": "请输入密码",
+     "enter_token": "请输入 token.",
+     "required": "此栏位不可为空"
+  }
+}

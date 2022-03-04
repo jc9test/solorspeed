@@ -1,0 +1,37 @@
+{
+  "origin": " 回源",
+  "address": "地址",
+  "origin_policies": "回源政策",
+  "origin_policy": "回源政策",
+  "origin_scheme": "回源协议",
+  "origin_port": "回源端口",
+  "policy": "政策",
+  "status": "状态",
+  "group": "群组",
+  "policy_name": "政策名字",
+  "port_mapping_type": "端口映射类型",
+  "port_number": "端口号码",
+  "used_origin_policy": "使用回源策略",
+  "load_balancing_method": "Health Check Timeout Method",
+  "load_balancing_sticky": "Load Balancing Sticky",
+  "health_check_mode": "Health Check Mode",
+  "health_check_interval": "Health Check Interval",
+  "health_check_timeout": "Health Check Timeout",
+  "health_check_success": "Health Check Success",
+  "health_check_fail": "Health Check Fail",
+  "add_region_policy": "添加新区域和政策",
+  "edit_region_policy": "更改政策",
+  "warning": {
+    "origin_policy_Name_empty": "请填写回源端口名称",
+    "at_least_one_origin": "回源至少填寫一個",
+    "enter_orgin_address": "请至少输入一个回源地址 (origin address)",
+    "enter_origin_address_text": "請輸入回源地址",
+    "at_least_one_region": "请至少输入一个区域",
+    "at_least_one_policy": "请至少输入一个政策",
+    "region_exist": "区域已存在",
+    "origin_port_out_of_range": "回源端口已超出范围"
+  },
+  "tooltip": {
+    "origin": "The origin server behind the CDN, weight will only effect when choosing LoadBalancer Methods to weight. Backup origins will only be used when all origins unavailable"
+  }
+}

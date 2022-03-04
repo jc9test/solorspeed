@@ -1,0 +1,357 @@
+.setting-btn {
+  cursor: pointer;
+}
+
+.dark-inverted {
+  color: grey;
+  font-family: $font-alt;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.add-btn {
+  margin-left: 0.5rem;
+  height: 0;
+  padding: 10px;
+  position: relative;
+  top: -3px;
+}
+
+.cache-tag {
+  overflow: hidden;
+  margin-bottom: 0.25rem;
+  margin-top: 0.25rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+@media only screen and (max-width: 578px) {
+  .cache-column {
+    width: 50%;
+  }
+}
+
+.right {
+  button {
+    margin-right: 0 !important;
+
+    &:first-child {
+      margin-right: 10px !important;
+    }
+  }
+}
+
+.vertical-divider {
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+  min-height: 80px;
+}
+
+.horizontal-divider {
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.is-dark .horizontal-divider {
+  border-bottom: 1px solid white;
+}
+
+.general-setting {
+  .form-fieldset {
+    border-bottom: 1px solid #e5e5e5;
+
+    .switch {
+      label {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .domain-table {
+    overflow-x: scroll;
+  }
+
+  .domain-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  body.is-dark .multiselect {
+    background: #323236;
+    // .multiselect-clear {
+    //   background: none;
+    // }
+  }
+
+  .multiselect-clear {
+    display: none;
+  }
+
+  .selection {
+    margin-top: 10px;
+    display: flex;
+
+    span {
+      color: $light-text;
+      padding: 5px 15px;
+      border-radius: 20px;
+      border: solid 1px $primary;
+      margin: 10px 10px 20px 0;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    span:hover {
+      background: $primary;
+      color: #fff;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .protocol-name {
+    flex-direction: column;
+  }
+
+  .selection {
+    flex-direction: column;
+
+    span {
+      margin: 10px 0;
+    }
+  }
+}
+
+.tile-grid {
+  .columns {
+    margin-left: -0.5rem !important;
+    margin-right: -0.5rem !important;
+    margin-top: -0.5rem !important;
+  }
+
+  .column {
+    padding: 0.5rem !important;
+
+    .button {
+      margin-right: 10px;
+    }
+
+    .right {
+      .button:last-child {
+        div {
+          color: $white;
+        }
+      }
+    }
+  }
+}
+
+.tile-grid-v2 {
+  .tile-grid-item {
+    @include solarspeed-s-card();
+
+    border-radius: 14px;
+    padding: 16px;
+    // cursor: pointer;
+
+    &.service-detail-card-body {
+      padding: 2rem 1rem;
+    }
+
+    &:hover {
+      border-color: $primary;
+      box-shadow: $light-box-shadow;
+    }
+
+    .tile-grid-item-inner {
+      display: flex;
+      align-items: center;
+
+      img {
+        display: block;
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+      }
+
+      .meta {
+        padding-left: 20px !important;
+        line-height: 1.4;
+
+        span {
+          // display: block;
+          font-family: $font;
+
+          &:first-child {
+            color: $dark-text;
+            font-family: $font-alt;
+            font-weight: 600;
+            font-size: 1rem;
+          }
+
+          &:nth-child(2) {
+            display: flex;
+            align-items: center;
+
+            span {
+              display: inline-block;
+              color: $light-text;
+              font-size: 0.8rem;
+              font-weight: 400;
+            }
+
+            // .icon-separator {
+            //   position: relative;
+            //   font-size: 4px;
+            //   color: $light-text;
+            //   padding: 0 6px;
+            // }
+          }
+        }
+      }
+
+      .dropdown {
+        margin-left: auto;
+      }
+
+      .service-detail-card-title {
+        font-size: 16px;
+        // vertical-align: -webkit-baseline-middle;
+        vertical-align: text-top;
+      }
+
+      .service-detail-card-label {
+        color: gray !important;
+      }
+    }
+  }
+}
+
+.is-dark {
+  .tile-grid {
+    .tile-grid-item {
+      @include solarspeed-card--dark();
+    }
+  }
+  .tile-grid-v2 {
+    .tile-grid-item {
+      @include solarspeed-card--dark();
+      &:hover {
+        border-color: $accent !important;
+      }
+
+      .tile-grid-item-inner {
+        span {
+          color: #fff !important;
+          font-family: $font-alt;
+          font-weight: 600;
+          font-size: 1rem;
+        }
+        .is-outlined {
+          span {
+            .iconify {
+              color: #fff !important;
+            }
+          }
+        }
+      }
+    }
+  }
+  .is-trigger {
+    .setting-btn {
+      color: #a2a5b9 !important;
+    }
+  }
+}
+.is-hidden {
+  display: none;
+}
+
+.region {
+  color: $dark-text;
+  font-family: $font-alt;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.service-desc {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+Mobile View
+========================================================================== */
+@media (max-width: 767px) {
+  .mobile-header-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .mobile-header {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      .mobile-header-container {
+        flex: auto;
+        text-align: left;
+      }
+      .mobile-header-status {
+        display: block;
+        padding-right: 35px;
+      }
+    }
+  }
+
+  .header-status {
+    display: none !important;
+  }
+  .columns {
+    flex-direction: column;
+  }
+  .vertical-divider {
+    display: none !important;
+  }
+  .horizontal-divider {
+    display: block !important;
+  }
+}
+.is-dark {
+  .mobile-header-container {
+    color: #aaaab3 !important;
+  }
+}
+.horizontal-divider {
+  display: none;
+}
+.mobile-header-status {
+  display: none;
+}
+.tile-grid-item {
+  position: relative;
+  &.service-detail-card-body {
+    padding: 2rem 1rem;
+  }
+  .tile-grid-item-inner {
+    .btn-edit {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+    }
+  }
+}
+
+/* ==========================================================================
+Others
+========================================================================== */
+
+.cache-item {
+  margin-top: 15px;
+
+  span {
+    font-size: 0.9rem !important;
+  }
+}
+
+// .iconify {
+//   color: $primary;
+// }

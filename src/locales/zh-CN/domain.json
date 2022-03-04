@@ -1,0 +1,17 @@
+{
+  "domain": "域名",
+  "group": "群组",
+  "service_name": "服务名称",
+  "description": "叙述",
+  "tags": "标签",
+  "status": "状态",
+  "use_system_cert": "套用系统凭证",
+  "keypairName": "凭证组",
+  "on": "开启",
+  "off": "关闭",
+  "sections": {
+    "essential": "基础",
+    "http_https": "HTTP/HTTPS"
+  },
+  "addDomain": "添加域名"
+}
