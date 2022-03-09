@@ -114,16 +114,20 @@ const updateCacheForm = async (type) => {
   if (!validation.status) {
     cacheFormDataChanges.value = validation.cacheData
   } else {
-    cacheFormData.value.proxyCacheIgnoreArgs =
-      cacheFormDataChanges.value.proxyCacheIgnoreArgs.value
-    cacheFormData.value.cusCachepath = cacheFormDataChanges.value.cusCachepath.value
-    cacheFormData.value.cusCachefile = cacheFormDataChanges.value.cusCachefile.value
-    cacheFormData.value.forceCusCachePath =
-      cacheFormDataChanges.value.forceCusCachePath.value
-    cacheFormData.value.forceCusCacheFile =
-      cacheFormDataChanges.value.forceCusCacheFile.value
-    cacheFormData.value.cusNoncachepath = cacheFormDataChanges.value.cusNoncachepath.value
-    cacheFormData.value.cusNonachefile = cacheFormDataChanges.value.cusNonachefile.value
+    for (const cacheFormData_key in cacheFormData.value) {
+      cacheFormData.value[cacheFormData_key] =
+        cacheFormDataChanges.value[cacheFormData_key].value
+    }
+    // cacheFormData.value.proxyCacheIgnoreArgs =
+    //   cacheFormDataChanges.value.proxyCacheIgnoreArgs.value
+    // cacheFormData.value.cusCachepath = cacheFormDataChanges.value.cusCachepath.value
+    // cacheFormData.value.cusCachefile = cacheFormDataChanges.value.cusCachefile.value
+    // cacheFormData.value.forceCusCachePath =
+    //   cacheFormDataChanges.value.forceCusCachePath.value
+    // cacheFormData.value.forceCusCacheFile =
+    //   cacheFormDataChanges.value.forceCusCacheFile.value
+    // cacheFormData.value.cusNoncachepath = cacheFormDataChanges.value.cusNoncachepath.value
+    // cacheFormData.value.cusNonachefile = cacheFormDataChanges.value.cusNonachefile.value
 
     // showCacheModal.value = false
     // showNoCacheModal.value = false

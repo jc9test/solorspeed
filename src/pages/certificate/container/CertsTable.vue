@@ -11,6 +11,7 @@ import {
   refUpdater,
   renderValues,
   renderSubmitValues,
+  formReferences,
 } from '../data/edit_certs_data'
 import CertsForm from './CertsForm.vue'
 
@@ -47,11 +48,19 @@ const props = defineProps({
   },
 })
 
-const pageSizeNow = ref(props.pageSize)
-const pageCurrentNow = ref(props.pageCurrent)
 const isDeleteModalShow = ref(false)
 const showFormCertsModal = ref(false)
 const itemDeleted = ref({})
+
+const pageSizeNow = computed({
+  get: () => props.pageSize,
+  set: (x) => emit('update:pageSize', x),
+})
+
+const pageCurrentNow = computed({
+  get: () => props.pageCurrent,
+  set: (x) => emit('update:pageCurrent', x),
+})
 
 const deleteIconClicked = (item) => {
   isDeleteModalShow.value = true
@@ -104,7 +113,7 @@ const firstItemCurrent = computed(() => {
   return pageCurrentNow.value > 1 ? pageSizeNow.value * (pageCurrentNow.value - 1) + 1 : 1
 })
 
-const emit = defineEmits(['getData'])
+const emit = defineEmits(['getData', 'update:pageSize', 'update:pageCurrent'])
 
 const getData = () => {
   const pageDetail = ref({
@@ -275,6 +284,7 @@ watch(
         :certs-data="certsData"
         :render-values="renderValues"
         :render-submit-values="renderSubmitValues"
+        :form-references="formReferences"
         :ref-updater="refUpdater"
         action="edit"
         @show-form-certs="showFormCerts"

@@ -15,6 +15,17 @@ const ridPosition = ref('z-index:9999;font-size:18px;position:absolute;top:0;lef
 const ridColor = ref('color:black')
 const status = ref('')
 
+export const resetToDefault = (resetOtherRefs: Function) => {
+  groupName.value = store.state.queryGroupName
+  htmlPageId.value = ''
+  htmlPageName.value = ''
+  htmlPageRaw.value = ''
+  htmlPageUpload.value = ''
+  ridPosition.value = 'z-index:9999;font-size:18px;position:absolute;top:0;left:0;'
+  ridColor.value = 'color:black'
+  resetOtherRefs()
+}
+
 export const formReferences = {
   createdDate,
   createBy,
@@ -57,10 +68,16 @@ export const renderSubmitValues = () => {
   const keys = Object.keys(formReferences)
 
   for (let kIndex = 0; kIndex < keys.length; kIndex++) {
-    const tempVal = formInputs.find((fi) => fi.key === keys[kIndex])?.value.value
-    submissionObject[keys[kIndex]] = tempVal
-      ? tempVal
-      : formReferences[keys[kIndex]].value
+    const fi = formInputs.find((fi) => fi.key === keys[kIndex])
+    const tempVal = fi?.value.value
+    if (fi?.type !== 'file') {
+      submissionObject[keys[kIndex]] = tempVal
+        ? tempVal
+        : formReferences[keys[kIndex]].value
+    } else {
+      console.log(tempVal)
+      submissionObject[keys[kIndex]] = tempVal.file.name
+    }
   }
   return submissionObject
 }

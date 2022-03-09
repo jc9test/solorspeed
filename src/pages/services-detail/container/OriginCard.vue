@@ -22,6 +22,7 @@ const props = defineProps({
 
 const countries = countryCode
 const isLoading = ref(false)
+const isFirstLoad = ref(true)
 const originFormData = ref({
   originPort: { value: 80, error: false },
   originsAddress: { value: [], error: false },
@@ -60,24 +61,27 @@ const originDropdown = computed(() => {
 })
 
 const updateOriginFormData = () => {
-  originFormData.value.originPort.value = overviewData.value?.originPort
-  originFormData.value.originsAddress.value = overviewData.value?.origins
-  originFormData.value.originscheme.value = overviewData.value?.originscheme
-  originFormData.value.httpPort.value = overviewData.value?.httpPort
-  originFormData.value.httpsPort.value = overviewData.value?.httpsPort
-  originFormData.value.useOriginPolicy.value = overviewData.value?.useOriginPolicy
-  originFormData.value.usedOriginPolicies.value = overviewData.value?.usedOriginPolicies
-  originFormData.value.portMappingType.value = overviewData.value?.portMappingType
+  if (isFirstLoad.value) {
+    originFormData.value.originPort.value = overviewData.value?.originPort
+    originFormData.value.originsAddress.value = overviewData.value?.origins
+    originFormData.value.originscheme.value = overviewData.value?.originscheme
+    originFormData.value.httpPort.value = overviewData.value?.httpPort
+    originFormData.value.httpsPort.value = overviewData.value?.httpsPort
+    originFormData.value.useOriginPolicy.value = overviewData.value?.useOriginPolicy
+    originFormData.value.usedOriginPolicies.value = overviewData.value?.usedOriginPolicies
+    originFormData.value.portMappingType.value = overviewData.value?.portMappingType
+    isFirstLoad.value = false
 
-  // Filter Origin Policies Region Name into single Array
-  let usedOriginPolicies = originFormData.value.usedOriginPolicies.value
-  if (usedOriginPolicies.length > 0) {
-    let regionNameArrRaw = usedOriginPolicies.map((x) => {
-      return Object.values(x.regionName)
-    })
-    originPoliciesRegionExists.value = [].concat(
-      ...regionNameArrRaw.filter(Array.isArray)
-    )
+    // Filter Origin Policies Region Name into single Array
+    let usedOriginPolicies = originFormData.value.usedOriginPolicies.value
+    if (usedOriginPolicies.length > 0) {
+      let regionNameArrRaw = usedOriginPolicies.map((x) => {
+        return Object.values(x.regionName)
+      })
+      originPoliciesRegionExists.value = [].concat(
+        ...regionNameArrRaw.filter(Array.isArray)
+      )
+    }
   }
 }
 const checkOriginPort = () => {
@@ -559,6 +563,7 @@ watch(overviewData, () => {
     "
     size="small"
     actions="right"
+    noscroll
     @close="closeOriginPolicyModal"
   >
     <template #content>

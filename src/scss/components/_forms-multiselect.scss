@@ -584,6 +584,35 @@
       width: 100% !important;
       caret-color: black;
     }
+
+    .multiselect-tag {
+      font-family: $font;
+      font-size: 0.9rem !important;
+      font-weight: 400 !important;
+      padding: 1px 0 1px 8px;
+      background: darken($widget-grey, 4%);
+      color: $dark-text;
+
+      i {
+        padding-right: 4px;
+
+        &::before {
+          color: $light-text;
+        }
+
+        &:hover {
+          background: transparent;
+
+          &::before {
+            color: $dark-text;
+          }
+        }
+      }
+
+      .multiselect-tag-remove {
+        display: block;
+      }
+    }
   }
 }
 

@@ -8,7 +8,7 @@ import store from '/@src/stores/index'
 import { checkDocumentExist, ipValidate } from '/@src/api/formValidate'
 import { _createData, _updateData } from '/@src/api/esdata'
 import useNotyf from '/@src/composable/useNotyf'
-import { checkFormValidation } from '../validation/validations'
+import { checkFormValidation, checkOriginOption } from '../validation/validations'
 import { getFormOptions } from '/@src/api/formOptions'
 
 const { t } = useI18n()
@@ -23,8 +23,8 @@ const props = defineProps({
     default: 'create',
   },
   showFormPolicyModal: {
-    type: String,
-    default: undefined,
+    type: Boolean,
+    default: false,
   },
   formInputs: {
     type: Object,
@@ -72,10 +72,11 @@ const closeFormPolicy = () => {
 const handleSubmit = async () => {
   // isLoading.value = true
   const validatedInputs = checkFormValidation(props.formReferences, props.action)
+  originError.value = checkOriginOption(entry.value.originsOptions).error
   if (validatedInputs.formInputs) {
     formInput.value = validatedInputs.formInputs
     performValidation.value = true
-    if (validatedInputs.isFormValid) {
+    if (validatedInputs.isFormValid && !originError.value) {
       const currValues = props.renderSubmitValues()
       let origins = currValues.originsOptions.map((o: any) => o.host)
       let option = {
@@ -149,7 +150,7 @@ watch(
   () => {
     if (props.originPolicyData) {
       entry.value = props.refUpdater(props.originPolicyData)
-      console.log(entry.value)
+      originError.value = false
       if (props.action === 'edit') {
         reRender.value = true
       }

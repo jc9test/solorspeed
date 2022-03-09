@@ -10,6 +10,17 @@ const htmlPageUpload = ref('')
 const ridPosition = ref('z-index:9999;font-size:18px;position:absolute;top:0;left:0;')
 const ridColor = ref('color:black')
 
+export const resetToDefault = (resetOtherRefs: Function) => {
+  groupName.value = store.state.queryGroupName
+  htmlPageId.value = ''
+  htmlPageName.value = ''
+  htmlPageRaw.value = ''
+  htmlPageUpload.value = ''
+  ridPosition.value = 'z-index:9999;font-size:18px;position:absolute;top:0;left:0;'
+  ridColor.value = 'color:black'
+  resetOtherRefs()
+}
+
 export const refUpdater = (refValues: Object) => {
   const keys = Object.keys(refValues)
   for (let keyIndex = 0; keyIndex < keys.length; keyIndex++) {
@@ -37,10 +48,16 @@ export const renderSubmitValues = () => {
   const keys = Object.keys(formReferences)
 
   for (let kIndex = 0; kIndex < keys.length; kIndex++) {
-    const tempVal = formInputs.find((fi) => fi.key === keys[kIndex])?.value.value
-    submissionObject[keys[kIndex]] = tempVal
-      ? tempVal
-      : formReferences[keys[kIndex]].value
+    const fi = formInputs.find((fi) => fi.key === keys[kIndex])
+    const tempVal = fi?.value.value
+    if (fi?.type !== 'file') {
+      submissionObject[keys[kIndex]] = tempVal
+        ? tempVal
+        : formReferences[keys[kIndex]].value
+    } else {
+      console.log(tempVal)
+      submissionObject[keys[kIndex]] = tempVal.file.name
+    }
   }
   return submissionObject
 }
@@ -150,7 +167,7 @@ export const formInputs: formInputs = [
     mode: 'single',
     value: htmlPageName,
     required: true,
-    disabled: true,
+    disabled: false,
     radioOptions: [{}],
     options: [{}],
     label: 'html.htmlPageName',

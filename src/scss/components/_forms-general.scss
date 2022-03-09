@@ -488,7 +488,7 @@ select {
       textarea,
       .multiselect {
         border-color: $danger !important;
-        box-shadow: $light-box-shadow;
+        // box-shadow: $light-box-shadow;
       }
 
       .validation-icon.is-error,
@@ -513,7 +513,7 @@ select {
     }
 
     .input {
-      padding-right: 40px;
+      // padding-right: 40px;
     }
 
     .validation-icon {

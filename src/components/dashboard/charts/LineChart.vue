@@ -445,7 +445,7 @@ function addQueryFilter(item, chartFilterOperator) {
       chartFilterOperator,
     })
   } catch (error) {
-    notif.error(error)
+    notif.error(error.message)
   }
 }
 
@@ -549,8 +549,7 @@ function setTimeRange(chartContext) {
 
 function initChart() {
   isChangeByDrag.value = true
-  const _prevRange = prevRange.value
-  store.commit('SET_TIME_RANGE', prevRange.value)
+  getNginxData()
 }
 
 function copyText() {

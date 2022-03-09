@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { computed, ref, onMounted, watch } from 'vue'
+// import { mapGetters } from 'vuex'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useHead } from '@vueuse/head'
+import { inject } from 'vue'
 
 import { getEsData, _updateData } from '/@src/api/esdata'
 import useNotyf from '/@src/composable/useNotyf'
@@ -24,6 +26,7 @@ const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const notif = useNotyf()
+const socket = inject('socket')
 
 const essentialRef = ref<HTMLElement | null>(null)
 const originRef = ref<HTMLElement | null>(null)
@@ -54,6 +57,8 @@ const advancedDropdown = ref(
 const domainsDropdown = ref(
   activeSidebar.value.filter((e) => e.name == 'domains')[0].open
 )
+// const refreshTable = computed({ ...mapGetters('service', ['refreshTable']) })
+const refreshTable = computed(() => serviceStore.getters.refreshTable)
 
 const getTableData = async () => {
   let searchOptions = {
@@ -104,11 +109,13 @@ const submitData = async (data) => {
       await _updateData('rcm-app-profiles', data).then((res) => {
         if (res?.data?.taskNo) {
           tableData.value = data
+          tableData.value.status = '部署中'
           serviceStore.mutations.SET_SERVICE_DETAIL(serviceStore.state, data)
           notif.success('Update Successful')
         } else {
           notif.error('Failed to update.')
         }
+        socket.emit('updateServiceDetail')
         console.log({
           API_Update_Data: {
             result: res,
@@ -117,7 +124,7 @@ const submitData = async (data) => {
         })
       })
     } catch (err) {
-      console.log({ '_updateData - err': err })
+      console.log({ 'submitData - err': err })
     }
   }
 }
@@ -221,6 +228,12 @@ watch(activeSidebar.value, () => {
   }
 })
 
+watch(refreshTable, () => {
+  console.log('true true true')
+  if (refreshTable.value) {
+    getTableData()
+  }
+})
 pageTitle.value = 'overview'
 useHead({
   title: 'Overview | Solarspeed',

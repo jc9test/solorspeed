@@ -13,6 +13,21 @@ const sanDns = ref('')
 const certpemRaw = ref('')
 const certkeyRaw = ref('')
 
+export const resetToDefault = (resetOtherRefs: Function) => {
+  groupName.value = store.state.queryGroupName
+  keyPairName.value = ''
+  commonName.value = ''
+  issuerCommonName.value = ''
+  validityStart.value = ''
+  validityEnd.value = ''
+  emailAddress.value = ''
+  sanDns.value = ''
+  certpemRaw.value = ''
+  certkeyRaw.value = ''
+
+  resetOtherRefs()
+}
+
 export const refUpdater = (refValues: Object) => {
   const keys = Object.keys(refValues)
   for (let keyIndex = 0; keyIndex < keys.length; keyIndex++) {
@@ -101,6 +116,8 @@ interface formInput {
   conditional_visibility: Object | undefined
   visibility: Boolean
   publisher?: Boolean
+  error?: Boolean
+  errorMsg?: String
 }
 
 interface formInputs extends Array<formInput> {}
@@ -130,6 +147,8 @@ export const formInputs: formInputs = [
     placeholder: '',
     conditional_visibility: undefined,
     visibility: true,
+    error: false,
+    errorMsg: 'filter.validation.required',
   },
   {
     title: 'Group',
@@ -148,10 +167,12 @@ export const formInputs: formInputs = [
     placeholder: '',
     conditional_visibility: undefined,
     visibility: true,
+    error: false,
+    errorMsg: 'filter.validation.required',
   },
   {
     title: 'Key Pair Name',
-    key: 'keypairname',
+    key: 'keyPairName',
     type: 'string',
     mode: '',
     value: keyPairName,
@@ -166,10 +187,12 @@ export const formInputs: formInputs = [
     placeholder: 'filter.input_keypairName',
     conditional_visibility: undefined,
     visibility: true,
+    error: false,
+    errorMsg: 'filter.validation.required',
   },
   {
     title: 'Cert PEM Upload',
-    key: 'certpemUpload',
+    key: 'certpemRaw',
     type: 'file',
     mode: '',
     value: certpemRaw,
@@ -189,10 +212,12 @@ export const formInputs: formInputs = [
     placeholder: '',
     conditional_visibility: undefined,
     visibility: true,
+    error: false,
+    errorMsg: 'filter.validation.required',
   },
   {
     title: 'Cert KEY Upload',
-    key: 'certkeyUpload',
+    key: 'certkeyRaw',
     type: 'file',
     mode: '',
     value: certkeyRaw,
@@ -208,6 +233,8 @@ export const formInputs: formInputs = [
     placeholder: '',
     conditional_visibility: undefined,
     visibility: true,
+    error: false,
+    errorMsg: 'filter.validation.required',
   },
   {
     title: 'Common Name',
@@ -216,7 +243,7 @@ export const formInputs: formInputs = [
     mode: '',
     value: commonName,
     required: true,
-    disabled: false,
+    disabled: true,
     radioOptions: [{}],
     options: [{}],
     label: 'cert.commonName',
@@ -226,6 +253,8 @@ export const formInputs: formInputs = [
     placeholder: '',
     conditional_visibility: undefined,
     visibility: true,
+    error: false,
+    errorMsg: 'filter.validation.required',
   },
   {
     title: 'Issuer CommonName',
@@ -234,7 +263,7 @@ export const formInputs: formInputs = [
     mode: '',
     value: issuerCommonName,
     required: true,
-    disabled: false,
+    disabled: true,
     radioOptions: [{}],
     options: [{}],
     label: 'cert.issuerCommonName',
@@ -244,6 +273,8 @@ export const formInputs: formInputs = [
     placeholder: '',
     conditional_visibility: undefined,
     visibility: true,
+    error: false,
+    errorMsg: 'filter.validation.required',
   },
   {
     title: 'SAN',
@@ -262,6 +293,8 @@ export const formInputs: formInputs = [
     placeholder: '',
     conditional_visibility: undefined,
     visibility: true,
+    error: false,
+    errorMsg: 'filter.validation.required',
   },
   {
     title: 'Validity Start',
@@ -270,7 +303,7 @@ export const formInputs: formInputs = [
     mode: '',
     value: validityStart,
     required: true,
-    disabled: false,
+    disabled: true,
     radioOptions: [{}],
     options: [{}],
     label: 'cert.validityStart',
@@ -280,6 +313,8 @@ export const formInputs: formInputs = [
     placeholder: '',
     conditional_visibility: undefined,
     visibility: true,
+    error: false,
+    errorMsg: 'filter.validation.required',
   },
   {
     title: 'Validity End',
@@ -288,7 +323,7 @@ export const formInputs: formInputs = [
     mode: '',
     value: validityEnd,
     required: true,
-    disabled: false,
+    disabled: true,
     radioOptions: [{}],
     options: [{}],
     label: 'cert.validityEnd',
@@ -298,6 +333,8 @@ export const formInputs: formInputs = [
     placeholder: '',
     conditional_visibility: undefined,
     visibility: true,
+    error: false,
+    errorMsg: 'filter.validation.required',
   },
   {
     title: 'Email Address',
@@ -316,6 +353,8 @@ export const formInputs: formInputs = [
     placeholder: '',
     conditional_visibility: undefined,
     visibility: true,
+    error: false,
+    errorMsg: 'filter.validation.required',
   },
 ]
 //default template

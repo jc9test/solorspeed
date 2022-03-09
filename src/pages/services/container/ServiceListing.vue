@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-
+import useNotyf from '/@src/composable/useNotyf'
+import store from '/@src/stores/index'
+import { _purgeCache } from '/@src/api/edges'
+import { _deleteData } from '/@src/api/esdata'
 import ServiceLineSingle from '/@src/pages/services/components/ServiceLineSingle.vue'
 
 const { t } = useI18n()
+const notif = useNotyf()
 const emit = defineEmits(['getData'])
 const props = defineProps({
   activeTab: {
@@ -75,10 +79,9 @@ async function clearCache() {
     purgeItems: purgeItems,
   }
   await _purgeCache(purgeData)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     .then(async (res) => {
-      await getTableData()
       notif.success('Clear Successful')
+      console.log({ 'purgeCache - success': res })
     })
     .catch((err) => {
       notif.error('Clear Fail')
@@ -90,13 +93,12 @@ async function clearCache() {
 
 async function deleteService() {
   isLoading.value = true
-  await _updateData('rcm-app-profiles', 'delete', deleteServiceItem.value)
+  await _deleteData('rcm-app-profiles', deleteServiceItem.value)
     .then(async (res) => {
-      if (res.data.taskNo == '') {
-        notif.error(t('service.notif.delete_fail'))
-      } else if (res.data.taskNo.length > 0 && res.data.success) {
-        await getTableData()
+      if (res?.data?.taskNo) {
         notif.success(t('service.notif.delete_success'))
+      } else {
+        notif.error(t('service.notif.delete_fail'))
       }
     })
     .catch((err) => {

@@ -20,6 +20,7 @@ const props = defineProps({
 })
 
 const isLoading = ref(false)
+const isFirstLoad = ref(true)
 const userServiceGroups = ref([])
 const essentialFormData = ref({
   serviceGroupName: { value: '', error: false },
@@ -37,9 +38,13 @@ const essentialDropdown = computed(() => {
 })
 
 const updateEssentialFormData = () => {
-  essentialFormData.value.serviceGroupName.value = service_detail.value?.serviceGroupName
-  essentialFormData.value.tags.value = service_detail.value?.tags
-  essentialFormData.value.desc.value = service_detail.value?.description
+  if (isFirstLoad.value) {
+    essentialFormData.value.serviceGroupName.value =
+      service_detail.value?.serviceGroupName
+    essentialFormData.value.tags.value = service_detail.value?.tags
+    essentialFormData.value.desc.value = service_detail.value?.description
+    isFirstLoad.value = false
+  }
 }
 const submitEssential = async () => {
   isLoading.value = true
@@ -72,6 +77,7 @@ onBeforeMount(async () => {
 
 watch(overviewData, () => {
   updateEssentialFormData()
+  console.log({ 'Essential - overviewData': overviewData })
 })
 </script>
 

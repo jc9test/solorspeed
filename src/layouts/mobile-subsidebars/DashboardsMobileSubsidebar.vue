@@ -126,7 +126,7 @@ onMounted(() => {
 
           <li>
             <div class="collapse-wrap">
-              <RouterLink :to="{ name: 'home.data-transfer' }" class="parent-link">
+              <RouterLink :to="{ name: 'home.data-usage' }" class="parent-link">
                 {{ t('dashboard.data_usage') }}
               </RouterLink>
             </div>

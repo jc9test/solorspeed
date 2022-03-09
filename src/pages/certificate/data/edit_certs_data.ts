@@ -13,6 +13,21 @@ const sanDns = ref('')
 const certpemRaw = ref('')
 const certkeyRaw = ref('')
 
+export const resetToDefault = (resetOtherRefs: Function) => {
+  groupName.value = store.state.queryGroupName
+  keyPairName.value = ''
+  commonName.value = ''
+  issuerCommonName.value = ''
+  validityStart.value = ''
+  validityEnd.value = ''
+  emailAddress.value = ''
+  sanDns.value = ''
+  certpemRaw.value = ''
+  certkeyRaw.value = ''
+
+  resetOtherRefs()
+}
+
 export const refUpdater = (refValues: Object) => {
   const keys = Object.keys(refValues)
   for (let keyIndex = 0; keyIndex < keys.length; keyIndex++) {
@@ -173,7 +188,7 @@ export const formInputs: formInputs = [
     mode: '',
     value: commonName,
     required: true,
-    disabled: false,
+    disabled: true,
     radioOptions: [{}],
     options: [{}],
     label: 'cert.commonName',
@@ -191,7 +206,7 @@ export const formInputs: formInputs = [
     mode: '',
     value: issuerCommonName,
     required: true,
-    disabled: false,
+    disabled: true,
     radioOptions: [{}],
     options: [{}],
     label: 'cert.issuerCommonName',
@@ -227,7 +242,7 @@ export const formInputs: formInputs = [
     mode: '',
     value: validityStart,
     required: true,
-    disabled: false,
+    disabled: true,
     radioOptions: [{}],
     options: [{}],
     label: 'cert.validityStart',
@@ -245,7 +260,7 @@ export const formInputs: formInputs = [
     mode: '',
     value: validityEnd,
     required: true,
-    disabled: false,
+    disabled: true,
     radioOptions: [{}],
     options: [{}],
     label: 'cert.validityEnd',
@@ -263,7 +278,7 @@ export const formInputs: formInputs = [
     mode: '',
     value: emailAddress,
     required: false,
-    disabled: false,
+    disabled: true,
     radioOptions: [{}],
     options: [{}],
     label: 'cert.emailAddress',

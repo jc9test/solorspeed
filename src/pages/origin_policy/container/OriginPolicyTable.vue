@@ -52,13 +52,23 @@ const props = defineProps({
   },
 })
 
-const pageSizeNow = ref(props.pageSize)
-const pageCurrentNow = ref(props.pageCurrent)
+const emit = defineEmits(['update:pageCurrent', 'update:pageSize', 'getData'])
+
 const isDeleteModalShow = ref(false)
 const isChangeLogShow = ref(false)
 const showFormPolicyModal = ref(false)
 const logDiffData = ref()
 const itemDeleted = ref({})
+
+const pageSizeNow = computed({
+  get: () => props.pageSize,
+  set: (x) => emit('update:pageSize', x),
+})
+
+const pageCurrentNow = computed({
+  get: () => props.pageCurrent,
+  set: (x) => emit('update:pageCurrent', x),
+})
 
 const objectLogData = ref([])
 
@@ -88,6 +98,7 @@ const deleteIconClicked = (item: object) => {
 
 const deleteItem = async () => {
   _deleteData('rcm-originpolicies', itemDeleted.value).then((res) => {
+    console.log(res)
     if (res.data.taskNo == '') {
       notif.error('Failed to delete. Please try again')
     } else if (res.data.taskNo.length > 0 && res.data.success) {
@@ -104,8 +115,6 @@ const firstItemCurrent = computed(() => {
 })
 
 const tab = ref(props.activeTab)
-
-const emit = defineEmits(['getData'])
 
 const getData = () => {
   const pageDetail = ref({

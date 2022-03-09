@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
-import OriginPolicyTableHeader from './OriginPolicyTableHeader.vue'
-import TitleDesc from '../../../components/general/TitleDesc.vue'
-import OriginPolicyTable from './OriginPolicyTable.vue'
-import { columnDefaults } from '../data/column_selector_data'
+import { ref, computed, watch, onMounted } from 'vue'
 import { getEsData } from '/@src/api/esdata'
 import { getGroupAsset } from '/@src/api/groupasset'
-import store from '/@src/stores/index'
+import store from '/@src/stores'
+import { useI18n } from 'vue-i18n'
+
+import OriginPolicyTableHeader from './OriginPolicyTableHeader.vue'
+import OriginPolicyTable from './OriginPolicyTable.vue'
 
 const { t } = useI18n()
 
@@ -22,117 +21,95 @@ const props = defineProps({
   },
 })
 
-const pageSize = ref(10)
+const groupName = computed(() => store.state.queryGroupName)
+const isFuzzySearch = ref(false)
+
 const pageCurrent = ref(1)
-const searchFilters = ref([
-  { key: 'groupName', type: 'string', value: store.state.queryGroupName },
+const pageSize = ref(10)
+const pageFrom = computed(() => pageSize.value * (pageCurrent.value - 1))
+
+const _filters = ref([])
+const filters = computed(() => [
+  {
+    key: 'groupName',
+    type: 'string',
+    value: groupName.value,
+  },
+  ..._filters.value,
 ])
 
-const filters = computed(() => {
-  var options = {
-    isFuzzySearch: true,
+const sort = computed(() => [{ modifiedDate: { order: 'desc' } }])
+
+const esOptions = computed(() => {
+  return {
+    isFuzzySearch: isFuzzySearch.value,
     esIndex: 'rcm-originpolicies',
-    from: pageCurrent.value > 1 ? pageSize.value * (pageCurrent.value - 1) : 0,
+    from: pageFrom.value,
     size: pageSize.value,
-    sort: [{ modifiedDate: { order: 'desc' } }],
-    filters: searchFilters.value,
+    sort: sort.value,
+    filters: filters.value,
     searchView: 'OriginPolicy',
   }
-  return options
 })
 
-const columnBuilder = () => {
-  let columns = {}
-  for (let index = 0; index < columnDefaults.length; index++) {
-    if (props.appliedSelectedColumn.includes(columnDefaults[index].name)) {
-      if (typeof columnDefaults[index].value === 'string') {
-        ;(columns as any)[columnDefaults[index].name] = columnDefaults[index].value
-      } else if (typeof columnDefaults[index].value === 'object') {
-        ;(columns as any)[columnDefaults[index].name] = {
-          ...(columnDefaults[index].value as any),
-        }
-      }
-    }
-  }
-  return columns
+const filtered = ref({ data: [], total: 0 })
+const usage = ref({ used: 0, max: 0, available: 0 })
+
+const getData = () => {
+  getEsData(esOptions.value).then((res) => {
+    const { mapData, total } = res.data
+    filtered.value = { data: mapData, total }
+  })
 }
 
-const columns = ref(columnBuilder())
-const filteredData = ref([])
-const filteredDataTotal = ref(0)
-const usage = ref({})
-
-const getData = (filtered = null, value = null) => {
-  if (filtered && !value) {
-    filters.value.from =
-      filtered.value.pageCurrent > 1
-        ? filtered.value.pageSize * (filtered.value.pageCurrent - 1)
-        : 0
-    filters.value.size = filtered.value.pageSize
-  }
-  getEsData(filters.value)
-    .then((res) => {
-      filteredData.value = res.data.mapData
-      filteredDataTotal.value = res.data.total
-    })
-    .catch(() => {
-      filteredData.value = []
-      filteredDataTotal.value = 0
-    })
-}
 const getAssetData = () => {
   getGroupAsset({
-    category: 'originPolicies',
-    groupNames: store.state.queryGroupName,
+    category: 'wafRules',
+    groupNames: groupName.value,
   }).then((res) => {
-    let { used, max } = res.data
-    let available = max - used
+    const { used, max } = res.data
+    const available = max - used
     usage.value = { used, max, available }
   })
 }
 
-watch(
-  () => [props.appliedSelectedColumn],
-  () => {
-    columns.value = columnBuilder()
-  }
-)
-
-const handleSearch = (formReferences) => {
-  const filters = ref(formReferences)
-  filters.value.from = 0
-  pageCurrent.value = 1
-  getData(filters, 2)
-}
-
-onMounted(() => {
+const getAllData = () => {
   getData()
   getAssetData()
+}
+
+watch(
+  () => [esOptions.value, pageCurrent.value, pageSize.value],
+  () => getData(),
+  { deep: true }
+)
+
+onMounted(() => {
+  getAllData()
 })
 </script>
 
 <template>
   <div>
     <TitleDesc
-      :title="`${t('originPolicy.titleContent')}`"
-      :desc="`${t('originPolicy.subtitleContent.first')} ${usage.used} ${t(
-        'originPolicy.subtitleContent.of'
-      )} ${usage.max} ${t('originPolicy.subtitleContent.originPolicy')}`"
+      :title="`${t('waf.titleContent')}`"
+      :desc="`${t('waf.subtitleContent.first')} ${usage.used} ${t(
+        'waf.subtitleContent.of'
+      )} ${usage.max} ${t('waf.subtitleContent.wafrules')}`"
     />
     <OriginPolicyTableHeader
-      :filters="filters"
-      @get-data="getData"
-      @search-filter-called="handleSearch"
+      v-model:filters="_filters"
+      v-model:isFuzzySearch="isFuzzySearch"
+      @get-data="getAllData"
     />
     <OriginPolicyTable
-      :page-size="pageSize"
-      :page-current="pageCurrent"
-      :filters="filters"
-      :active-tab="activeTab"
-      :filtered-data="filteredData"
-      :filtered-data-total="filteredDataTotal"
-      :applied-selected-column="appliedSelectedColumn"
-      @get-data="getData"
+      v-model:pageSize="pageSize"
+      v-model:pageCurrent="pageCurrent"
+      :active-tab="props.activeTab"
+      :filtered-data="filtered.data"
+      :filtered-data-total="filtered.total"
+      :applied-selected-column="props.appliedSelectedColumn"
+      @get-data="getAllData"
     />
   </div>
 </template>

@@ -1,89 +1,90 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import FilterSelector from '../components/FilterSelector.vue'
 import ColumnSelector from '../components/ColumnSelector.vue'
 import HeaderSearchBar from '../components/HeaderSearchBar.vue'
 import CertsForm from './CertsForm.vue'
+import CertsFilterGroup from './CertsFilterGroup.vue'
 import {
+  formReferences,
   formInputs,
   refUpdater,
   renderValues,
   renderSubmitValues,
+  inputAttributeUpdater,
 } from '../data/create_certs_data'
 
 const { t } = useI18n()
 
-//search
-const policyNameSearch = ref()
-const isPolicyNameSearch = ref(false)
-
-//pagination
-const hasFilter = ref(false)
-
 const props = defineProps({
   filters: {
-    type: Object,
-    default: () => {},
+    type: Array,
+    default: () => [],
+  },
+  isFuzzySearch: {
+    type: Boolean,
+    default: () => false,
   },
 })
+const emit = defineEmits(['update:filters', 'update:isFuzzySearch', 'getData'])
 
-const showFormCertsModal = ref(false)
+const isFuzzySearch = computed({
+  get: () => {
+    return props.isFuzzySearch
+  },
+  set: (x) => emit('update:isFuzzySearch', x),
+})
 
-//pagination
-const certsData = ref()
-const emit = defineEmits(['search-filter-called', 'getData'])
-const searchFilter = (searchFilterOptions) => {
-  emit('search-filter-called', searchFilterOptions)
-}
-const showFormCerts = (value: boolean) => {
-  showFormCertsModal.value = value
-  if (value) {
-    certsData.value = renderValues()
-  }
-}
+const filters = computed({
+  get: () => {
+    return props.filters
+  },
+  set: (x) => emit('update:filters', x),
+})
 
-const getData = () => {
-  emit('getData')
-}
+const getData = () => emit('getData')
+
+const showFormCerts = ref(false)
+const certsData = renderValues()
 </script>
 
 <template>
   <div class="header-container">
     <div class="header-options-container">
       <div class="filter-column-container">
-        <FilterSelector
-          v-model:hasFilter="hasFilter"
-          v-model:is-policy-name-search="isPolicyNameSearch"
-          :filters="props.filters"
-          :policy-name-search="policyNameSearch"
-          @search-filter-called="searchFilter"
-        />
+        <FilterSelector v-model:filters="filters" />
         <ColumnSelector />
       </div>
       <div class="header-searchbar-container">
-        <HeaderSearchBar />
+        <HeaderSearchBar
+          v-model:isFuzzySearch="isFuzzySearch"
+          v-model:filters="filters"
+        />
       </div>
     </div>
 
     <div class="header-action-container">
-      <VButton color="primary" class="cache-button" bold @click="showFormCerts"
+      <VButton color="primary" class="cache-button" bold @click="showFormCerts = true"
         >{{ t('main.createText') }}
       </VButton>
     </div>
     <CertsForm
-      :show-form-certs-modal="showFormCertsModal"
+      :show-form-policy-modal="showFormCerts"
       :form-inputs="formInputs"
+      :form-references="formReferences"
       :certs-data="certsData"
-      :render-values="renderValues"
       :ref-updater="refUpdater"
+      :attribute-updater="inputAttributeUpdater"
+      :render-values="renderValues"
       :render-submit-values="renderSubmitValues"
       action="create"
-      @show-form-certs="showFormCerts"
+      @show-form-policy="showFormCerts = false"
       @get-data="getData"
     />
   </div>
+  <CertsFilterGroup v-model:filters="filters" />
 </template>
 
 <style lang="scss">

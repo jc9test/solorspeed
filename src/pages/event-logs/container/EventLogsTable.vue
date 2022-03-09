@@ -40,6 +40,8 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['update:pageSize', 'update:pageCurrent', 'getData'])
+
 const actionOptions = {
   '00': 'Allow',
   '01': 'Deny',
@@ -57,12 +59,20 @@ const actionOptions = {
   '14': 'Smart Captcha',
 }
 
-const pageSizeNow = ref(props.pageSize)
-const pageCurrentNow = ref(props.pageCurrent)
 const isDeleteModalShow = ref(false)
 const requestHeaderShow = ref(false)
 const reqHeaderData = ref()
 const itemDeleted = ref({})
+
+const pageSizeNow = computed({
+  get: () => props.pageSize,
+  set: (x) => emit('update:pageSize', x),
+})
+
+const pageCurrentNow = computed({
+  get: () => props.pageCurrent,
+  set: (x) => emit('update:pageCurrent', x),
+})
 
 const openReqHeaderModal = (item: any) => {
   reqHeaderData.value = item
@@ -77,8 +87,6 @@ const closeReqHeaderModal = () => {
 const firstItemCurrent = computed(() => {
   return pageCurrentNow.value > 1 ? pageSizeNow.value * (pageCurrentNow.value - 1) + 1 : 1
 })
-
-const emit = defineEmits(['getData'])
 
 const getData = () => {
   const pageDetail = ref({

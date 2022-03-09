@@ -134,7 +134,7 @@ const updateDashboardQueryFilters = (
     case 'REMOVE_FILTER':
       dashboardQueryFilters.value = dashboardQueryFilters.value.filter(
         (x) =>
-          x.chartFilterKey !== filter.chartFilterKey &&
+          x.chartFilterKey !== filter.chartFilterKey ||
           x.chartFilterValue !== filter.chartFilterValue
       )
       break

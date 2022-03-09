@@ -156,7 +156,7 @@ function addCurrentFilter() {
     updateDashboardQueryFilters('ADD_FILTER', chartFilterData.value)
     closeFilter()
   } catch (error) {
-    notif.error(error as string)
+    notif.error(error.message)
   }
 }
 

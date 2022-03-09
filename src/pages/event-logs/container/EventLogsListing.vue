@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted } from 'vue'
-import EventLogsTableHeader from './EventLogsTableHeader.vue'
-import EventLogsTable from './EventLogsTable.vue'
-import { columnDefaults } from '../data/column_selector_data'
+import { ref, computed, watch, onMounted } from 'vue'
 import { getEsData } from '/@src/api/esdata'
-import store from '/@src/stores/index'
+import store from '/@src/stores'
+
+import EventLogsTable from './EventLogsTable.vue'
+import EventLogsTableHeader from './EventLogsTableHeader.vue'
 
 const props = defineProps({
   activeTab: {
@@ -17,99 +17,76 @@ const props = defineProps({
   },
 })
 
-const pageSize = ref(10)
+const groupName = computed(() => store.state.queryGroupName)
+const isFuzzySearch = ref(false)
+
 const pageCurrent = ref(1)
-const searchFilters = ref([
-  { key: 'group', type: 'string', value: store.state.queryGroupName },
+const pageSize = ref(10)
+const pageFrom = computed(() => pageSize.value * (pageCurrent.value - 1))
+
+const _filters = ref([])
+const filters = computed(() => [
+  {
+    key: 'group',
+    type: 'string',
+    value: groupName.value,
+  },
+  ..._filters.value,
 ])
 
-const filters = computed(() => {
-  var options = {
-    isFuzzySearch: true,
+const sort = computed(() => [{ modifiedDate: { order: 'desc' } }])
+
+const esOptions = computed(() => {
+  return {
+    isFuzzySearch: isFuzzySearch.value,
     esIndex: 'rcm-monitor-edge-accesslog-*',
-    from: pageCurrent.value > 1 ? pageSize.value * (pageCurrent.value - 1) : 0,
+    from: pageFrom.value,
     size: pageSize.value,
-    sort: [{ modifiedDate: { order: 'desc' } }],
-    filters: searchFilters.value,
+    sort: sort.value,
+    filters: filters.value,
     searchView: 'WafEvent',
   }
-  return options
 })
 
-const columnBuilder = () => {
-  let columns = {}
-  for (let index = 0; index < columnDefaults.length; index++) {
-    if (props.appliedSelectedColumn.includes(columnDefaults[index].name)) {
-      if (typeof columnDefaults[index].value === 'string') {
-        ;(columns as any)[columnDefaults[index].name] = columnDefaults[index].value
-      } else if (typeof columnDefaults[index].value === 'object') {
-        ;(columns as any)[columnDefaults[index].name] = {
-          ...(columnDefaults[index].value as any),
-        }
-      }
-    }
-  }
-  return columns
+const filtered = ref({ data: [], total: 0 })
+
+const getData = () => {
+  getEsData(esOptions.value).then((res) => {
+    const { mapData, total } = res.data
+    filtered.value = { data: mapData, total }
+  })
 }
 
-const columns = ref(columnBuilder())
-const filteredData = ref([])
-const filteredDataTotal = ref(0)
-
-const getData = (filtered = null, value = null) => {
-  if (filtered && !value) {
-    filters.value.from =
-      filtered.value.pageCurrent > 1
-        ? filtered.value.pageSize * (filtered.value.pageCurrent - 1)
-        : 0
-    filters.value.size = filtered.value.pageSize
-  }
-  getEsData(filters.value)
-    .then((res) => {
-      filteredData.value = res.data.mapData
-      filteredDataTotal.value = res.data.total
-    })
-    .catch(() => {
-      filteredData.value = []
-      filteredDataTotal.value = 0
-    })
+const getAllData = () => {
+  getData()
 }
 
 watch(
-  () => [props.appliedSelectedColumn],
-  () => {
-    columns.value = columnBuilder()
-  }
+  () => [esOptions.value, pageCurrent.value, pageSize.value],
+  () => getData(),
+  { deep: true }
 )
 
-const handleSearch = (formReferences) => {
-  const filters = ref(formReferences)
-  filters.value.from = 0
-  pageCurrent.value = 1
-  getData(filters, 2)
-}
-
 onMounted(() => {
-  getData()
+  getAllData()
 })
 </script>
 
 <template>
   <div>
     <EventLogsTableHeader
-      :filters="filters"
-      @get-data="getData"
-      @search-filter-called="handleSearch"
+      v-model:filters="_filters"
+      v-model:isFuzzySearch="isFuzzySearch"
+      @get-data="getAllData"
     />
     <EventLogsTable
-      :page-size="pageSize"
-      :page-current="pageCurrent"
-      :filters="filters"
-      :active-tab="activeTab"
-      :filtered-data="filteredData"
-      :filtered-data-total="filteredDataTotal"
-      :applied-selected-column="appliedSelectedColumn"
-      @get-data="getData"
+      v-model:pageSize="pageSize"
+      v-model:pageCurrent="pageCurrent"
+      :active-tab="props.activeTab"
+      :filtered-data="filtered.data"
+      :filtered-data-total="filtered.total"
+      :applied-selected-column="props.appliedSelectedColumn"
+      @get-data="getAllData"
     />
   </div>
 </template>

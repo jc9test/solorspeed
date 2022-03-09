@@ -26,7 +26,7 @@
   "select_deny_page": "Select a deny page",
   "input_keypairName": "Enter a Keypair Name",
   "validation": {
-    "required": "This filed is required.",
+    "required": "This field is required.",
     "cannot_use": "cannot be used."
   }
 }

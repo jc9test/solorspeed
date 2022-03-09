@@ -50,34 +50,40 @@ const props = defineProps({
     type: Number,
     default: () => 0,
   },
-  filters: {
-    type: Object,
-    default: () => {},
-  },
 })
+
+const emit = defineEmits(['update:pageCurrent', 'update:pageSize', 'getData'])
 
 const actionOptions = {
   '00': 'Allow',
   '01': 'Deny',
   '03': 'Gesture',
-  '04': 'Log',
+  // '04': 'Log',
   '05': 'Speed',
   '06': 'Redirect',
   '07': 'Cookie',
   '08': 'Period',
   '09': 'Request Headers',
   '10': 'Response Headers',
-  '11': 'Log Only',
+  // '11': 'Log Only',
   '12': 'Custom Page',
   '13': 'OriginPolicy',
   '14': 'Smart Captcha',
 }
 
-const pageSizeNow = ref(props.pageSize)
-const pageCurrentNow = ref(props.pageCurrent)
 const isDeleteModalShow = ref(false)
 const isChangeLogShow = ref(false)
 const itemDeleted = ref({})
+
+const pageSizeNow = computed({
+  get: () => props.pageSize,
+  set: (x) => emit('update:pageSize', x),
+})
+
+const pageCurrentNow = computed({
+  get: () => props.pageCurrent,
+  set: (x) => emit('update:pageCurrent', x),
+})
 
 // object log modal
 
@@ -123,14 +129,8 @@ const firstItemCurrent = computed(() => {
   return pageCurrentNow.value > 1 ? pageSizeNow.value * (pageCurrentNow.value - 1) + 1 : 1
 })
 
-const emit = defineEmits(['getData'])
-
 const getData = () => {
-  const pageDetail = ref({
-    pageSize: pageSizeNow.value,
-    pageCurrent: pageCurrentNow.value,
-  })
-  emit('getData', pageDetail)
+  emit('getData')
 }
 
 const tab = ref(props.activeTab)
@@ -155,7 +155,7 @@ const deleteItem = async () => {
     }
   })
   isDeleteModalShow.value = false
-  await new Promise((resolve) => setTimeout(resolve, 10000)) // 3 sec
+  await new Promise((resolve) => setTimeout(resolve, 10000)) // 3 sec ???
   getData()
 }
 

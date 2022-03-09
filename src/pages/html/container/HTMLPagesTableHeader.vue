@@ -1,88 +1,94 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import FilterSelector from '../components/FilterSelector.vue'
 import ColumnSelector from '../components/ColumnSelector.vue'
 import HeaderSearchBar from '../components/HeaderSearchBar.vue'
+import HTMLPagesForm from './HTMLPagesForm.vue'
+import HTMLPagesFilterGroup from './HTMLPagesFilterGroup.vue'
 import {
+  formReferences,
   formInputs,
   refUpdater,
   renderValues,
   renderSubmitValues,
+  inputAttributeUpdater,
 } from '../data/create_html_pages_data'
-import HTMLPagesForm from './HTMLPagesForm.vue'
 
-//search
-const policyNameSearch = ref()
-const isPolicyNameSearch = ref(false)
-
-//pagination
-const hasFilter = ref(false)
+const { t } = useI18n()
 
 const props = defineProps({
   filters: {
-    type: Object,
-    default: () => {},
+    type: Array,
+    default: () => [],
+  },
+  isFuzzySearch: {
+    type: Boolean,
+    default: () => false,
   },
 })
+const emit = defineEmits(['update:filters', 'update:isFuzzySearch', 'getData'])
 
-const showFormHtmlModal = ref(false)
-const { t } = useI18n()
+const isFuzzySearch = computed({
+  get: () => {
+    return props.isFuzzySearch
+  },
+  set: (x) => emit('update:isFuzzySearch', x),
+})
 
-//pagination
-const htmlPagesData = ref()
-const emit = defineEmits(['search-filter-called', 'getData'])
-const searchFilter = (searchFilterOptions) => {
-  emit('search-filter-called', searchFilterOptions)
-}
-const showFormHtml = (value: boolean) => {
-  showFormHtmlModal.value = value
-  if (value) {
-    htmlPagesData.value = renderValues()
-  }
-}
+const filters = computed({
+  get: () => {
+    return props.filters
+  },
+  set: (x) => emit('update:filters', x),
+})
 
-const getData = () => {
-  emit('getData')
-}
+const getData = () => emit('getData')
+
+const showFormHTML = ref(false)
+const htmlPagesData = renderValues()
 </script>
 
 <template>
   <div class="header-container">
     <div class="header-options-container">
       <div class="filter-column-container">
-        <FilterSelector
-          v-model:hasFilter="hasFilter"
-          v-model:is-policy-name-search="isPolicyNameSearch"
-          :filters="props.filters"
-          :policy-name-search="policyNameSearch"
-          @search-filter-called="searchFilter"
-        />
+        <FilterSelector v-model:filters="filters" />
         <ColumnSelector />
       </div>
       <div class="header-searchbar-container">
-        <HeaderSearchBar />
+        <HeaderSearchBar
+          v-model:isFuzzySearch="isFuzzySearch"
+          v-model:filters="filters"
+        />
       </div>
     </div>
-
+    <div />
     <div class="header-action-container">
-      <VButton color="primary" class="cache-button" bold @click="showFormHtml"
-        >{{ t('main.createText') }}
+      <VButton color="primary" class="cache-button" bold @click="showFormHTML = true">
+        {{ t('main.createText') }}
       </VButton>
     </div>
     <HTMLPagesForm
-      :show-form-html-modal="showFormHtmlModal"
+      :show-form-html-modal="showFormHTML"
       :form-inputs="formInputs"
+      :form-references="formReferences"
       :html-pages-data="htmlPagesData"
+      :ref-updater="refUpdater"
+      :attribute-updater="inputAttributeUpdater"
       :render-values="renderValues"
       :render-submit-values="renderSubmitValues"
-      :ref-updater="refUpdater"
       action="create"
-      @show-form-html="showFormHtml"
+      @show-form-html="
+        (e) => {
+          showFormHTML = e
+        }
+      "
       @get-data="getData"
     />
   </div>
+  <HTMLPagesFilterGroup v-model:filters="filters" />
 </template>
 
 <style lang="scss">

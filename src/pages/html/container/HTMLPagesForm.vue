@@ -9,6 +9,8 @@ import 'prismjs/components/prism-javascript'
 import 'prismjs/themes/prism-tomorrow.css'
 import { checkFormValidation } from '../validation/validations'
 import { _createData, _updateData } from '/@src/api/esdata'
+import { resetToDefault as resetCreateForm } from '../data/create_html_pages_data'
+import { resetToDefault as resetEditForm } from '../data/edit_html_pages_data'
 
 const { t } = useI18n()
 const notif = useNotyf()
@@ -57,6 +59,7 @@ const isLoading = ref(false)
 const formInput = ref(props.formInputs)
 const reRender = ref(false)
 const performValidation = ref(false)
+// const showFormHtmlModal = computed(() => props.showFormHtmlModal)
 
 const emit = defineEmits(['show-form-html', 'getData'])
 const closeHtmlPagesModal = () => {
@@ -70,20 +73,25 @@ function highlighter(htmlPageRaw: any) {
 
 const handleFileChange = (e: Event) => {
   const target = e.target as HTMLInputElement
+  console.log({ 'handleFileChange - e': e })
   if (target && target.files) {
     const file = target.files[0]
+    console.log({ 'target.files': target.files })
     if (file.name.includes('.html')) {
       // htmlPageUploadErr.value = false
       // htmlPageUpload.value = file.name
       var reader = new FileReader()
       reader.onload = (e: any) => {
+        console.log({ 'reader.onload - e': e })
         entry.value.htmlPageRaw = e.target.result
         htmlPageRaw.value = e.target.result
+        // formReferences.htmlPageRaw.value = e.target.result
       }
       reader.readAsText(file)
     } else {
       // htmlPageUploadErr.value = true
     }
+    console.log({ 'Test - reader': reader })
   }
 }
 
@@ -91,24 +99,32 @@ const handleCentralChange = () => {
   entry.value = props.renderValues()
 }
 
-const handleSubmit = () => {
-  const newFormInputs = checkFormValidation(props.formReferences, props.action)
+const handleSubmit = async () => {
+  const newFormInputs = await checkFormValidation(props.formReferences, props.action)
+  console.log({ 'html - before submit': newFormInputs })
   if (newFormInputs.formInputs) {
     formInput.value = newFormInputs.formInputs
     performValidation.value = true
     if (newFormInputs.isFormValid) {
       const currValues = props.renderSubmitValues()
-      let newHtmlPages = currValues
-      console.log(newHtmlPages)
+      let newHtmlPages = { ...currValues, htmlPageRaw: htmlPageRaw.value }
+      console.log({
+        'html - submit': {
+          'data - props.action': props.action,
+          'data - newHtmlPages': newHtmlPages,
+        },
+      })
       if (props.action === 'create') {
         _createData('rcm-htmlpages', newHtmlPages).then(async (result) => {
           notification(result)
         })
+        resetCreateForm(() => {})
       } else if (props.action === 'edit') {
         _updateData('rcm-htmlpages', newHtmlPages).then(async (result) => {
-          console.log(result)
           notification(result)
+          console.log(newHtmlPages, result)
         })
+        resetEditForm(() => {})
       }
     }
   }
@@ -143,6 +159,7 @@ watch(
   () => props.htmlPagesData,
   () => {
     if (props.htmlPagesData) {
+      resetEditForm(() => {})
       entry.value = props.refUpdater(props.htmlPagesData)
       htmlPageRaw.value = entry.value.htmlPageRaw
       if (props.action === 'edit') {
@@ -151,6 +168,11 @@ watch(
     }
   }
 )
+// watch(props.showFormHtmlModal, () => {
+//   console.log({ showFormHtmlModal: showFormHtmlModal })
+//   console.log({ 'props.showFormHtmlModal': props.showFormHtmlModal })
+// })
+// console.log({ 'props.showFormHtmlModal0': props.showFormHtmlModal })
 </script>
 
 <template>
@@ -162,43 +184,43 @@ watch(
     @close="closeHtmlPagesModal"
   >
     <template #content>
-      <form class="modal-form" @submit.prevent="">
-        <FormBuilder
-          :form-inputs="formInput"
-          :re-render="reRender"
-          :perform-validation="performValidation"
-          @central-changed="(e: any) => handleCentralChange(e)"
-          @file-changed="(e: any) => handleFileChange(e)"
-          @validation-performed="handleValidationPerformed"
-        >
-          <template #lastInput>
-            <VField>
-              <label>{{ t('html.htmlPageContent') }} *</label>
-              <prism-editor
-                v-model="htmlPageRaw"
-                class="my-editor height-300"
-                :highlight="() => highlighter(htmlPageRaw)"
-                line-numbers
-                readonly
-              ></prism-editor>
-            </VField>
-            <label>{{ t('html.htmlPagePreview') }} *</label><br />
-            <div class="height-300 position-relative">
-              <!-- <div v-html="htmlPageRaw"></div> -->
-              <iframe
-                title="createHTMLPagePreview"
-                class="max-width height-300 position-relative"
-                :srcdoc="htmlPageRaw"
-              ></iframe>
-              <div :style="entry.ridPosition">
-                <span :style="entry.ridColor">Case ID : 123456</span><br />
-                <span :style="entry.ridColor">Time Stamp : 2022-01-01</span><br />
-                <span :style="entry.ridColor">IP : 1.2.3.4</span>
-              </div>
+      <!-- <form class="modal-form" @submit.prevent=""> -->
+      <FormBuilder
+        :form-inputs="formInput"
+        :re-render="reRender"
+        :perform-validation="performValidation"
+        @central-changed="(e) => handleCentralChange(e)"
+        @file-changed="(e) => handleFileChange(e)"
+        @validation-performed="handleValidationPerformed"
+      >
+        <template #lastInput>
+          <VField>
+            <label>{{ t('html.htmlPageContent') }} *</label>
+            <prism-editor
+              v-model="htmlPageRaw"
+              class="my-editor height-300"
+              :highlight="() => highlighter(htmlPageRaw)"
+              line-numbers
+              readonly
+            ></prism-editor>
+          </VField>
+          <label>{{ t('html.htmlPagePreview') }} *</label><br />
+          <div class="height-300 position-relative">
+            <!-- <div v-html="htmlPageRaw"></div> -->
+            <iframe
+              title="createHTMLPagePreview"
+              class="max-width height-300 position-relative"
+              :srcdoc="htmlPageRaw"
+            ></iframe>
+            <div :style="entry.ridPosition">
+              <span :style="entry.ridColor">Case ID : 123456</span><br />
+              <span :style="entry.ridColor">Time Stamp : 2022-01-01</span><br />
+              <span :style="entry.ridColor">IP : 1.2.3.4</span>
             </div>
-          </template>
-        </FormBuilder>
-      </form>
+          </div>
+        </template>
+      </FormBuilder>
+      <!-- </form> -->
     </template>
     <template #action>
       <VButton color="primary" raised :loading="isLoading" @click="handleSubmit">{{

@@ -21,6 +21,10 @@ const props = withDefaults(defineProps<VSwitchBlockProps>(), {
   color: undefined,
 })
 
+const switchValue = () => {
+  emit('update:modelValue', !props.modelValue)
+}
+
 const blockSwitchId = `block-switch-${++instances}`
 </script>
 
@@ -55,6 +59,8 @@ const blockSwitchId = `block-switch-${++instances}`
         :for="blockSwitchId"
         class="form-switch"
         :class="[props.color && `is-${props.color}`]"
+        @click="switchValue"
+        @keydown="switchValue"
       >
         <input
           :id="blockSwitchId"
@@ -62,7 +68,6 @@ const blockSwitchId = `block-switch-${++instances}`
           type="checkbox"
           class="is-switch"
           v-bind="$attrs"
-          @change="emit('update:modelValue', !props.modelValue)"
         />
         <i aria-hidden="true"></i>
       </label>

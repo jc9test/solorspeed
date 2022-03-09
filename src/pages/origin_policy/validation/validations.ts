@@ -17,52 +17,54 @@ const attributeUpdater = ({ key, attributeName, value, errorMsg = '' }) => {
   }
 }
 
-const checkOriginFormPort = (ref: any) => {
-  if (ref.originPort.value > 0 && ref.originPort.value < 65535) {
-    return attributeUpdater({
-      key: 'originPort',
-      attributeName: 'error',
-      value: false,
-    })
-  } else {
-    return attributeUpdater({
-      key: 'originPort',
-      attributeName: 'error',
-      value: true,
-    })
+const checkOriginPolicyName = (ref: any) => {
+  const originPolicyName = ref.originPolicyName.value
+  const regex = /^[a-z0-9\_]*$/
+  const err = { error: false, errorMsg: '' }
+  if (!originPolicyName) {
+    err.error = true
+    err.errorMsg = 'filter.validation.required'
   }
+  if (!regex.test(originPolicyName)) {
+    err.error = true
+    err.errorMsg = 'Invalid Name: Please make sure you exclude any special characters.'
+  }
+  if (originPolicyName.length > 35) {
+    err.error = true
+    err.errorMsg = 'Invalid Name: Please make your name do not exceed 35 characters'
+  }
+
+  return attributeUpdater({
+    key: 'originPolicyName',
+    attributeName: 'error',
+    value: err.error,
+    errorMsg: err.errorMsg,
+  })
 }
 
-// const checkOriginOption = (ref: any) => {
-//   if (ref.originsOptions.length === 0) {
-//     return attributeUpdater({
-//       key: 'originsError',
-//       attributeName: 'error',
-//       value: true,
-//     })
-//   } else {
-//     return attributeUpdater({
-//       key: 'originsError',
-//       attributeName: 'error',
-//       value: false,
-//     })
-//   }
-// }
-
-const checkOriginPolicyName = (ref: any) => {
-  if (ref.originPolicyName.value == '') {
-    return attributeUpdater({
-      key: 'originPolicyName',
-      attributeName: 'error',
-      value: true,
-    })
-  } else {
-    return attributeUpdater({
-      key: 'originPolicyName',
-      attributeName: 'error',
-      value: false,
-    })
+export const checkOriginOption = (originsOptions: any) => {
+  const err = { error: false, errorMsg: '' }
+  if (originsOptions.length === 0) {
+    errorCount.value = errorCount.value + 1
+    err.error = true
+    err.errorMsg = ''
   }
+  return err
+}
+
+const checkOriginFormPort = (ref: any) => {
+  const err = { error: false, errorMsg: '' }
+  if (ref.originPort.value <= 0 || ref.originPort.value >= 65535) {
+    err.error = true
+    err.errorMsg = 'Invalid Port: Value must be within the range of 1 - 65534'
+  }
+
+  return attributeUpdater({
+    key: 'originPort',
+    attributeName: 'error',
+    value: err.error,
+    errorMsg: err.errorMsg,
+  })
 }
 
 export function checkFormValidation(formReferences: any, action) {

@@ -94,15 +94,15 @@ export default defineComponent({
         })
       )
     } else if (props.hasError) {
-      validationIcon = h(
-        'div',
-        { class: 'validation-icon is-error' },
-        h('i', {
-          'aria-hidden': true,
-          'data-icon': 'feather:x',
-          class: 'iconify',
-        })
-      )
+      // validationIcon = h(
+      //   'div',
+      //   { class: 'validation-icon is-error' },
+      //   h('i', {
+      //     'aria-hidden': true,
+      //     'data-icon': 'feather:x',
+      //     class: 'iconify',
+      //   })
+      // )
     }
 
     return () => {

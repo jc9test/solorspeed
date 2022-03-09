@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed, watch, inject } from 'vue'
 import { getEdgeChartDataV2 } from '/@src/api/monitor'
 import { useI18n } from 'vue-i18n'
 import useNotyf from '/@src/composable/useNotyf'
@@ -8,9 +8,12 @@ import numeral from 'numeral'
 import store from '/@src/stores/index'
 import { tagLabels } from './filterOption'
 
+const { dashboardQueryFilters, updateDashboardQueryFilters } = inject(
+  'dashboardQueryFilters'
+)
+
 const { locale, t } = useI18n()
 const notif = useNotyf()
-const emit = defineEmits(['update:dashboardQueryFilters'])
 const props = defineProps({
   hasFilter: { type: Boolean, default: true },
   numeralFormat: { type: String, default: '0.00a' },
@@ -61,8 +64,8 @@ const lineChartOptions = computed(() => {
         ? props.chartQueryFilters
         : lineChartOptions.chartQueryFilters,
     dashboardQueryFilters:
-      props.dashboardQueryFilters.length > 0
-        ? props.dashboardQueryFilters
+      dashboardQueryFilters.length > 0
+        ? dashboardQueryFilters
         : lineChartOptions.dashboardQueryFilters,
     dateRangeOptions: dateRange.value,
   }
@@ -173,63 +176,21 @@ function formatNumToString(num) {
   return props.numStringPrefix + formatedNum + props.numStringSuffix
 }
 
-function filterChartData(item, chartOperator) {
-  let filters = props.dashboardQueryFilters
-  let operator = chartOperator === 'is' ? 'is' : 'not'
-  let labelTitle
-  let filterDuplicate = false
-  let value
-
-  for (let tag of tagLabels) {
-    if (item.chartFilterKey === tag.title) {
-      labelTitle = tag.label
-    }
-  }
-
-  if (!item.chartFilterValue) {
-    value = '""'
-  } else {
-    value = item.chartFilterValue
-  }
-
-  let label =
-    chartOperator === 'is'
-      ? `${labelTitle}: ${item.name}`
-      : `NOT ${labelTitle}: ${item.name}`
-
-  let filter = {
-    chartFilterKey: item.chartFilterKey,
-    chartFilterOperator: operator,
-    chartFilterValue: value,
-    chartFilterEnabled: true,
-    chartFilterLabel: label,
-  }
-
-  for (const item of filters) {
-    if (
-      item.chartFilterKey === filter.chartFilterKey &&
-      item.chartFilterValue === filter.chartFilterValue
-    ) {
-      filterDuplicate = true
-    } else {
-      filterDuplicate = false
-    }
-  }
-
-  if (!filterDuplicate) {
-    filters.push(filter)
-    emit('update:dashboardQueryFilters', filters)
-  } else {
-    notif.error('Filter Duplicate.')
+function filterChartData(item, chartFilterOperator) {
+  const { chartFilterKey, chartFilterValue } = item
+  try {
+    updateDashboardQueryFilters('ADD_FILTER', {
+      chartFilterKey,
+      chartFilterValue,
+      chartFilterOperator,
+    })
+  } catch (error) {
+    notif.error(error.message)
   }
 }
 
 function clearFilter(item) {
-  let filters = props.dashboardQueryFilters.filter(
-    (el) => el.chartFilterKey !== item.chartFilterKey
-  )
-
-  emit('update:dashboardQueryFilters', filters)
+  updateDashboardQueryFilters('REMOVE_FILTER', item)
 }
 
 watch(
@@ -241,7 +202,7 @@ watch(
 )
 
 watch(
-  () => props.dashboardQueryFilters,
+  () => dashboardQueryFilters,
   (to) => {
     getNginxData()
     isLoading.value = true
@@ -273,7 +234,7 @@ onMounted(() => {
 
           <div
             v-if="
-              props.dashboardQueryFilters.some(
+              dashboardQueryFilters.some(
                 (el) => el.chartFilterKey === item.chartFilterKey
               )
             "

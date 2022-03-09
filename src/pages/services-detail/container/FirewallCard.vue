@@ -1,17 +1,20 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Draggable from 'vuedraggable'
 
 import { getEsData } from '/@src/api/esdata'
 import { getFormOptions } from '/@src/api/formOptions'
 import store from '/@src/stores/index'
-import AddFirewallRulesModal from '/@src/pages/services-detail/container/AddFirewallRulesModal.vue'
+import FirewallRulesAddFormModal from '/@src/pages/services-detail/container/FirewallRulesAddFormModal.vue'
 import FirewallRulesForm from '/@src/pages/firewall_rules/container/FirewallRulesForm.vue'
 import {
   formReferences,
   formInputs,
   refUpdater,
+  renderSubmitValues,
+  renderValues,
+  inputAttributeUpdater,
 } from '/@src/pages/firewall_rules/data/edit_firewall_rule_data'
 
 const { t } = useI18n()
@@ -30,7 +33,6 @@ const props = defineProps({
 
 const isLoading = ref(false)
 const isShow = ref(false)
-const selectedFirewallRules = ref('')
 const tableData = ref([])
 const viewContent = ref('')
 const firewallRulesList = ref([])
@@ -49,12 +51,12 @@ const firewallDropdown = computed(() => {
 })
 
 // Update and Get Detail
-const updateFirewallFormData = () => {
+const updateFirewallFormData = async () => {
   let tempList = []
   let usedWafRules = overviewData.value?.usedWafRules
   let overviewFirewallRulesValue = usedWafRules?.map((val) => val.value) ?? []
 
-  getFormOptions(`wafrules?groupName=${store.state.queryGroupName}`).then((res) => {
+  await getFormOptions(`wafrules?groupName=${store.state.queryGroupName}`).then((res) => {
     let fullFirewallList = res.data.options
     firewallRulesList.value = fullFirewallList
 
@@ -67,7 +69,7 @@ const updateFirewallFormData = () => {
           })
 
           // ! Remove Firewall Rules value, prevent duplicates
-          // ! Firewall Rules value, is it can be the same ?
+          // ? Firewall Rules value, is it can be the same ?
           let index = overviewFirewallRulesValue.indexOf(list.value)
           if (index !== -1) {
             overviewFirewallRulesValue.splice(index, 1)
@@ -93,20 +95,22 @@ const getUnusedFirewallRules = () => {
   })
   unUsedFirewallRulesList.value = tempList
 }
-const getFirewallData = () => {
+
+const getFirewallData = (ruleName) => {
   var firewallOptions = {
     isFuzzySearch: false,
     esIndex: 'rcm-wafrules',
     from: 0,
     size: 1,
     sort: [],
-    filters: [{ key: 'ruleName', type: 'string', value: selectedFirewallRules.value }],
+    filters: [{ key: 'ruleName', type: 'string', value: ruleName }],
     searchView: '',
   }
 
   getEsData(firewallOptions)
     .then((res) => {
-      tableData.value = res.data.mapData
+      tableData.value = res.data.mapData[0]
+      console.log({ 'getFirewallData - success': tableData.value })
     })
     .catch((err) => {
       tableData.value = []
@@ -121,8 +125,8 @@ const onClickAddFirewallModal = () => {
 const onClickEditModal = (item: object) => {
   isShow.value = !isShow.value
   if (item) {
-    selectedFirewallRules.value = item
-    // getTableData()
+    getFirewallData(item.value)
+    console.log({ FirewallCard: item })
   }
 }
 const onClickPreviewModal = (item: object) => {
@@ -235,9 +239,9 @@ const submitWAF = () => {
   isLoading.value = false
 }
 
-onMounted(async () => {
-  getFirewallData()
-})
+// onMounted(async () => {
+//   getFirewallData()
+// })
 
 watch(overviewData, () => {
   // Get existing firewall detail
@@ -303,7 +307,7 @@ watch(firewallRulesList, () => {
                   <span class="dark-inverted" style="color: gray">
                     {{ t('waf.appliedRule') }}
                   </span>
-                  <AddFirewallRulesModal
+                  <FirewallRulesAddFormModal
                     v-if="firewallRulesList.length > 0"
                     :is-modal-show="addFirewallModal"
                     :firewall-list="unUsedFirewallRulesList"
@@ -319,7 +323,7 @@ watch(firewallRulesList, () => {
                       @click="onClickAddFirewallModal"
                     >
                     </VIconButton>
-                  </AddFirewallRulesModal>
+                  </FirewallRulesAddFormModal>
                 </div>
               </div>
               <div class="flex-table" style="margin-top: 1rem">
@@ -448,18 +452,37 @@ watch(firewallRulesList, () => {
   <FirewallRulesForm
     :show-form-rules-modal="isShow"
     :form-inputs="formInputs"
-    :firewall-rules-data="selectedFirewallRules"
+    :firewall-rules-data="tableData"
     :ref-updater="refUpdater"
+    :attribute-updater="inputAttributeUpdater"
+    :render-values="renderValues"
+    :render-submit-values="renderSubmitValues"
     :form-references="formReferences"
     action="edit"
     @show-form-rules="showFormRules"
+    @get-data="getData"
   />
+
+  <!-- <FirewallRulesForm
+    :show-form-rules-modal="showFormRulesModal"
+    :form-inputs="formInputs"
+    :firewall-rules-data="firewallRulesData"
+    :ref-updater="refUpdater"
+    :attribute-updater="inputAttributeUpdater"
+    :render-values="renderValues"
+    :render-submit-values="renderSubmitValues"
+    :form-references="formReferences"
+    action="edit"
+    @show-form-rules="showFormRules"
+    @get-data="getData"
+  /> -->
 
   <VModal
     :open="viewContent != ''"
     :title="viewContent.value || ''"
     size="medium"
     actions="right"
+    noscroll
     @close="onClickPreviewModal"
   >
     <template #content>

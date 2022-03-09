@@ -73,6 +73,7 @@ watch(isModalShow, () => {
     :open="isModalShow"
     size="medium"
     actions="right"
+    noscroll
     @close="emit('close')"
   >
     <template #content>

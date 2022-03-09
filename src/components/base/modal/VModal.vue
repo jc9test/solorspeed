@@ -263,7 +263,8 @@ zh-CN:
       .modal-card-body {
         overflow-x: hidden;
         .modal-form {
-          padding: 10px 0 20px;
+          // padding: 10px 0 20px;
+          padding-bottom: 20px;
         }
 
         &.has-tabs {

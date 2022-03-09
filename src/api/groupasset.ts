@@ -3,7 +3,7 @@ import axiosClient from '../composable/useApi'
 
 export interface GroupAsset {
   category: string
-  groupNames: string
+  groupNames: string | string[]
 }
 export interface GroupAssetSubscription {
   category: string

@@ -29,7 +29,38 @@ const userName = ref(store.state.userData.username),
 
 const avatarImg = ref('/images/avatars/' + userAvatar.value + '.svg')
 
-const avatarItems = ref([{ avatarName: 'two-ponytails-hair-lady-with-green-glasses' }])
+const avatarItems = ref([
+  { avatarName: 'bald-man-in-green-jacket' },
+  { avatarName: 'blond-curly-hair-business-lady' },
+  { avatarName: 'blond-long-hair-business-lady' },
+  { avatarName: 'brown-curly-hair-lady-in-light-green-shirt' },
+  { avatarName: 'brown-curly-hair-lady-with-golden-earrings' },
+  { avatarName: 'brown-hair-business-lady-with-glasses' },
+  { avatarName: 'brown-long-curly-hair-lady' },
+  { avatarName: 'brown-long-hair-lady-with-red-glasses' },
+  { avatarName: 'brown-pigtail-hair-lady' },
+  { avatarName: 'brown-short-hair-lady-in-yellow-shirt' },
+  { avatarName: 'business-man-in-yellow-glasses' },
+  { avatarName: 'indian-lady' },
+  { avatarName: 'long-curly-hair-lady-with-glasses' },
+  { avatarName: 'man-in-blue-t-shirt' },
+  { avatarName: 'man-in-green-sweater' },
+  { avatarName: 'man-in-green-tie' },
+  { avatarName: 'man-in-red-jacket' },
+  { avatarName: 'man-in-striped-shirt' },
+  { avatarName: 'man-in-white-shirt-2' },
+  { avatarName: 'man-in-white-shirt' },
+  { avatarName: 'man-in-yellow-striped-sweater' },
+  { avatarName: 'man-with-beard-in-suit' },
+  { avatarName: 'man-with-beard-in-violet-shirt' },
+  { avatarName: 'man-with-brown-hair-in-green-sweater' },
+  { avatarName: 'man-with-orange-tie' },
+  { avatarName: 'man-with-yellow-tie-in-jacket' },
+  { avatarName: 'red-short-hair-lady-in-yellow-shirt' },
+  { avatarName: 'short-curly-hair-lady-in-pink-shirt' },
+  { avatarName: 'short-hair-business-lady-with-glasses' },
+  { avatarName: 'two-ponytails-hair-lady-with-green-glasses' },
+])
 
 for (let i = 0; i < avatarItems.value.length; i++) {
   avatarItems.value[i].avatarPath =

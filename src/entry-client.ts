@@ -14,6 +14,7 @@
  */
 import { createApp } from './app'
 import * as NProgress from 'nprogress'
+import VueSocketIO from 'vue-socket.io'
 
 /**
  * We create our app and mount it when it is ready
@@ -33,7 +34,13 @@ createApp().then(async (solarspeed) => {
 
   // wait for the app to be ready
   await solarspeed.router.isReady()
+  const vueSocket = new VueSocketIO({
+    debug: true,
+    connection: 'http://webback.thettdoc.com:8080/',
+    // connection: 'http://localhost:3000',
+    // connection: SocketIO('ws://webback.thettdoc.com:8080/'),
+  })
 
   // finaly mount the app to the DOM
-  solarspeed.app.mount('#app')
+  solarspeed.app.use(vueSocket).mount('#app')
 })

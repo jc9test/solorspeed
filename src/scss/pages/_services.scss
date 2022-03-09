@@ -96,6 +96,9 @@
   &.between {
     justify-content: space-between;
   }
+  &.align-center {
+    align-items: center;
+  }
 }
 
 .p-b-130 {
@@ -105,3 +108,46 @@
 .h-400 {
   height: 400px;
 }
+
+// Service Detail - Domain Card - START
+.search-domain-input {
+  margin-bottom: 20px;
+  width: 30%;
+}
+
+.domains {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.pagination {
+  margin-top: 20px;
+
+  .list-bottom {
+    width: 100%;
+  }
+
+  .right {
+    .pagination {
+      margin-top: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+  .pagination {
+    .list-bottom {
+      flex-direction: column;
+    }
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+  .pagination {
+    .list-bottom {
+      flex-direction: column;
+    }
+  }
+}
+// Service Detail - Domain Card - END

@@ -14,23 +14,23 @@ const emit = defineEmits(['step_forward', 'step_back'])
 const props = defineProps({
   package: {
     type: Object,
-    default: undefined,
+    default: () => {},
   },
   httpPort: {
     type: Array,
-    default: undefined,
+    default: () => [],
   },
   httpsPort: {
     type: Array,
-    default: undefined,
+    default: () => [],
   },
   origins: {
     type: Object,
-    default: undefined,
+    default: () => {},
   },
   clear: {
     type: Boolean,
-    default: false,
+    default: () => false,
   },
 })
 const serviceForm = reactive({

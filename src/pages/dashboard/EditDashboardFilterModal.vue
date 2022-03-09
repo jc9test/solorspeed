@@ -88,7 +88,7 @@ function editFilter() {
     })
     emit('edit', { chartFilterKey, chartFilterValue, chartFilterOperator })
   } catch (error) {
-    notif.error(error)
+    notif.error(error.message)
   }
 }
 </script>

@@ -6,8 +6,14 @@ import FormBuilder from '/@src/components/general/FormBuilder.vue'
 import { default as countriesList } from '/@src/data/json/countryCode.json'
 import { checkFormValidation } from '../validation/validations'
 import { _createData, _updateData } from '/@src/api/esdata'
-import { fetchFormOptions as fetchCreateFormOptions } from '../data/create_firewall_rule_data'
-import { fetchFormOptions as fetchEditFormOptions } from '../data/edit_firewall_rule_data'
+import {
+  fetchFormOptions as fetchCreateFormOptions,
+  resetToDefault as resetCreateForm,
+} from '../data/create_firewall_rule_data'
+import {
+  fetchFormOptions as fetchEditFormOptions,
+  resetToDefault as resetEditForm,
+} from '../data/edit_firewall_rule_data'
 
 const { t } = useI18n()
 const notif = useNotyf()
@@ -69,21 +75,28 @@ const closeFirewallForm = () => {
   reRender.value = false
 }
 
-const handleSubmit = () => {
-  const validatedInputs = checkFormValidation(props.formReferences, props.action)
+const handleSubmit = async () => {
+  const validatedInputs = await checkFormValidation(props.formReferences, props.action)
   if (validatedInputs.formInputs) {
     formInput.value = validatedInputs.formInputs
     performValidation.value = true
     if (validatedInputs.isFormValid) {
       const currValues = props.renderSubmitValues()
       let newRules = currValues
+      console.log({ 'Firewall - before Submit - newRules': newRules })
       if (props.action === 'create') {
         _createData('rcm-wafrules', newRules).then(async (result) => {
           notification(result)
         })
+        resetCreateForm(() => {
+          country.value = []
+        })
       } else {
         _updateData('rcm-wafrules', newRules).then(async (result) => {
           notification(result)
+        })
+        resetEditForm(() => {
+          country.value = []
         })
       }
     }
@@ -112,7 +125,7 @@ const handleValidationPerformed = () => {
   performValidation.value = false
 }
 
-const country = ref(entry.value.wafCountry)
+const country = ref(entry.value?.wafCountry)
 
 function switchCountry() {
   entry.value = props.renderValues()
@@ -134,8 +147,11 @@ watch(
   () => props.firewallRulesData,
   () => {
     if (props.firewallRulesData) {
+      resetEditForm(() => {
+        country.value = []
+      })
       entry.value = props.refUpdater(props.firewallRulesData)
-      country.value = entry.value.wafCountry
+      country.value = entry.value?.wafCountry
       if (props.action === 'edit') {
         reRender.value = true
       }
@@ -155,9 +171,10 @@ onBeforeMount(async () => {
 <template>
   <VModal
     :open="showFormRulesModal"
-    :title="props.action === 'create' ? 'Add Firewall Rules' : 'Edit Firewall Rules'"
+    :title="props.action === 'create' ? 'Add Firewall Rules' : `Edit ${entry?.ruleName}`"
     size="large"
     actions="right"
+    noscroll
     @close="closeFirewallForm"
   >
     <template #content>

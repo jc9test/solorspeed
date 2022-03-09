@@ -116,7 +116,7 @@ export const formInputs = [
     conditional_visibility: undefined,
   },
   {
-    required: true,
+    required: false,
     disabled: false,
     title: 'origin.port_mapping_type',
     key: 'portMappingType',
@@ -159,7 +159,7 @@ export const formInputs = [
     },
   },
   {
-    required: false,
+    required: true,
     disabled: false,
     title: 'origin.origin_port',
     key: 'originPort',
@@ -216,7 +216,7 @@ export const formInputs = [
   },
   {
     required: false,
-    disabled: true,
+    disabled: false,
     title: 'origin.health_check_mode',
     key: 'healthCheckMode',
     type: 'select',

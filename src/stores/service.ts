@@ -67,6 +67,7 @@ export interface ServiceState {
   cname: string
   service_list: null | Array<Object>
   appProfileName: string
+  refreshTable: boolean
 }
 
 const userStore = {
@@ -113,11 +114,16 @@ const userStore = {
       redirecthttps: false,
       scheme: [],
       serviceGroupName: '',
+      keypairname: 'self-sign',
+      isEnforceProtect: false,
+      useHttp2: false,
+      setCustomHostHeader: 'off',
 
       upstreamTimeout: 60,
       useHsts: false,
       useOriginPolicy: false,
       usedOriginPolicies: [],
+      useSystemCert: false,
       usedWafRules: [],
       websocketPath: '',
       tags: [],
@@ -125,10 +131,14 @@ const userStore = {
     cname: '',
     service_list: ['caricarz.my', 'spotify.app'],
     appProfileName: '',
+    refreshTable: false,
   },
   getters: {
     getCname(state: ServiceState) {
       return state.cname
+    },
+    refreshTable(state: ServiceState) {
+      return state.refreshTable
     },
   },
   mutations: {
@@ -168,7 +178,7 @@ const userStore = {
       state.service_detail.appProfileName = data.appProfileName.value
       state.service_detail.serviceGroupName = data.serviceGroupName.value
       state.service_detail.portMappingType = data.portMappingType.value
-      state.service_detail.originPort = data.originPort
+      state.service_detail.originPort = data.originPort.value
       state.service_detail.origins = data.origins.value
       state.service_detail.scheme = data.scheme.value
       state.service_detail.originscheme = data.originscheme.value
@@ -242,6 +252,9 @@ const userStore = {
     SET_WAF_RULES(state: ServiceState, rules: any) {
       state.service_detail.usedWafRules = rules
     },
+    SET_REFRESH_TABLE(state: ServiceState, data: any) {
+      state.refreshTable = data
+    },
   },
   actions: {
     async updateServiceForm(state: ServiceState) {
@@ -273,38 +286,38 @@ const userStore = {
       })
     },
     async createServiceForm(state: ServiceState) {
-      // set to default when create new service line
-      userStore.state.service_detail.cusNonachefile = ''
-      userStore.state.service_detail.cusNoncachepath = ''
-      userStore.state.service_detail.cusCachefile = ''
-      userStore.state.service_detail.cusCachepath = ''
-      userStore.state.service_detail.forceCusCacheFile = ''
-      userStore.state.service_detail.forceCusCachePath = ''
-      userStore.state.service_detail.proxyCacheIgnoreArgs = false
-      userStore.state.service_detail.cusFollowCachePath = ''
-      userStore.state.service_detail.cusFollowCacheFile = ''
-      userStore.state.service_detail.cusCachepathExp = '1d'
-      userStore.state.service_detail.cusCachepathSrvexp = '1d'
-      userStore.state.service_detail.cusCachepathHottime = '1'
-      userStore.state.service_detail.cusCachefileExp = '1d'
-      userStore.state.service_detail.cusCachefileSrvexp = '1d'
-      userStore.state.service_detail.cusCachefileHottime = '1'
-      userStore.state.service_detail.defCachefileExp = '1d'
-      userStore.state.service_detail.defCachefileSrvexp = '1d'
-      userStore.state.service_detail.defCachefileHottime = '1'
-      userStore.state.service_detail.description = ''
+      // // set to default when create new service line
+      // userStore.state.service_detail.cusNonachefile = ''
+      // userStore.state.service_detail.cusNoncachepath = ''
+      // userStore.state.service_detail.cusCachefile = ''
+      // userStore.state.service_detail.cusCachepath = ''
+      // userStore.state.service_detail.forceCusCacheFile = ''
+      // userStore.state.service_detail.forceCusCachePath = ''
+      // userStore.state.service_detail.proxyCacheIgnoreArgs = false
+      // userStore.state.service_detail.cusFollowCachePath = ''
+      // userStore.state.service_detail.cusFollowCacheFile = ''
+      // userStore.state.service_detail.cusCachepathExp = '1d'
+      // userStore.state.service_detail.cusCachepathSrvexp = '1d'
+      // userStore.state.service_detail.cusCachepathHottime = '1'
+      // userStore.state.service_detail.cusCachefileExp = '1d'
+      // userStore.state.service_detail.cusCachefileSrvexp = '1d'
+      // userStore.state.service_detail.cusCachefileHottime = '1'
+      // userStore.state.service_detail.defCachefileExp = '1d'
+      // userStore.state.service_detail.defCachefileSrvexp = '1d'
+      // userStore.state.service_detail.defCachefileHottime = '1'
+      // userStore.state.service_detail.description = ''
 
-      userStore.state.service_detail.upstreamTimeout = 60
-      userStore.state.service_detail.useOriginPolicy = false
-      userStore.state.service_detail.usedOriginPolicies = []
-      userStore.state.service_detail.usedWafRules = []
-      userStore.state.service_detail.websocketPath = ''
-      userStore.state.service_detail.tags = []
+      // userStore.state.service_detail.upstreamTimeout = 60
+      // userStore.state.service_detail.useOriginPolicy = false
+      // userStore.state.service_detail.usedOriginPolicies = []
+      // userStore.state.service_detail.usedWafRules = []
+      // userStore.state.service_detail.websocketPath = ''
+      // userStore.state.service_detail.tags = []
 
       const origins = userStore.state.service_detail.origins
       const appProfileName = userStore.state.service_detail.appProfileName
       await ipValidate('origin', origins).then(async (result) => {
-        console.log(userStore.state.service_detail)
+        console.log({ 'create - submit form': userStore.state.service_detail })
         if (!result.data.success) {
           console.log('failed')
         } else {
@@ -323,6 +336,7 @@ const userStore = {
                   notif.success('Create successful!')
                   userStore.mutations.SET_APP_PROFILE_NAME(state, appProfileName)
                 }
+                console.log({ 'create - return data': res })
               })
           } catch (err) {
             console.log(err)
@@ -331,33 +345,33 @@ const userStore = {
       })
     },
     async createDomain(state: ServiceState) {
-      // set to default when create new service line
-      userStore.state.service_detail.cusNonachefile = ''
-      userStore.state.service_detail.cusNoncachepath = ''
-      userStore.state.service_detail.cusCachefile = ''
-      userStore.state.service_detail.cusCachepath = ''
-      userStore.state.service_detail.forceCusCacheFile = ''
-      userStore.state.service_detail.forceCusCachePath = ''
-      userStore.state.service_detail.proxyCacheIgnoreArgs = false
-      userStore.state.service_detail.cusFollowCachePath = ''
-      userStore.state.service_detail.cusFollowCacheFile = ''
-      userStore.state.service_detail.cusCachepathExp = '1d'
-      userStore.state.service_detail.cusCachepathSrvexp = '1d'
-      userStore.state.service_detail.cusCachepathHottime = '1'
-      userStore.state.service_detail.cusCachefileExp = '1d'
-      userStore.state.service_detail.cusCachefileSrvexp = '1d'
-      userStore.state.service_detail.cusCachefileHottime = '1'
-      userStore.state.service_detail.defCachefileExp = '1d'
-      userStore.state.service_detail.defCachefileSrvexp = '1d'
-      userStore.state.service_detail.defCachefileHottime = '1'
-      userStore.state.service_detail.description = ''
+      // // set to default when create new service line
+      // userStore.state.service_detail.cusNonachefile = ''
+      // userStore.state.service_detail.cusNoncachepath = ''
+      // userStore.state.service_detail.cusCachefile = ''
+      // userStore.state.service_detail.cusCachepath = ''
+      // userStore.state.service_detail.forceCusCacheFile = ''
+      // userStore.state.service_detail.forceCusCachePath = ''
+      // userStore.state.service_detail.proxyCacheIgnoreArgs = false
+      // userStore.state.service_detail.cusFollowCachePath = ''
+      // userStore.state.service_detail.cusFollowCacheFile = ''
+      // userStore.state.service_detail.cusCachepathExp = '1d'
+      // userStore.state.service_detail.cusCachepathSrvexp = '1d'
+      // userStore.state.service_detail.cusCachepathHottime = '1'
+      // userStore.state.service_detail.cusCachefileExp = '1d'
+      // userStore.state.service_detail.cusCachefileSrvexp = '1d'
+      // userStore.state.service_detail.cusCachefileHottime = '1'
+      // userStore.state.service_detail.defCachefileExp = '1d'
+      // userStore.state.service_detail.defCachefileSrvexp = '1d'
+      // userStore.state.service_detail.defCachefileHottime = '1'
+      // userStore.state.service_detail.description = ''
 
-      userStore.state.service_detail.upstreamTimeout = 60
-      userStore.state.service_detail.useOriginPolicy = false
-      userStore.state.service_detail.usedOriginPolicies = []
-      userStore.state.service_detail.usedWafRules = []
-      userStore.state.service_detail.websocketPath = ''
-      userStore.state.service_detail.tags = []
+      // userStore.state.service_detail.upstreamTimeout = 60
+      // userStore.state.service_detail.useOriginPolicy = false
+      // userStore.state.service_detail.usedOriginPolicies = []
+      // userStore.state.service_detail.usedWafRules = []
+      // userStore.state.service_detail.websocketPath = ''
+      // userStore.state.service_detail.tags = []
       const origins = userStore.state.service_detail.origins
       await ipValidate('origin', origins).then(async (result) => {
         if (!result.data.success) {

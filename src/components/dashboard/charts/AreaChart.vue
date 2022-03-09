@@ -80,7 +80,7 @@ const dateRangeDay = ref()
 const isDataExist = ref()
 const nginxData = ref()
 const dataTotal = ref()
-const newData = ref()
+const newData = ref([])
 const newLabel = ref([])
 const chartSeries = ref([])
 const chartOptions = ref({
@@ -91,7 +91,9 @@ const chartOptions = ref({
     sparkline: {
       enabled: true,
     },
-    group: 'area-chart',
+    animations: {
+      enabled: true,
+    },
   },
   yaxis: {
     min: 0,
@@ -114,9 +116,8 @@ function updateChart(newData, newLabel, chartId) {
       sparkline: {
         enabled: true,
       },
-      group: 'area-chart',
       animations: {
-        enabled: false,
+        enabled: true,
       },
     },
     colors: [themeColors.primary, themeColors.accent],

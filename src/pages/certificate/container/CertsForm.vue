@@ -5,6 +5,8 @@ import useNotyf from '/@src/composable/useNotyf'
 import FormBuilder from '/@src/components/general/FormBuilder.vue'
 import { checkFormValidation } from '../validation/validations'
 import { _createData, _updateData } from '/@src/api/esdata'
+import { resetToDefault as resetCreateForm } from '../data/create_certs_data'
+import { resetToDefault as resetEditForm } from '../data/edit_certs_data'
 
 const { t } = useI18n()
 const notif = useNotyf()
@@ -59,25 +61,81 @@ const closeCertsModal = () => {
   reRender.value = false
 }
 
-const handleSubmit = () => {
-  const validatedInputs = checkFormValidation(props.formReferences, props.action)
+const globalPemResult = ref()
+const globalKeyResult = ref()
+
+const handleSubmit = async () => {
+  const validatedInputs = await checkFormValidation(props.formReferences, props.action)
   if (validatedInputs.formInputs) {
     formInput.value = validatedInputs.formInputs
     performValidation.value = true
     if (validatedInputs.isFormValid) {
       const currValues = props.renderSubmitValues()
       let newCert = currValues
+      console.log({
+        newCert: {
+          ...newCert,
+          certpemRaw: globalPemResult.value.certpemRaw,
+          certkeyRaw: globalKeyResult.value.certkeyRaw,
+        },
+      })
       if (props.action === 'create') {
         _createData('rcm-certpems', newCert).then(async (result) => {
           notification(result)
+          resetCreateForm(() => {})
         })
       } else {
         _updateData('rcm-certpems', newCert).then(async (result) => {
           notification(result)
+          resetEditForm(() => {})
         })
       }
     }
   }
+}
+
+function handleFileChange(value, input) {
+  let fileType = input.key.includes('pem') ? 'certpem' : 'certkey'
+  let file = value.target.files
+  handlefileUpload(file, fileType)
+}
+
+function handlefileUpload(file, fileType) {
+  const action = `api/uploads/${fileType}`
+
+  let xhr = new XMLHttpRequest()
+
+  xhr.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      if (fileType === 'certpem') {
+        const certpem = JSON.parse(this.responseText)
+        const certpemResult = certpem.uploadPerformResult
+        globalPemResult.value = certpemResult
+        if (certpem.success) {
+          formInput.value.commonName = certpemResult.commonName
+          formInput.value.issuerCommonName = certpemResult.issuerCommonName
+          formInput.value.validityStart = certpemResult.validityStart
+          formInput.value.validityEnd = certpemResult.validityEnd
+          formInput.value.emailAddress = certpemResult.emailAddress
+          formInput.value.sanDns = certpemResult.sanDns
+          formInput.value.certpemRaw = props.formReferences.certpemRaw
+        }
+      } else {
+        const certkey = JSON.parse(this.responseText)
+        globalKeyResult.value = certkey.uploadPerformResult
+        if (certkey.success) {
+          formInput.value.certkeyRaw = props.formReferences.certkeyRaw
+        }
+      }
+      props.refUpdater(formInput.value)
+    }
+  }
+
+  xhr.open('post', action, true)
+  const formData = new FormData()
+  formData.append('uploads', file[0])
+
+  xhr.send(formData)
 }
 
 const notification = (result: any) => {
@@ -109,6 +167,7 @@ watch(
   () => props.certsData,
   () => {
     if (props.certsData) {
+      resetEditForm(() => {})
       entry.value = props.refUpdater(props.certsData)
       if (props.action === 'edit') {
         reRender.value = true
@@ -132,6 +191,7 @@ watch(
           :re-render="reRender"
           :perform-validation="performValidation"
           @validation-performed="handleValidationPerformed"
+          @file-changed="handleFileChange"
         ></FormBuilder>
       </form>
     </template>

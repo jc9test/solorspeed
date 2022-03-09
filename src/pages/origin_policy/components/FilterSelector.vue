@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { formReferences, formInputs } from '../data/filter_selector_data'
 import FormBuilder from '/@src/components/general/FormBuilder.vue'
-import { generateSearchFilter } from '/@src/utils/search-filter'
 
 const { t } = useI18n()
-//form v-model
 
 const props = defineProps({
   filters: {
@@ -14,7 +12,11 @@ const props = defineProps({
     default: () => [],
   },
 })
+
+const emit = defineEmits(['update:filters'])
+
 const isFilterOpen = ref(false)
+const hasFilters = computed(() => props.filters.length > 0)
 
 function initFormItem() {
   formReferences.createBy.value = ''
@@ -36,35 +38,42 @@ function initFormItem() {
   formReferences.createdDate.value = ''
   formReferences.modifiedDate.value = ''
   formReferences.status.value = ''
+  filters.value = []
 }
 
-const searchFilterOptions = ref(props.filters)
-const emit = defineEmits(['search-filter-called'])
-const handleSearch = () => {
-  // searchFilterOptions.value.filters = []
-  // for (let i in formInputs.value) {
-  //   if (formInputs.value[i].ref) {
-  //     let labelValue
+const filters = computed({
+  get: () => props.filters,
+  set: (x) => emit('update:filters', x),
+})
 
-  //     if (formInputs.value[i].key === 'loadbalancerSticky') {
-  //       labelValue = actionOptions[formInputs.value[i].value]
-  //     } else {
-  //       labelValue = formInputs.value[i].value
-  //     }
-  //     // searchFilterOptions.value.filters = []
-  //     searchFilterOptions.value.filters.unshift({
-  //       key: formInputs.value[i].key,
-  //       type: formInputs.value[i].type,
-  //       value: formInputs.value[i].ref,
-  //       tag: `${formInputs.value[i].title}: ${labelValue}`,
-  //     })
-  //   }
-  // }
-  searchFilterOptions.value = generateSearchFilter(searchFilterOptions.value, formInputs)
-  emit('search-filter-called', searchFilterOptions)
+const TYPES = ['string', 'range', 'date', 'multiselect']
+
+const updateFilters = () => {
+  const _filters = filters.value.filter((x) => x.key !== 'groupName')
+  // XD This is O(n^2)
+  // Doing two pass to retain order
+  // existing filters
+  const prev = _filters.map((x) => {
+    const input = formInputs.find((y) => y.key === x.key)
+    return input?.ref.value === x.value ? x : { ...x, value: input?.ref.value }
+  })
+  // newly added filters
+  const rest = formInputs
+    .filter(
+      (x) => !prev.find((y) => y.key === x.key) && x.ref.value && x.key !== 'groupName'
+    )
+    .map((x) => {
+      const { key, ref } = x
+      const type = TYPES.includes(x.type)
+        ? x.type === 'multiselect'
+          ? 'select' // convert multiselect to select for api
+          : x.type
+        : 'string'
+
+      return { key, type, value: ref.value }
+    })
+  filters.value = [...prev, ...rest].filter((x) => x.value)
 }
-
-onMounted(() => {})
 </script>
 
 <template>
@@ -77,8 +86,7 @@ onMounted(() => {})
         icon="feather:sliders"
         @click="isFilterOpen = !isFilterOpen"
       />
-
-      <!-- <div :class="props.hasFilter ? 'filter-dot' : 'dot'"></div> -->
+      <div :class="hasFilters ? 'filter-dot' : 'dot'" />
     </div>
 
     <VModal
@@ -90,14 +98,13 @@ onMounted(() => {})
     >
       <template #content>
         <form class="modal-form">
-          <FormBuilder :form-inputs="formInputs" />
+          <FormBuilder :form-inputs="formInputs"> </FormBuilder>
         </form>
       </template>
 
       <template #action>
         <VButton @click="initFormItem"> {{ t('main.clearText') }} </VButton>
-
-        <VButton color="primary" raised @click="handleSearch">
+        <VButton color="primary" raised @click="updateFilters">
           {{ t('filter.searchText') }}
         </VButton>
       </template>

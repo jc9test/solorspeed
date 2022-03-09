@@ -81,7 +81,7 @@ const isDataExist = ref()
 const nginxData = ref()
 const dataTotal = ref()
 const cachedDataTotal = ref()
-const newData = ref()
+const newData = ref('0')
 const newLabel = ref([])
 const chartData = ref({
   series: [0],
@@ -96,6 +96,9 @@ const chartData = ref({
     },
     toolbar: {
       show: false,
+    },
+    animations: {
+      enabled: true,
     },
   },
   plotOptions: {
@@ -130,6 +133,9 @@ function updateChart(newData) {
       },
       toolbar: {
         show: false,
+      },
+      animations: {
+        enabled: true,
       },
     },
     colors: [themeColors.accent],
@@ -212,10 +218,13 @@ function getNginxData() {
     const cachedData = cached ? cached.reduce((prev, next) => prev + next, 0) : 0
     cachedDataTotal.value = numeral(cachedData).format(props.numeralFormat)
 
-    newData.value = ((cachedData / (cachedData + uncachedData)) * 100).toFixed(2)
+    const ratio = cachedData / (cachedData + uncachedData)
+    const percent = Number.isNaN(ratio) ? 0 : ratio * 100
+
+    newData.value = percent.toFixed(2)
 
     dataTotal.value = Number(newData.value) > 0 ? Number(newData.value) : 0
-    updateChart(newData.value)
+    updateChart(percent)
   })
 }
 

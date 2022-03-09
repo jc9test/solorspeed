@@ -60,7 +60,7 @@ const onSave = async () => {
           <div class="column is-12">
             <VField>
               <VControl>
-                <V-SwitchBlock
+                <VSwitchBlock
                   v-model="twoFactor"
                   :label="t('setting.2factor_content')"
                   color="primary"

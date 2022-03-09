@@ -8,6 +8,7 @@ import {
   refUpdater,
   renderValues,
   renderSubmitValues,
+  formReferences,
 } from '../data/edit_html_pages_data'
 import HTMLPagesForm from './HTMLPagesForm.vue'
 
@@ -52,12 +53,20 @@ const props = defineProps({
   },
 })
 
-const pageSizeNow = ref(props.pageSize)
-const pageCurrentNow = ref(props.pageCurrent)
 const isDeleteModalShow = ref(false)
 const isChangeLogShow = ref(false)
 const showFormHtmlModal = ref(false)
 const itemDeleted = ref({})
+
+const pageSizeNow = computed({
+  get: () => props.pageSize,
+  set: (x) => emit('update:pageSize', x),
+})
+
+const pageCurrentNow = computed({
+  get: () => props.pageCurrent,
+  set: (x) => emit('update:pageCurrent', x),
+})
 
 const objectLogData = ref([])
 
@@ -286,6 +295,7 @@ watch(
       <HTMLPagesForm
         :show-form-html-modal="showFormHtmlModal"
         :form-inputs="formInputs"
+        :form-references="formReferences"
         :html-pages-data="htmlPagesData"
         :render-values="renderValues"
         :render-submit-values="renderSubmitValues"

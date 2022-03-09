@@ -22,6 +22,7 @@ const props = defineProps({
 })
 
 const isLoading = ref(false)
+const isFirstLoad = ref(true)
 const redirectHttpCodeOptions = ref([301, 302, 307])
 const sslFormData = ref({
   scheme: { value: [], error: false },
@@ -31,17 +32,6 @@ const sslFormData = ref({
   redirecthttps: { value: false, error: false },
   redirectHttpCode: { value: '', error: false },
 })
-
-// const sslFormData = computed(() => {
-//   return {
-//     scheme: { value: props.overviewData?.scheme ?? '', error: false },
-//     httpPort: { value: props.overviewData?.httpPort ?? '', error: false },
-//     httpsPort: { value: props.overviewData?.httpsPort ?? '', error: false },
-//     useHsts: props.overviewData?.useHsts ?? '',
-//     redirecthttps: props.overviewData?.redirecthttps ?? '',
-//     redirectHttpCode: props.overviewData?.redirectHttpCode ?? '',
-//   }
-// })
 const httpPortOptions = ref([80, 8080, 8880, 2052, 2082, 2086, 2095])
 const httpsPort = ref([])
 const invalidHttpsPort = ref([])
@@ -53,12 +43,15 @@ const sslDropdown = computed(() => {
 })
 
 const updateSslFormData = () => {
-  sslFormData.value.scheme.value = overviewData.value?.scheme
-  sslFormData.value.httpPort.value = overviewData.value?.httpPort
-  sslFormData.value.httpsPort.value = overviewData.value?.httpsPort
-  sslFormData.value.useHsts.value = overviewData.value?.useHsts
-  sslFormData.value.redirecthttps.value = overviewData.value?.redirecthttps
-  sslFormData.value.redirectHttpCode.value = overviewData.value?.redirectHttpCode
+  if (isFirstLoad.value) {
+    sslFormData.value.scheme.value = overviewData.value?.scheme
+    sslFormData.value.httpPort.value = overviewData.value?.httpPort
+    sslFormData.value.httpsPort.value = overviewData.value?.httpsPort
+    sslFormData.value.useHsts.value = overviewData.value?.useHsts
+    sslFormData.value.redirecthttps.value = overviewData.value?.redirecthttps
+    sslFormData.value.redirectHttpCode.value = overviewData.value?.redirectHttpCode
+    isFirstLoad.value = false
+  }
 }
 
 const onClickSslScheme = (scheme: string) => {
@@ -141,8 +134,6 @@ watch(overviewData, () => {
 </script>
 
 <template>
-  <!-- <div v-if="sslFormData != null" ref="sslRef" class="column is-12"> -->
-
   <div class="tile-grid-item service-detail-card-body">
     <div class="tile-grid-item-inner" style="display: block">
       <div class="columns" style="display: flex">

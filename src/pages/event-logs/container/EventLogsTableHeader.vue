@@ -1,52 +1,56 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed } from 'vue'
 
 import FilterSelector from '../components/FilterSelector.vue'
 import ColumnSelector from '../components/ColumnSelector.vue'
 import HeaderSearchBar from '../components/HeaderSearchBar.vue'
+import EventLogsFilterGroup from './EventLogsFilterGroup.vue'
 import ExportData from '../components/ExportData.vue'
-
-//search
-
-const policyNameSearch = ref()
-const isPolicyNameSearch = ref(false)
-
-//pagination
-const hasFilter = ref(false)
 
 const props = defineProps({
   filters: {
-    type: Object,
-    default: () => {},
+    type: Array,
+    default: () => [],
+  },
+  isFuzzySearch: {
+    type: Boolean,
+    default: () => false,
   },
 })
+const emit = defineEmits(['update:filters', 'update:isFuzzySearch', 'getData'])
 
-const emit = defineEmits(['search-filter-called'])
-const searchFilter = (formReferences) => {
-  console.log(formReferences)
-  emit('search-filter-called', formReferences)
-}
+const isFuzzySearch = computed({
+  get: () => {
+    return props.isFuzzySearch
+  },
+  set: (x) => emit('update:isFuzzySearch', x),
+})
+
+const filters = computed({
+  get: () => {
+    return props.filters
+  },
+  set: (x) => emit('update:filters', x),
+})
 </script>
 
 <template>
   <div class="header-container">
     <div class="header-options-container">
       <div class="filter-column-container">
-        <FilterSelector
-          v-model:hasFilter="hasFilter"
-          v-model:is-policy-name-search="isPolicyNameSearch"
-          :filters="props.filters"
-          :policy-name-search="policyNameSearch"
-          @search-filter-called="searchFilter"
-        />
-        <ExportData />
+        <FilterSelector v-model:filters="filters" />
         <ColumnSelector />
+        <ExportData />
       </div>
       <div class="header-searchbar-container">
-        <HeaderSearchBar />
+        <HeaderSearchBar
+          v-model:isFuzzySearch="isFuzzySearch"
+          v-model:filters="filters"
+        />
       </div>
     </div>
   </div>
+  <EventLogsFilterGroup v-model:filters="filters" />
 </template>
 
 <style lang="scss">

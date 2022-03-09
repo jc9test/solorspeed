@@ -37,7 +37,7 @@ const valueChanged = (value: any, input: any) => {
   emit('central-changed', { value, input })
 
   if (input.type === 'file') {
-    handleFileChange(returnValue, input)
+    handleFileChange(value, input)
   } else {
     renderedInputs.value = props.formInputs.filter((observer) => {
       return conditionalRendering(observer, input, returnValue)
@@ -55,8 +55,16 @@ const checkBoxChanged = (e: any) => {
 
 const handleFileChange = (value: any, input: any) => {
   console.log({ action: 'file change listener triggered' })
+
+  console.log({ input, value })
   emit('file-changed', value, input)
-  input.value = value.target.files[0]
+  input.value =
+    value instanceof Event
+      ? {
+          file: value.target.files[0],
+          path: value.target.value,
+        }
+      : value
 }
 
 const conditionalRendering = (observer: any, input: any, value: any) => {
@@ -114,7 +122,7 @@ watch(
           <span v-if="input.required">*</span>
           <span
             v-if="input.questionTooltip"
-            v-tooltip.right="`${input.tooltip}`"
+            v-tooltip.right="`${t(input.tooltip || '')}`"
             class="ml-2"
           >
             <i class="icon-tooltip fas fa-question-circle"></i>
@@ -122,12 +130,15 @@ watch(
         </label>
 
         <div v-if="input.type === 'string'">
-          <input
-            v-model="input.ref"
-            :placeholder="t(input.placeholder || '')"
-            type="text"
-            class="input"
-          />
+          <VControl :has-error="input.error">
+            <input
+              v-model="input.ref"
+              :placeholder="t(input.placeholder || '')"
+              type="text"
+              class="input"
+              :disabled="input.disabled"
+            />
+          </VControl>
         </div>
 
         <div v-if="input.type === 'textarea'">
@@ -137,6 +148,7 @@ watch(
               class="textarea"
               rows="4"
               :placeholder="t(input.placeholder || '')"
+              :disabled="input.disabled"
             ></textarea>
           </VControl>
         </div>
@@ -148,6 +160,7 @@ watch(
               :placeholder="t(input.placeholder || '')"
               type="number"
               class="input"
+              :disabled="input.disabled"
             />
           </VControl>
         </div>
@@ -206,15 +219,16 @@ watch(
         </div>
 
         <div v-else-if="input.type === 'file' && input.mode !== 'single'">
-          <VControl>
+          <VControl :has-error="input.error">
             <div class="file">
               <label class="file-label">
                 <input
-                  :ref="input.key"
+                  :ref="input.ref"
                   class="file-input"
                   type="file"
                   :name="input.key"
                   :accept="input.fileFormats.map((ff) => ff.format).join(', ')"
+                  @click="(e) => (e.target.value = null)"
                 />
                 <span class="file-cta">
                   <span class="file-icon">
@@ -227,7 +241,7 @@ watch(
               </label>
             </div>
           </VControl>
-          <span>{{ input?.value?.name }}</span>
+          <span>{{ input?.value?.file?.name || input?.value?.value }}</span>
         </div>
 
         <div v-else-if="input.type === 'file' && input.mode === 'single'">
@@ -236,10 +250,12 @@ watch(
               <div class="file has-name">
                 <label class="file-label">
                   <input
+                    :ref="input.ref"
                     class="file-input max-width"
                     type="file"
                     :name="input.key"
                     accept=".html"
+                    @click="(e) => (e.target.value = null)"
                   />
                   <span class="file-cta">
                     <span class="file-icon">
@@ -249,8 +265,9 @@ watch(
                   </span>
                   <span class="file-name light-text">
                     {{
+                      input?.value?.file?.name ||
+                      input?.value?.value ||
                       input?.value ||
-                      input?.value?.name ||
                       `${input.fileFormats[0].label.toUpperCase()} File only`
                     }}
                   </span>
@@ -258,9 +275,9 @@ watch(
               </div>
             </VControl>
           </div>
-          <span v-if="input.error" class="missing-alert">
+          <!-- <span v-if="input.error" class="missing-alert">
             {{ t('html.fileError') }}
-          </span>
+          </span> -->
         </div>
 
         <div v-else-if="input.type === 'switch'">
@@ -276,7 +293,7 @@ watch(
         </div>
 
         <div v-else-if="input.type === 'select'">
-          <VControl>
+          <VControl :has-error="input.error">
             <div class="select">
               <select v-model="input.ref" :disabled="input.disabled">
                 <option
@@ -292,7 +309,7 @@ watch(
         </div>
 
         <div v-else-if="input.type === 'multiselect'">
-          <VControl>
+          <VControl :has-error="input.error">
             <Multiselect
               v-model="input.ref"
               :placeholder="
@@ -328,9 +345,9 @@ watch(
   gap: 10px;
 }
 
-.modal-card-body {
-  padding-top: 0px !important;
-}
+// .modal-card-body {
+//   padding-top: 0px !important;
+// }
 
 .field {
   display: flex;
@@ -356,6 +373,6 @@ watch(
 .missing-alert {
   font-size: 0.75rem;
   color: $danger !important;
-  padding-left: 10px;
+  // padding-left: 10px;
 }
 </style>

@@ -29,7 +29,7 @@ const expired = ref(['1d', '15d', '30d'])
 const minused = ref(['1', '5', '15', '25'])
 const moreSettingFormData = ref({
   errorHtmlPageName: { value: 'default', error: false },
-  upstreamTimeout: { value: 50, error: false },
+  upstreamTimeout: { value: 60, error: false },
   isEnabledUpstreamHttp11: { value: true, error: false },
   isAcceptHttpV1: { value: false, error: false },
   isInsertRidHeaderToOrigin: { value: false, error: false },
@@ -63,43 +63,6 @@ const showAdvancedModal = computed(() => {
 
 const updateMoreSettingFormData = () => {
   moreSettingFormData.value = JSON.parse(JSON.stringify(advancedFormData.value))
-
-  // moreSettingFormData.value.errorHtmlPageName.value =
-  //   advancedFormData.value.errorHtmlPageName.value
-  // moreSettingFormData.value.upstreamTimeout.value = advancedFormData.value.upstreamTimeout.value
-  // moreSettingFormData.value.isEnabledUpstreamHttp11.value =
-  //   advancedFormData.value.isEnabledUpstreamHttp11.value
-  // moreSettingFormData.value.isAcceptHttpV1.value = advancedFormData.value.isAcceptHttpV1
-  // moreSettingFormData.value.isInsertRidHeaderToOrigin.value =
-  //   advancedFormData.value.isInsertRidHeaderToOrigin
-  // moreSettingFormData.value.setCustomHostHeader.value =
-  //   advancedFormData.value.setCustomHostHeader
-  // moreSettingFormData.value.customHostHeader.value =
-  //   advancedFormData.value.customHostHeader
-  // moreSettingFormData.value.isUpgradeInsecureRequest.value =
-  //   advancedFormData.value.isUpgradeInsecureRequest
-  // moreSettingFormData.value.websocketPath.value = advancedFormData.value.websocketPath
-  // moreSettingFormData.value.proxyBufferSize.value = advancedFormData.value.proxyBufferSize
-  // moreSettingFormData.value.maxUploadSize.value = advancedFormData.value.maxUploadSize
-  // moreSettingFormData.value.cusFollowCachePath.value =
-  //   advancedFormData.value.cusFollowCachePath
-  // moreSettingFormData.value.cusFollowCacheFile.value =
-  //   advancedFormData.value.cusFollowCacheFile
-  // moreSettingFormData.value.cusCachepathExp.value = advancedFormData.value.cusCachepathExp
-  // moreSettingFormData.value.cusCachepathSrvexp.value =
-  //   advancedFormData.value.cusCachepathSrvexp
-  // moreSettingFormData.value.cusCachepathHottime.value =
-  //   advancedFormData.value.cusCachepathHottime
-  // moreSettingFormData.value.cusCachefileExp.value = advancedFormData.value.cusCachefileExp
-  // moreSettingFormData.value.cusCachefileSrvexp.value =
-  //   advancedFormData.value.cusCachefileSrvexp
-  // moreSettingFormData.value.cusCachefileHottime.value =
-  //   advancedFormData.value.cusCachefileHottime
-  // moreSettingFormData.value.defCachefileExp.value = advancedFormData.value.defCachefileExp
-  // moreSettingFormData.value.defCachefileSrvexp.value =
-  //   advancedFormData.value.defCachefileSrvexp
-  // moreSettingFormData.value.defCachefileHottime.value =
-  //   advancedFormData.value.defCachefileHottime
 }
 
 const submitMoreSetting = async () => {
@@ -109,28 +72,6 @@ const submitMoreSetting = async () => {
 
   const submit_data = {
     ...moreSettingFormData.value,
-    // errorHtmlPageName: moreSettingFormData.value.errorHtmlPageName.value,
-    // upstreamTimeout: moreSettingFormData.value.upstreamTimeout.value,
-    // isEnabledUpstreamHttp11: moreSettingFormData.value.isEnabledUpstreamHttp11.value,
-    // isAcceptHttpV1: moreSettingFormData.value.isAcceptHttpV1.value,
-    // isInsertRidHeaderToOrigin: moreSettingFormData.value.isInsertRidHeaderToOrigin.value,
-    // setCustomHostHeader: moreSettingFormData.value.setCustomHostHeader.value,
-    // customHostHeader: moreSettingFormData.value.customHostHeader.value,
-    // isUpgradeInsecureRequest: moreSettingFormData.value.isUpgradeInsecureRequest.value,
-    // websocketPath: moreSettingFormData.value.websocketPath.value,
-    // proxyBufferSize: moreSettingFormData.value.proxyBufferSize.value,
-    // maxUploadSize: moreSettingFormData.value.maxUploadSize.value,
-    // cusFollowCachePath: moreSettingFormData.value.cusFollowCachePath.value,
-    // cusFollowCacheFile: moreSettingFormData.value.cusFollowCacheFile.value,
-    // cusCachepathExp: moreSettingFormData.value.cusCachepathExp.value,
-    // cusCachepathSrvexp: moreSettingFormData.value.cusCachepathSrvexp.value,
-    // cusCachepathHottime: moreSettingFormData.value.cusCachepathHottime.value,
-    // cusCachefileExp: moreSettingFormData.value.cusCachefileExp.value,
-    // cusCachefileSrvexp: moreSettingFormData.value.cusCachefileSrvexp.value,
-    // cusCachefileHottime: moreSettingFormData.value.cusCachefileHottime.value,
-    // defCachefileExp: moreSettingFormData.value.defCachefileExp.value,
-    // defCachefileSrvexp: moreSettingFormData.value.defCachefileSrvexp.value,
-    // defCachefileHottime: moreSettingFormData.value.defCachefileHottime.value,
   }
 
   const validation = await validateAdvancedForm(
@@ -173,7 +114,7 @@ watch(showAdvancedModal, () => {
       <form class="form-layout modal-form" @submit.prevent="submitMoreSetting">
         <VField>
           <label>{{ t('advancedSetting.error_html_page_name') }}</label>
-          <VControl>
+          <VControl :has-error="moreSettingFormData.errorHtmlPageName.error">
             <div class="select">
               <select v-model="moreSettingFormData.errorHtmlPageName.value">
                 <option v-for="(name, index) in htmlPageNames" :key="index">
@@ -181,6 +122,12 @@ watch(showAdvancedModal, () => {
                 </option>
               </select>
             </div>
+            <p
+              v-if="moreSettingFormData.errorHtmlPageName.error"
+              class="help text-danger"
+            >
+              Please select a Error HTML Page Name.
+            </p>
           </VControl>
         </VField>
         <VField>

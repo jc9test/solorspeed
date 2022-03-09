@@ -4,7 +4,8 @@ import { useI18n } from 'vue-i18n'
 
 import { getFormOptions } from '/@src/api/formOptions'
 import store from '/@src/stores/index'
-import AdvancedMoreSettingModal from '/@src/pages/services-detail/container/AdvancedMoreSettingModal.vue'
+import AdvancedSettingFormModal from '/@src/pages/services-detail/container/AdvancedSettingFormModal.vue'
+import { validateAdvancedForm } from '/@src/pages/services-detail/validation/validate'
 
 const { t } = useI18n()
 const emit = defineEmits(['clickDropdown', 'submitData'])
@@ -83,34 +84,6 @@ const advancedDropdown = computed(() => {
 })
 
 const updateAdvancedFormData = () => {
-  // advancedFormData.value.errorHtmlPageName = overviewData.value.errorHtmlPageName
-  // advancedFormData.value.isAcceptHttpV1 = overviewData.value.isAcceptHttpV1
-  // advancedFormData.value.isUpgradeInsecureRequest =
-  //   overviewData.value.isUpgradeInsecureRequest
-  // advancedFormData.value.maxUploadSize = overviewData.value.maxUploadSize
-  // advancedFormData.value.upstreamTimeout = overviewData.value.upstreamTimeout
-  // advancedFormData.value.isEnabledCompressionToOrigin =
-  //   overviewData.value.isEnabledCompressionToOrigin
-  // advancedFormData.value.isEnabledUpstreamHttp11 =
-  //   overviewData.value.isEnabledUpstreamHttp11
-  // advancedFormData.value.isInsertRidHeaderToOrigin =
-  //   overviewData.value.isInsertRidHeaderToOrigin
-  // advancedFormData.value.setCustomHostHeader = overviewData.value.setCustomHostHeader
-  // advancedFormData.value.customHostHeader = overviewData.value.customHostHeader
-  // advancedFormData.value.websocketPath = overviewData.value.websocketPath
-  // advancedFormData.value.proxyBufferSize = overviewData.value.proxyBufferSize
-  // advancedFormData.value.cusFollowCachePath = overviewData.value.cusFollowCachePath
-  // advancedFormData.value.cusFollowCacheFile = overviewData.value.cusFollowCacheFile
-  // advancedFormData.value.cusCachepathExp = overviewData.value.cusCachepathExp
-  // advancedFormData.value.cusCachepathSrvexp = overviewData.value.cusCachepathSrvexp
-  // advancedFormData.value.cusCachepathHottime = overviewData.value.cusCachepathHottime
-  // advancedFormData.value.cusCachefileExp = overviewData.value.cusCachefileExp
-  // advancedFormData.value.cusCachefileSrvexp = overviewData.value.cusCachefileSrvexp
-  // advancedFormData.value.cusCachefileHottime = overviewData.value.cusCachefileHottime
-  // advancedFormData.value.defCachefileExp = overviewData.value.defCachefileExp
-  // advancedFormData.value.defCachefileSrvexp = overviewData.value.defCachefileSrvexp
-  // advancedFormData.value.defCachefileHottime = overviewData.value.defCachefileHottime
-
   // UPDATE advancedFormData FROM overviewData
   for (const advancedFormData_key in advancedFormData.value) {
     advancedFormData.value[advancedFormData_key] =
@@ -122,7 +95,6 @@ const updateAdvancedFormData = () => {
     advancedFormDataChanges.value[advancedFormDataChanges_key].value =
       advancedFormData.value[advancedFormDataChanges_key]
   }
-  console.log({ 'updateAdvancedFormData - value': advancedFormDataChanges.value })
 }
 
 const onClickMoreSettingModal = () => {
@@ -133,74 +105,17 @@ const onClickMoreSettingModal = () => {
       'showAdvancedModal - advancedFormDataChanges': advancedFormDataChanges.value,
     },
   })
-
-  // advancedFormDataChanges.value.errorHtmlPageName.value =
-  //   advancedFormData.value.errorHtmlPageName
-  // advancedFormDataChanges.value.isAcceptHttpV1.value =
-  //   advancedFormData.value.isAcceptHttpV1
-  // advancedFormDataChanges.value.isUpgradeInsecureRequest.value =
-  //   advancedFormData.value.isUpgradeInsecureRequest
-  // advancedFormDataChanges.value.maxUploadSize.value = advancedFormData.value.maxUploadSize
-  // // More Setting Data
-  // advancedFormDataChanges.value.upstreamTimeout.value =
-  //   advancedFormData.value.upstreamTimeout
-  // advancedFormDataChanges.value.isEnabledCompressionToOrigin.value =
-  //   advancedFormData.value.isEnabledCompressionToOrigin
-  // advancedFormDataChanges.value.isEnabledUpstreamHttp11.value =
-  //   advancedFormData.value.isEnabledUpstreamHttp11
-  // advancedFormDataChanges.value.isInsertRidHeaderToOrigin.value =
-  //   advancedFormData.value.isInsertRidHeaderToOrigin
-  // advancedFormDataChanges.value.setCustomHostHeader.value =
-  //   advancedFormData.value.setCustomHostHeader
-  // advancedFormDataChanges.value.customHostHeader.value =
-  //   advancedFormData.value.customHostHeader
-  // advancedFormDataChanges.value.websocketPath.value = advancedFormData.value.websocketPath
-  // advancedFormDataChanges.value.proxyBufferSize.value =
-  //   advancedFormData.value.proxyBufferSize
-  // advancedFormDataChanges.value.cusFollowCachePath.value =
-  //   advancedFormData.value.cusFollowCachePath
-  // advancedFormDataChanges.value.cusFollowCacheFile.value =
-  //   advancedFormData.value.cusFollowCacheFile
-  // advancedFormDataChanges.value.cusCachepathExp.value =
-  //   advancedFormData.value.cusCachepathExp
-  // advancedFormDataChanges.value.cusCachepathSrvexp.value =
-  //   advancedFormData.value.cusCachepathSrvexp
-  // advancedFormDataChanges.value.cusCachepathHottime.value =
-  //   advancedFormData.value.cusCachepathHottime
-  // advancedFormDataChanges.value.cusCachefileExp.value =
-  //   advancedFormData.value.cusCachefileExp
-  // advancedFormDataChanges.value.cusCachefileSrvexp.value =
-  //   advancedFormData.value.cusCachefileSrvexp
-  // advancedFormDataChanges.value.cusCachefileHottime.value =
-  //   advancedFormData.value.cusCachefileHottime
-  // advancedFormDataChanges.value.defCachefileExp.value =
-  //   advancedFormData.value.defCachefileExp
-  // advancedFormDataChanges.value.defCachefileSrvexp.value =
-  //   advancedFormData.value.defCachefileSrvexp
-  // advancedFormDataChanges.value.defCachefileHottime.value =
-  //   advancedFormData.value.defCachefileHottime
-
-  // const test =
-
-  // test.map((val) => {})
-
-  // test.map((val, key) => {
-  //   return advancedFormData.value.find((val1, key1) => key1 === key)[0]
-  // })
-  // console.log({ test: test })
 }
 
 const submitMoreSetting = (item) => {
-  // onClickMoreSettingModal()
   console.log({ 'submitMoreSetting - item': item })
-  // advancedFormDataChanges.value = item
 
   for (const item_key in item) {
     advancedFormDataChanges.value[item_key].value = item[item_key].value
   }
 }
 
-const submitAdvancedSettings = () => {
+const submitAdvancedSettings = async () => {
   let temp_list = { ...advancedFormDataChanges.value }
   const submit_data = {
     ...overviewData.value,
@@ -231,8 +146,19 @@ const submitAdvancedSettings = () => {
   }
   console.log({ 'submitAdvancedSettings - item': submit_data })
 
-  emit('submitData', submit_data)
-  emit('clickDropdown')
+  const validation = await validateAdvancedForm(
+    'advancedSetting',
+    submit_data,
+    advancedFormDataChanges.value
+  )
+
+  if (!validation.status) {
+    advancedFormDataChanges.value = validation.advancedData
+  } else {
+    console.log('Update Advanced Setting')
+    emit('submitData', submit_data)
+    emit('clickDropdown')
+  }
 }
 
 onMounted(async () => {
@@ -252,8 +178,6 @@ watch(advancedFormDataChanges, () => {
 </script>
 
 <template>
-  <!-- <div v-if="tableData != null" ref="advanceSettingRef" class="column is-12"> -->
-
   <div class="tile-grid-item service-detail-card-body">
     <div class="tile-grid-item-inner" style="display: block">
       <div class="columns" style="display: flex">
@@ -377,13 +301,19 @@ watch(advancedFormDataChanges, () => {
                 <span class="dark-inverted" style="color: gray">
                   {{ t('advancedSetting.max_upload_size') }}
                 </span>
-                <VControl>
+                <VControl :has-error="advancedFormDataChanges.maxUploadSize.error">
                   <input
                     v-model="advancedFormDataChanges.maxUploadSize.value"
                     type="number"
                     class="input"
                   />
-                  <i aria-hidden="true"></i>
+                  <!-- <i aria-hidden="true"></i> -->
+                  <p
+                    v-if="advancedFormDataChanges.maxUploadSize.error"
+                    class="help text-danger"
+                  >
+                    The upload size must be between 1 and 100
+                  </p>
                 </VControl>
               </div>
             </div>
@@ -463,15 +393,7 @@ watch(advancedFormDataChanges, () => {
     </div>
   </div>
 
-  <!-- <VModal
-    :open="showAdvancedModal"
-    title="Edit Advanced Settings"
-    size="large"
-    actions="right"
-    @close="onClickMoreSettingModal"
-  > -->
-
-  <AdvancedMoreSettingModal
+  <AdvancedSettingFormModal
     :show-advanced-modal="showAdvancedModal"
     :advanced-form-data="advancedFormDataChanges"
     :html-page-names="htmlPageNames"

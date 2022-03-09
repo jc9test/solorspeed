@@ -1,49 +1,52 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-// import CreateFormButton from '../components/CreateFormButton.vue'
 import FilterSelector from '../components/FilterSelector.vue'
 import ColumnSelector from '../components/ColumnSelector.vue'
 import HeaderSearchBar from '../components/HeaderSearchBar.vue'
 import OriginPolicyForm from './OriginPolicyForm.vue'
+import OriginPolicyFilterGroup from './OriginPolicyFilterGroup.vue'
 import {
   formReferences,
   formInputs,
   refUpdater,
-  inputAttributeUpdater,
   renderValues,
   renderSubmitValues,
+  inputAttributeUpdater,
 } from '../data/create_origin_policy_data'
 
-//search
+const { t } = useI18n()
 
 const props = defineProps({
   filters: {
-    type: Object,
-    default: () => {},
+    type: Array,
+    default: () => [],
+  },
+  isFuzzySearch: {
+    type: Boolean,
+    default: () => false,
   },
 })
+const emit = defineEmits(['update:filters', 'update:isFuzzySearch', 'getData'])
 
-const policyNameSearch = ref()
-const isPolicyNameSearch = ref(false)
-const showFormPolicyModal = ref(false)
-const { t } = useI18n()
+const isFuzzySearch = computed({
+  get: () => {
+    return props.isFuzzySearch
+  },
+  set: (x) => emit('update:isFuzzySearch', x),
+})
 
-//pagination
-const hasFilter = ref(false)
-const emit = defineEmits(['search-filter-called', 'getData'])
-const searchFilter = (formReferences) => {
-  emit('search-filter-called', formReferences)
-}
+const filters = computed({
+  get: () => {
+    return props.filters
+  },
+  set: (x) => emit('update:filters', x),
+})
 
-const getData = () => {
-  emit('getData')
-}
-const showFormPolicy = (value: boolean) => {
-  showFormPolicyModal.value = value
-}
+const getData = () => emit('getData')
 
+const showFormPolicy = ref(false)
 const originPolicyData = renderValues()
 </script>
 
@@ -51,27 +54,24 @@ const originPolicyData = renderValues()
   <div class="header-container">
     <div class="header-options-container">
       <div class="filter-column-container">
-        <FilterSelector
-          v-model:hasFilter="hasFilter"
-          v-model:is-policy-name-search="isPolicyNameSearch"
-          :filters="props.filters"
-          :policy-name-search="policyNameSearch"
-          @search-filter-called="searchFilter"
-        />
+        <FilterSelector v-model:filters="filters" />
         <ColumnSelector />
       </div>
       <div class="header-searchbar-container">
-        <HeaderSearchBar />
+        <HeaderSearchBar
+          v-model:isFuzzySearch="isFuzzySearch"
+          v-model:filters="filters"
+        />
       </div>
     </div>
 
     <div class="header-action-container">
-      <VButton color="primary" class="cache-button" bold @click="showFormPolicy"
+      <VButton color="primary" class="cache-button" bold @click="showFormPolicy = true"
         >{{ t('main.createText') }}
       </VButton>
     </div>
     <OriginPolicyForm
-      :show-form-policy-modal="showFormPolicyModal"
+      :show-form-policy-modal="showFormPolicy"
       :form-inputs="formInputs"
       :form-references="formReferences"
       :origin-policy-data="originPolicyData"
@@ -80,10 +80,11 @@ const originPolicyData = renderValues()
       :render-values="renderValues"
       :render-submit-values="renderSubmitValues"
       action="create"
-      @show-form-policy="showFormPolicy"
+      @show-form-policy="showFormPolicy = false"
       @get-data="getData"
     />
   </div>
+  <OriginPolicyFilterGroup v-model:filters="filters" />
 </template>
 
 <style lang="scss">

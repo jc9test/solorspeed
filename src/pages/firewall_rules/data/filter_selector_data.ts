@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue'
+import { Ref, ref, watch } from 'vue'
 import store from '/@src/stores/index'
 
 //form v-model
@@ -58,13 +58,13 @@ interface formInput {
   title: string
   key: string
   type: string
-  value: any
+  value: Ref<string | number>
   required: Boolean
   disabled: Boolean
   radioOptions: Array<Object>
   options: Array<Object>
   label: string
-  ref: any
+  ref: Ref<string | number>
   questionTooltip: Boolean
   tooltip: string
   placeholder: string

@@ -17,7 +17,7 @@ const wafRedirectUrl = ref()
 const wafRedirectHttpCode = ref('302')
 const wafSetReqHeaders = ref()
 const wafSetResHeaders = ref()
-const wafCustomHtmlPageName = ''
+const wafCustomHtmlPageName = ref()
 const wafCountry = ref()
 const wafIp = ref('0.0.0.0/0')
 const wafUri = ref()
@@ -34,6 +34,40 @@ const wafProxyType = ref()
 const description = ref()
 const wafruleId = ref()
 const usedByFQDNConfigLength = ref()
+
+export const resetToDefault = (resetOtherRefs: Function) => {
+  groupName.value = store.state.queryGroupName
+  ruleName.value = undefined
+  wafAction.value = '00'
+  wafDenyHtmlPageName.value = undefined
+  denyPage.value = undefined
+  blockPeriodDenyPage.value = 'default'
+  wafOriginPolicyName.value = undefined
+  wafBucketTime.value = 300
+  wafSpeedLimit.value = 10240
+  wafRedirectUrl.value = undefined
+  wafRedirectHttpCode.value = '302'
+  wafSetReqHeaders.value = undefined
+  wafSetResHeaders.value = undefined
+  wafCustomHtmlPageName.value = undefined
+  wafCountry.value = undefined
+  wafIp.value = '0.0.0.0/0'
+  wafUri.value = undefined
+  wafHeaders.value = undefined
+  wafIsp.value = undefined
+  wafHttpMethod.value = undefined
+  wafRate.value = undefined
+  wafOwasp.value = undefined
+  wafIpExclude.value = undefined
+  wafUriExclude.value = undefined
+  wafHeadersExclude.value = undefined
+  wafHeadersNotExist.value = undefined
+  wafProxyType.value = undefined
+  description.value = undefined
+  wafruleId.value = undefined
+  usedByFQDNConfigLength.value = undefined
+  resetOtherRefs()
+}
 
 export const refUpdater = (refValues: Object) => {
   const keys = Object.keys(refValues)
@@ -869,7 +903,7 @@ export const formInputs: formInputs = [
     ref: wafRate,
     questionTooltip: true,
     tooltip: 'waf.tooltip.requestRate',
-    placeholder: '',
+    placeholder: 'hits/seconds',
     error: false,
     errorMsg: 'filter.validation.required',
     conditional_visibility: undefined,
